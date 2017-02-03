@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>    
+    <script src="jquery.flatWeatherPlugin.js"></script>    
+    <link href="css/flatWeatherPlugin.css" rel="stylesheet" />
+    <script>
+   $(document).ready(function () {
+
+      var example3 = $("#weatherwidget").flatWeatherPlugin({
+	location: "Houston, TX",
+	country: "USA",
+	api: "openweathermap",
+	displayCityNameOnly : true,
+	
+});
+
+
+    });
+	
+	/*  $(document).ready(function () {
+
+      var example3 = $("#weatherwidget").flatWeatherPlugin({
+	location: "Houston, TX",
+	country: "USA",
+	api: "openweathermap",
+	displayCityNameOnly : true,
+	render:false
+});
+
+example3.flatWeatherPlugin('fetchWeather')
+  .then(function(data){
+    console.log(data);
+    //you can then do whatever you want with the data
+    //such as generate your own custom markup
+    $("<h2/>", {"class" : "wi wi"+data.today.code})
+      .text(" " + data.city)
+      .appendTo(example3);
+    $("<p/>").html(data.today.temp.now + "°C, " + data.today.desc )
+      .appendTo(example3);
+	   $("<p/>").html(data.today.wind.speed + "mph, " + data.today.wind.deg )
+      .appendTo(example3);
+});
+    });*/
+    </script>
+    </head>
+    <body >
+        <div  id="weatherwidget" width="400px"></div>
+        
+    </body>
+    </html>

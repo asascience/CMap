@@ -1,0 +1,191 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<style type="text/css">
+.atxt{text-decoration: none;}
+.tg  {border-collapse:collapse;border-spacing:0;}
+
+.tgsub  {border-collapse:collapse;border-spacing:0;border:none;width:100%}
+
+.tg td{cursor:pointer;background-color:#AED6F1; font-family:Arial, sans-serif;font-size:14px;padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+
+.tgsub td{cursor:pointer;background-color:#AED6F1; font-family:Arial, sans-serif;font-size:14px;padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+
+.tg th{align:left;background-color:#AED6F1;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+
+.tg .tg-yw4l{vertical-align:top}
+.tg .tg-heading{cursor:pointer;background-color:#154360;color:white; font-family:Arial, sans-serif;font-size:14px;padding:5px 5px;border-color:black;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+
+#tblMTable1{font-size:10px;}
+
+.tblDesignMenu{font-size:10px;border-collapse:collapse;border-spacing:0;}
+.tblDesignMenu td{cursor:pointer;background-color:#AED6F1; font-family:Arial, sans-serif;font-size:13px;padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tblDesignMenu .tg-heading{cursor:pointer;background-color:#154360;color:white; font-family:Arial, sans-serif;font-size:14px;padding:5px 5px;border-color:black;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+#trH2SO4{display:none;}
+</style>
+<script src="../js/cmapmenu.js"></script>	
+<script>
+$(document).ready(function(){
+
+var qs=getParameterByName("tank");
+ChangeDesignTable(qs);
+changeMAERTable(qs);
+
+  });
+  </script>
+</head>
+<body>
+<!-------------------------------------------Main Table----------------------------------->
+	<table id="tblMainMenu" class="tg" width="100%">
+  <tr>
+<td><table class="tgsub" onclick="javascript:showDesignMenu(1)"><tr>
+    <td >DESIGN</td><td align="right"><img src="right.gif"></td>
+</tr></table>
+</td>
+  </tr>
+  <tr>
+<td>
+<table class="tgsub" onclick="javascript:showAirMenu(1)"><tr>
+    <td >AIR</td><td align="right"><img src="right.gif"></td>
+</tr></table>
+</td>
+
+  </tr>
+  <tr>
+    <td class="tg-yw4l"> WATER</td>
+  </tr>
+   <tr>
+    <td class="tg-yw4l">WASTE</td>
+  </tr>
+   <tr>
+    <td class="tg-yw4l">OTHER</td>
+  </tr>
+</table>
+<!-------------------------------------------Design Table----------------------------------->
+<table class="tblDesignMenu" id="tblDesignMenu" width="100%" style="display:none">
+<tr><td class="tg-heading" onclick="javascript:showDesignMenu(0)" colspan=2><img src="leftarrow.gif">DESIGN</td></tr>
+ 
+  <tr>
+  <td><b>Material</b></td>
+    <td class="tg-yw4l" id="tdMaterials"> </td>
+  </tr>
+  <tr>
+  <td><b>Design Basis</b></td>
+    <td class="tg-yw4l" id="tdDB"></td>
+  </tr>
+  <tr>
+  <td><b>Dimensions</b></td>
+    <td class="tg-yw4l" id="tdDimensions"></td>
+  </tr>
+  <tr>
+  <td><b>Capacity</b></td>
+    <td class="tg-yw4l" id="tdCapacity"></td>
+  </tr>
+   <tr>
+   <td><b>Service</b></td>
+    <td class="tg-yw4l" id="tdService"></td>
+  </tr>
+   <tr>
+   <td><b>Construction Date</b></td>
+    <td class="tg-yw4l" id="tdCDate"></td>
+  </tr>
+<tr>
+<td><b>Modification Date</b></td>
+    <td class="tg-yw4l" id="tdMDate"> </td>
+  </tr>
+</table>
+<!-------------------------------------------Air Table----------------------------------->
+<table class="tg" id="tblAirMenu" width="100%" style="display:none">
+<tr><td class="tg-heading" onclick="javascript:showAirMenu(0)"><img src="leftarrow.gif">AIR</td></tr>
+  <tr>
+  <td>
+  <table class="tgsub" onclick="javascript:showAirProgramsMenu(1)"><tr>
+    <td >REGULATIONS</td><td align="right"><img src="right.gif"></td>
+</tr></table>
+</td>    
+  </tr>
+  <tr>
+    <td>
+	 <table class="tgsub" onclick="javascript:showAirPermitsMenu(1)"><tr>
+    <td >PERMITS</td><td align="right"><img src="right.gif"></td>
+</tr></table>
+</td>
+  </tr>
+  <tr>
+  <td>
+  <table class="tgsub" onclick="javascript:showAirEmissionsMenu(1)"><tr>
+    <td >EMISSIONS</td><td align="right"><img src="right.gif"></td>
+</tr></table>
+</td>
+    <!--<td class="tg-yw4l">EMISSIONS</td>-->
+  </tr>
+ <tr>
+    <td class="tg-yw4l"> MONITORING</td>
+  </tr>
+ <tr>
+    <td class="tg-yw4l"> RECORD KEEPING</td>
+  </tr>
+   <tr>
+    <td class="tg-yw4l"> REPORTING</td>
+  </tr>
+   <tr>
+    <td class="tg-yw4l"> NOTES</td>
+  </tr>
+</table>
+<!-------------------------------------------Air->REGULATIONS Table----------------------------------->
+<table class="tg" id="tblAirRegulationsMenu" width="100%" style="display:none">
+<tr><td class="tg-heading" onclick="javascript:showAirMenu(1)"><img src="leftarrow.gif">AIR->REGULATIONS</td></tr>
+  <tr>
+    <td class="tg-yw4l" ><a class="atxt" href="documents/compliance map rule pdfs/40 CFR 60 Subpart Kb.pdf" target="_blank">40 CFR 60 SUBPART Kb</a> </td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">40 CFR 63 SUBPART CC</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l"><a class="atxt" href="documents/compliance map rule pdfs/40 CFR 70.pdf" target="_blank">40 CFR 70</a></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">30 TAC 115</td>
+  </tr>  
+   <tr>
+    <td class="tg-yw4l">30 TAC 116</td>
+  </tr> 
+   <tr>
+    <td class="tg-yw4l">30 TAC 122</td>
+  </tr> 
+</table>
+<!-------------------------------------------Air->Emissions Table----------------------------------->
+<table class="tg" id="tblAirEmissionsMenu" width="100%" style="display:none">
+<tr><td class="tg-heading" onclick="javascript:showAirMenu(1)"><img src="leftarrow.gif">AIR->EMISSIONS</td></tr>
+  <tr>
+    <td class="tg-yw4l" id="tdMTable" > MAER TABLE<br/>
+	<table id="tblMTable1" style="padding:5px;margin:5px;" >
+  <tr><td style="font-size:12px;"><b>VOC</b></td><td style="font-size:12px;" id="tdMTlbs1"></td><td style="font-size:12px;" id="tdMTtny1"></td></tr>
+  <tr id="trBenzene"><td style="font-size:12px;"><b>Benzene</b></td><td style="font-size:12px;" id="tdMTlbs2"></td><td style="font-size:12px;" id="tdMTtny2"></td></tr>
+  <tr id="trH2SO4"><td style="font-size:12px;"><b>H<sub>2</sub>SO<sub>4</sub></b></td><td style="font-size:12px;" id="tdMTlbs3"></td><td style="font-size:12px;" id="tdMTtny3"></td></tr></table></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">TANK CALCS</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">TANK EMISSIONS</td>
+  </tr>
+   <tr>
+    <td class="tg-yw4l">LDAR COMPONENTS</td>
+  </tr>  
+  
+</table>
+
+<table class="tg" id="tblAirPermitsMenu" width="100%" style="display:none">
+<tr><td class="tg-heading" onclick="javascript:showAirMenu(1)"><img src="leftarrow.gif">AIR->PERMITS</td></tr>
+  <tr>
+    <td class="tg-yw4l" > <a class="atxt" href="documents/Permit 8404.pdf" target="_blank">8404.pdf</a></td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l"><a class="atxt" href="documents/SOP - O1386.pdf" target="_blank">SOP 01386.pdf</a></td>
+  </tr>
+  
+</table>
+
+</body>
+</html>

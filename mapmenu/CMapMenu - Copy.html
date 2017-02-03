@@ -1,0 +1,183 @@
+<html>
+<head>
+<style type="text/css">
+.atxt{text-decoration: none;}
+.tg  {border-collapse:collapse;border-spacing:0;}
+
+.tgsub  {border-collapse:collapse;border-spacing:0;border:none;width:100%}
+
+.tg td{cursor:pointer;background-color:#AED6F1; font-family:Arial, sans-serif;font-size:14px;padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+
+.tgsub td{cursor:pointer;background-color:#AED6F1; font-family:Arial, sans-serif;font-size:14px;padding:0px 0px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;}
+
+.tg th{align:left;background-color:#AED6F1;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+
+.tg .tg-yw4l{vertical-align:top}
+.tg .tg-heading{cursor:pointer;background-color:#154360;color:white; font-family:Arial, sans-serif;font-size:14px;padding:5px 5px;border-color:black;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+</style>
+<script>
+function showDesignMenu(show)
+{
+if (show==1){
+document.getElementById('tblMainMenu').style.display='none';
+document.getElementById('tblDesignMenu').style.display='block';}
+else
+{
+document.getElementById('tblMainMenu').style.display='block';
+document.getElementById('tblDesignMenu').style.display='none';
+}
+}
+function showAirMenu(show)
+{
+if (show==1){
+document.getElementById('tblMainMenu').style.display='none';
+document.getElementById('tblAirMenu').style.display='block';
+document.getElementById('tblAirRegulationsMenu').style.display='none';
+document.getElementById('tblAirEmissionsMenu').style.display='none';
+}
+else{
+document.getElementById('tblMainMenu').style.display='block';
+document.getElementById('tblAirMenu').style.display='none';
+}
+}
+
+function showAirProgramsMenu(show)
+{
+if (show==1){
+document.getElementById('tblAirMenu').style.display='none';
+document.getElementById('tblAirRegulationsMenu').style.display='block';
+}
+else{
+document.getElementById('tblAirMenu').style.display='block';
+document.getElementById('tblAirRegulationsMenu').style.display='none';
+}
+}
+function showAirEmissionsMenu(show)
+{
+if (show==1){
+document.getElementById('tblAirMenu').style.display='none';
+document.getElementById('tblAirEmissionsMenu').style.display='block';
+}
+else{
+document.getElementById('tblAirMenu').style.display='block';
+document.getElementById('tblAirEmissionsMenu').style.display='none';
+}
+}
+</script>
+</head>
+<body>
+<!-------------------------------------------Main Table----------------------------------->
+	<table id="tblMainMenu" class="tg" width="100%">
+  <tr>
+<td><table class="tgsub" onclick="javascript:showDesignMenu(1)"><tr>
+    <td >DESIGN</td><td align="right"><img src="right.gif"></td>
+</tr></table>
+</td>
+  </tr>
+  <tr>
+<td>
+<table class="tgsub" onclick="javascript:showAirMenu(1)"><tr>
+    <td >AIR</td><td align="right"><img src="right.gif"></td>
+</tr></table>
+</td>
+
+  </tr>
+  <tr>
+    <td class="tg-yw4l"> WATER</td>
+  </tr>
+   <tr>
+    <td class="tg-yw4l">WASTE</td>
+  </tr>
+   <tr>
+    <td class="tg-yw4l">OTHER</td>
+  </tr>
+</table>
+<!-------------------------------------------Design Table----------------------------------->
+<table class="tg" id="tblDesignMenu" width="100%" style="display:none">
+<tr><td class="tg-heading" onclick="javascript:showDesignMenu(0)"><img src="leftarrow.gif">DESIGN</td></tr>
+ 
+  <tr>
+    <td class="tg-yw4l" > MATERIALS</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">DESIGN BASIS</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">DIMENSIONS</td>
+  </tr>
+   <tr>
+    <td class="tg-yw4l">SERVICE</td>
+  </tr>
+   <tr>
+    <td class="tg-yw4l">CONSTRUCTION DATE</td>
+  </tr>
+<tr>
+    <td class="tg-yw4l">MODIFICATION DATE</td>
+  </tr>
+</table>
+<!-------------------------------------------Air Table----------------------------------->
+<table class="tg" id="tblAirMenu" width="100%" style="display:none">
+<tr><td class="tg-heading" onclick="javascript:showAirMenu(0)"><img src="leftarrow.gif">AIR</td></tr>
+  <tr>
+  <td>
+  <table class="tgsub" onclick="javascript:showAirProgramsMenu(1)"><tr>
+    <td >REGULATIONS</td><td align="right"><img src="right.gif"></td>
+</tr></table>
+</td>
+    <!--<td class="tg-yw4l" >REGULATIONS</td>-->
+  </tr>
+  <tr>
+    <td class="tg-yw4l"><a class="atxt" href="documents/Permit 8404.pdf" target="_blank">PERMITS</a></td>
+  </tr>
+  <tr>
+  <td>
+  <table class="tgsub" onclick="javascript:showAirEmissionsMenu(1)"><tr>
+    <td >EMISSIONS</td><td align="right"><img src="right.gif"></td>
+</tr></table>
+</td>
+    <!--<td class="tg-yw4l">EMISSIONS</td>-->
+  </tr>
+ <tr>
+    <td class="tg-yw4l"> MONITORING</td>
+  </tr>
+ <tr>
+    <td class="tg-yw4l"> RECORD KEEPING</td>
+  </tr>
+   <tr>
+    <td class="tg-yw4l"> REPORTING</td>
+  </tr>
+   <tr>
+    <td class="tg-yw4l"> NOTES</td>
+  </tr>
+</table>
+<!-------------------------------------------Air->REGULATIONS Table----------------------------------->
+<table class="tg" id="tblAirRegulationsMenu" width="100%" style="display:none">
+<tr><td class="tg-heading" onclick="javascript:showAirMenu(1)"><img src="leftarrow.gif">AIR->REGULATIONS</td></tr>
+  <tr>
+    <td class="tg-yw4l" ><a class="atxt" href="documents/compliance map rule pdfs/40 CFR 60 Subpart Kb.pdf" target="_blank">40 CFR 60 SUBPART Kb</a> </td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">40 CFR 63 SUBPART CC</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">30 TAC ???</td>
+  </tr>  
+</table>
+<!-------------------------------------------Air->Emissions Table----------------------------------->
+<table class="tg" id="tblAirEmissionsMenu" width="100%" style="display:none">
+<tr><td class="tg-heading" onclick="javascript:showAirMenu(1)"><img src="leftarrow.gif">AIR->EMISSIONS</td></tr>
+  <tr>
+    <td class="tg-yw4l" > MAER TABLE</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">TANK CALCS</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l">TANK EMISSIONS</td>
+  </tr>
+   <tr>
+    <td class="tg-yw4l">LDAR COMPONENTS</td>
+  </tr>  
+</table>
+</body>
+</html>

@@ -1,0 +1,222 @@
+ html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
+ table tr td {vertical-align:top;}
+ #calendar {
+                     width: 100%;
+					 font-size:11px;
+                } 
+ .exhibition,
+                .party,
+                .cocktail {
+                    font-weight: bold;
+                }
+
+                .exhibition {
+                    color: #ff9e00;
+                }
+
+                .party {
+                    color: #ff4081;
+                }
+
+                .cocktail {
+                    color: #00a1e8;
+                }
+ /*---------------------------------tabs window-------------------------------------------*/
+
+
+ 
+ #tblWasteGuidance,#tblWastePermits,#tblWasteRegulations,#tblWastePermits,#tblWasteOtherRecordsData
+ {font-size:11px;}
+ #tblAirRegulations,#tblAirPermits,#tblAirGuidance,#tblAirPermits,#tblAirOtherRecordsData
+ {font-size:11px;}
+ #tblWaterRegulations,#tblWaterPermits,#tblWaterDesign,#tblWaterOtherRecordsData
+ {font-size:11px;}
+ #tblOtherRegulations,#tblOtherPermits,#tblOtherGuidance,#tblOtherDesign,#tblOtherRecordsData,#divFCSearchResults
+ {font-size:11px;}
+  #EventstatusRed {
+      width: 20px;
+      height: 20px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      background: red;
+	  color:white;
+    }
+	 #EventstatusOrange {
+      width: 20px;
+      height: 20px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      background: orange;
+	  color:white;
+    }
+ 
+ 
+     .ui-tabs-vertical {
+              width: auto;
+          }
+
+              .ui-tabs-vertical .ui-tabs-nav {
+                  padding: .2em .1em .2em .2em;
+                  float: left;
+                  width: 12em;
+              }
+
+                  .ui-tabs-vertical .ui-tabs-nav li {
+                      clear: left;
+                      width: 100%;
+                      border-bottom-width: 1px !important;
+                      border-right-width: 0 !important;
+                      margin: 0 -1px .2em 0;
+					  list-style:none;
+                  }
+
+                      .ui-tabs-vertical .ui-tabs-nav li a {
+                          display: block;
+                      }
+
+                      .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
+                          padding-bottom: 0;
+                          padding-right: .1em;
+                          border-right-width: 1px;
+                      }
+
+              .ui-tabs-vertical .ui-tabs-panel {
+                  padding: 1em;
+                  float: right;
+                  width: 40em;
+              }
+			    .toolbarBG { background-color: #AED6F1;height:40px;padding:0px;margin:0px;margin-left:5px; }
+				/*---------------------------------tabs-------------------------------------------*/
+	   #mapDiv{
+		   margin:0px;
+	   }
+	   #HomeButton {
+      position: absolute;
+      top: 95px;
+      left: 21px;
+      z-index: 50;
+	  
+    }
+	#IFWeather
+	{
+		-moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;
+  background: #fff; /* fallback for browsers that don't understand rgba */
+  border: #solid 10px #000; /* fallback for browsers that don't understand rgba */
+  background-color: rgba(174,214,241,0.9);/* slighly transparent white */
+  border-color: rgba(0,0,0,0.2); /*Very transparent black*/
+	}
+
+	#divDashBoard{
+
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;
+
+  background: #fff; 
+  border: #solid 10px #000; 
+ /* background-color: rgba(174,214,241,0.9);*/
+ background-color:#47A3DA;
+  border-color: rgba(0,0,0,0.2); 
+  position:absolute;
+  top:15px;
+  left:350px;
+  z-index:9999998;
+ 
+  padding:15px;
+
+	}
+	.imgDB
+	{
+		width:50px;
+		height:50px;
+		cursor:pointer;
+		padding-right:10px;
+	}
+	
+	#divSelectObjects
+	{
+		position:absolute;
+		width:500px;
+		height:600px;
+		left:350px;
+		top:120px;
+		z-index:9999999;
+		display:none;
+		background-color: #ffffff;/* slighly transparent white */
+	}
+	
+	#divps
+	{
+		position:absolute;
+		width:500px;
+		height:800px;
+		/*left:350px;
+		top:120px;*/
+		z-index:9999999;
+		display:none;
+		background-color: #ffffff;
+	/*	-moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;
+  background: #fff; 
+  border: #solid 10px #000; 
+  
+  border-color: rgba(0,0,0,0.2); */
+	}
+	tg  {border-collapse:collapse;border-spacing:0;width:100%;}
+.tg td{background-color:#AED6F1; font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{background-color:#AED6F1;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-yw4l{vertical-align:top}
+	.DBtitles{font-size:12px;font-name:verdana;text-align:center;}
+	#tblFC  {border-collapse:collapse;border-spacing:0;width:100%;}
+#tblUpload  {border-collapse:collapse;border-spacing:0;width:100%;}
+#tblFC td{background-color:#AED6F1; font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+#tblUpload td{background-color:#AED6F1; font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+#tblAirFiles td{border:none;}
+#tblWasteFiles td{border:none;}
+#tblWaterFiles td{border:none;}
+#tblOtherFiles td{border:none;}
+#tblFC th{background-color:#AED6F1;font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-color:black;border-width:1px;overflow:hidden;word-break:normal;cursor:pointer;}
+#tblFC .tabSelected{height:25px;background-color:#3360aa;color:white;font-weight:bold;vertical-align:top;text-align:center;}
+#tblFC .tabNotSelected{height:25px;vertical-align:top;text-align:center;}
+#divUpload{display:none;}
+#btnUpload{background-color:#AED6F1;cursor:pointer;}
+#btnFileCabinet{background-color:#AED6F1;cursor:pointer;}
+#uploadFiles{width:350px;}
+.button {
+   background-color: #3360aa;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px 2px;
+    cursor: pointer;
+}
+#imgCloseFC
+{
+	cursor:pointer;
+}
+#imgCloseW
+{
+	cursor:pointer;
+}
+#imgCloseSO
+{
+	cursor:pointer;
+}
+
+
+.orange {
+ color:orange;
+}
+
+.green {
+  color: green;
+}
