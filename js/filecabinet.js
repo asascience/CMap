@@ -1,15 +1,10 @@
 ﻿$(document).ready(function () {
 
- var serviceURLslocal = { fileslist: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/GetFilesList", inspectionslist: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/GetInspectionsList", inspectionshistory: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/GetInspectionsHistory", uploadinspectionhistory: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/uploadinspectionhistory", uploadcustomfile: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/UploadCustomFile", fixuploadfile: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/FixUploadedFile" };
+    var serviceURLs = window.serviceURLs;
 
-
-	
- var serviceURLsProd = { fileslist: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetFilesList", inspectionslist: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetInspectionsList", inspectionshistory: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetInspectionsHistory", uploadinspectionhistory: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/uploadinspectionhistory", uploadcustomfile: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/UploadCustomFile", fixuploadfile: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/FixUploadedFile" };
-    // var serviceURLs = serviceURLslocal;
-
-	   var serviceURLs = serviceURLsProd;
  var winW = $(window).width();
-   var FCWindow = $("#divFC");
+ var FCWindow = $("#divFC");
+ var FCUploadWindow = $("#divFCUpload");
    //---------------------------------------------------------------------------------
    FCWindow.kendoWindow({
 	    position: {
@@ -26,14 +21,14 @@
                        
           });
 		   //---------------------------------------------------------------------------------
-   FCWindow.kendoWindow({
+   FCUploadWindow.kendoWindow({
 	    position: {
 			top: 100, // or "100px"
 			left: winW / 2 - $('#divDashBoard').width() / 2 +40
 		  },
         width:winW-500,
 	    height:600,
-        title: "File Cabinet",
+        title: "File Cabinet - Upload",
         visible: false,
         actions: [                           
              "Close"
@@ -56,7 +51,7 @@
                    { text: "RecordsData", value: "RECORDS/DATA" },
 
    ];
-    $("#category").height(20).kendoDropDownList({
+    $("#category").height(15).kendoDropDownList({
 
         dataTextField: "text",
         dataValueField: "value",
@@ -66,7 +61,7 @@
 
     });
 
-    $("#subcategory").height(20).kendoDropDownList({
+    $("#subcategory").height(15).kendoDropDownList({
         dataTextField: "text",
         dataValueField: "value",
         dataSource: subcategory,
@@ -82,15 +77,53 @@
         }
     });
 
+    LoadRecent20Files();
+    function LoadRecent20Files() {
+         var Type = "POST";
+         var Url = serviceURLs["GetRecent20Files"];
+        var ContentType = "application/json; charset=utf-8";
+        var DataType = "json";
 
-
-
+        $.ajax({
+            type: Type,
+            url: Url,            
+            contentType: ContentType,
+            dataType: DataType,
+            processdata: true,
+            success: function (msg) {
+                LoadRecent20FilesSucceded(msg);
+                // alert("success");
+            },
+            error: ServiceFailed// When Service call fails
+        });
+        
+    }
+    function LoadRecent20FilesSucceded(result)
+    {
+        
+        var resultObject = eval(result.GetRecent20FilesResult);
+        var data = {
+            "d": resultObject
+        };
+        $("#divRecent20Files").kendoGrid({
+            dataSource: {
+                transport: {
+                    read: function (options) {
+                        options.success(data);
+                    }
+                },
+                schema: {
+                    data: "d"
+                }
+            }
+        });
+    }
 
     oncategoryChange();
     function oncategoryChange() {
 
         var uesrid = "2"; var Type = "POST";
-        var Url = serviceURLs["fileslist"];;
+        var Url = serviceURLs["fileslist"];
         var Data = '{"Id": "' + uesrid + '"}';
         var ContentType = "application/json; charset=utf-8";
         var DataType = "json";
@@ -119,7 +152,7 @@
 
     function LoadFilesListSucceeded(result) {
 
-        console.log(result);
+       // console.log(result);
 
         var dropdownlist = $("#category").data("kendoDropDownList");
 
@@ -131,7 +164,7 @@
 
         resultObject = eval(result.GetFilesListResult);
 
-        console.log(resultObject);
+      //  console.log(resultObject);
 
 
         var json = [];
@@ -158,6 +191,9 @@
                         if (parent.id === "#") {
                             return false; // prevent moving a child above or below the root
                         }
+                    }
+                    if (operation === "delete_node") {
+                        alert("Deleted");
                     }
 
                     if (operation === "rename_node") {
@@ -231,7 +267,24 @@
 
 
     };
-
+    /*$("#FCTabs").kendoTabStrip({
+        animation:false
+    });
+    $("#FCAirTabs").kendoTabStrip({
+        tabPosition: "left"
+    });
+    $("#FCWasteTabs").kendoTabStrip({
+        tabPosition: "left"
+    });
+    $("#FCWaterTabs").kendoTabStrip({
+        tabPosition: "left"
+    });
+    $("#FCOtherTabs").kendoTabStrip({
+        tabPosition: "left"       
+    });
+    $("#FCSearchTabs").kendoTabStrip({
+        tabPosition: "left"
+    });*/
 
     $("#divFC1").tabs();
     $("#airpermits").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
@@ -251,7 +304,7 @@
 
 
     $("#btnFCSearch").click(function () {
-        //alert("results");
+        alert(document.getElementById("divFCSearchResults").style.display);
 
         document.getElementById("divFCSearchResults").style.display = "block";
 
@@ -261,6 +314,10 @@
 
         FCWindow.data("kendoWindow").open();
         LoadAllFiles();
+    });
+
+    $("#btnFCUpload").click(function () {
+        FCUploadWindow.data("kendoWindow").open();
     });
     //---------------------------------------------------------------------------------
 
@@ -317,8 +374,8 @@ var loadAllFilesResults;
                 loadtree(resultObject, divtreename, category[i].value, subcategory[j].value);
             }
         }
-
-
+        loadtree(resultObject, '#divFCSearchResults', 'AIR', 'REGULATIONS');
+        
 
     }
 
@@ -331,7 +388,7 @@ var loadAllFilesResults;
            
           
 
-            console.log(data);
+          //  console.log(data);
             var i, j, r = [];
             for (i = 0, j = data.selected.length; i < j; i++) {
                 r.push(data.instance.get_node(data.selected[i]).text);

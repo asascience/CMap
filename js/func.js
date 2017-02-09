@@ -1,13 +1,9 @@
 ﻿$(document).ready(function () {
-    var serviceURLslocal = { fileslist: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/GetFilesList", inspectionslist: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/GetInspectionsList", inspectionshistory: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/GetInspectionsHistory", uploadinspectionhistory: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/uploadinspectionhistory", uploadcustomfile: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/UploadCustomFile", fixuploadfile: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/FixUploadedFile" };
 
-
-	
-	   var serviceURLsProd = { fileslist: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetFilesList", inspectionslist: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetInspectionsList", inspectionshistory: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetInspectionsHistory", uploadinspectionhistory: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/uploadinspectionhistory", uploadcustomfile: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/UploadCustomFile", fixuploadfile: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/FixUploadedFile" };
- //var serviceURLs = serviceURLslocal;
-	var serviceURLs = serviceURLsProd;
     
-  
+    var serviceURLs = window.serviceURLs;
+    
+
  function ServiceFailed(result) {
         alert('Service call failed: ' + result.status + '' + result.statusText);
         Type = null; Url = null; Data = null; ContentType = null; DataType = null; ProcessData = null;
@@ -32,13 +28,7 @@
         };
     }
 
-    
-  //For Local Server
-	//var serviceURLs=serviceURLsProd;// For Production Server
-	
-	//var screenwidth = getScreenWidth();
-	
-    //document.getElementById('divDashBoard').style.left = (screenwidth/2) - 300 + "px";
+ 
 	var winW = $(window).width();
 
 	var winheight = $(window).height();
@@ -50,30 +40,15 @@
 	$('#divFC1').css('width', winW - 600);
 
 	$('#chartContainer').css('width', winW - 600);
-	//$('#divFC').css('left', winW / 2 - $('#divDashBoard').width() / 2 - 20);
+	
 
 	
 	  var PI = $("#divps");
 	  var PI1 = $("#divps1");
-	  var ETInspectWindow = $("#divETInspections");
-	  var ETCalendarWindow=$("#divETCalendar") ;
+	  var ETInspectWindow = $("#divETInspections");	
 	  var detailsWindow = $("#details");
 	  //---------------------------------------------------------------------------------
-	ETCalendarWindow.kendoWindow({
-	    position: {
-			top: 100, // or "100px"
-			left: winW / 2 - $('#divDashBoard').width() / 2 +40
-		  },
-        width:winW-500,
-	    height:700,
-        title: "Event Tickler - Calendar",
-        visible: false,
-        actions: [                           
-             "Close"
-         ]
-                       
-          });
-	//---------------------------------------------------------------------------------
+	
 	ETInspectWindow.kendoWindow({
 	    position: {
 			top: 100, // or "100px"
@@ -397,7 +372,6 @@ function getScreenWidth() {
 	
 }
 
-//---------------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------------
 $("#btnpi").click(function () {
@@ -431,55 +405,18 @@ $("#btnpis").click(function () {
         $('#divSelectObjects').css("display", "block");
 		
     });
+
+    //---------------------------------------------------------------------------------
+
 	
 
-          
-			///////////////////////////////////////////////////////////////////////////////
-			 function onChange() {
-                    alert("hello");
-                    //kendoConsole.log("Change :: " + kendo.toString(this.value(), 'd'));
-                }
-			 $('#btnETCalendar').click(function () {
-				 var today = new Date();
-				 var    events = [
-                           +new Date(today.getFullYear(), today.getMonth(), 8),
-                           +new Date(today.getFullYear(), today.getMonth(), 12),
-                           +new Date(today.getFullYear(), today.getMonth(), 24),
-                           +new Date(today.getFullYear(), today.getMonth() + 1, 6),
-                           +new Date(today.getFullYear(), today.getMonth() + 1, 7),
-                           +new Date(today.getFullYear(), today.getMonth() + 1, 25),
-                           +new Date(today.getFullYear(), today.getMonth() + 1, 27),
-                           +new Date(today.getFullYear(), today.getMonth() - 1, 3),
-                           +new Date(today.getFullYear(), today.getMonth() - 1, 5),
-                           +new Date(today.getFullYear(), today.getMonth() - 2, 22),
-                           +new Date(today.getFullYear(), today.getMonth() - 2, 27)
-                        ];
-				  $("#calendar").kendoCalendar({
-                        value: today,
-                      change:onChange,
-                        dates: events,
-                        weekNumber: false,
-                        month: {
-                            // template for dates in month view
-                            content: '# if ($.inArray(+data.date, data.dates) != -1) { #' +
-                                        '<div class="' +
-                                           '# if (data.value < 10) { #' +
-                                               "exhibition" +
-                                           '# } else if ( data.value < 20 ) { #' +
-                                               "party" +
-                                           '# } else { #' +
-                                               "cocktail" +
-                                           '# } #' +
-                                        '">#= data.value+"<br>Hello" #</div>' +
-                                     '# } else { #' +
-                                     '#= data.value #' +
-                                     '# } #'
-                            
-                        },
-                        footer: false
-                    });
-				 ETCalendarWindow.data("kendoWindow").open();
-			 });
+
+	
+    
+
+
+
+   
             $('#btnETInspections').click(function () {
                 ETInspectWindow.data("kendoWindow").open();
                 var uesrid = "2"; var Type = "POST";              
@@ -517,7 +454,7 @@ $("#btnpis").click(function () {
                 
                 resultObject = eval(result.GetInspectionsListResult);
 
-                console.log(resultObject);
+               // console.log(resultObject);
                 $("#datagridinspections").kendoGrid({
 
                     dataSource: {
