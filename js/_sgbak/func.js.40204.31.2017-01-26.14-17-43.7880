@@ -1,0 +1,1108 @@
+﻿$(document).ready(function(){
+    $("#tabstrip").kendoTabStrip({
+        animation: {
+            open: {
+                effects: "fadeIn"
+            }
+        }
+    });
+    
+    var serviceURLslocal = { fileslist: "http://localhost/CMapService/Service.svc/GetFilesList", inspectionslist: "http://localhost/CMapService/Service.svc/GetInspectionsList", uploadcustomfile: "http://localhost/CMapService/Service.svc/UploadCustomFile", fixuploadfile: "http://localhost/CMapService/Service.svc/FixUploadedFile" };
+	
+    var serviceURLsProd = { fileslist: "http://tct.reservoirkb.com/CMapService/Service.svc/GetFilesList", inspectionslist: "http://localhost/CMapService/Service.svc/GetInspectionsList", uploadcustomfile: "http://tct.reservoirkb.com/CMapService/Service.svc/UploadCustomFile", fixuploadfile: "http://tct.reservoirkb.com/CMapService/Service.svc/FixUploadedFile" };
+	var serviceURLs=serviceURLslocal;//For Local Server
+	//var serviceURLs=serviceURLsProd;// For Production Server
+	
+	//var screenwidth = getScreenWidth();
+	
+    //document.getElementById('divDashBoard').style.left = (screenwidth/2) - 300 + "px";
+	var winW = $(window).width();
+
+	var winheight = $(window).height();
+
+	$('#divDashBoard').css('width', winW - 360);
+
+	$('#divDashBoard').css('left', winW / 2 - $('#divDashBoard').width() / 2 - 20);
+
+	$('#divFC1').css('width', winW - 600);
+
+	$('#chartContainer').css('width', winW - 600);
+	//$('#divFC').css('left', winW / 2 - $('#divDashBoard').width() / 2 - 20);
+
+	  var FCWindow = $("#divFC");
+	  var PI = $("#divps");
+	  var PI1 = $("#divps1");
+	var ETInspectWindow= $("#divETInspections");
+	//---------------------------------------------------------------------------------
+	ETInspectWindow.kendoWindow({
+	    position: {
+			top: 100, // or "100px"
+			left: winW / 2 - $('#divDashBoard').width() / 2 +40
+		  },
+        width:winW-500,
+	    height:700,
+        title: "Event Tickler - Inspections",
+        visible: false,
+        actions: [                           
+             "Close"
+         ]
+                       
+          });
+ //---------------------------------------------------------------------------------
+   FCWindow.kendoWindow({
+	    position: {
+			top: 100, // or "100px"
+			left: winW / 2 - $('#divDashBoard').width() / 2 +40
+		  },
+        width:winW-500,
+	    height:500,
+        title: "File Cabinet",
+        visible: false,
+        actions: [                           
+             "Close"
+         ]
+                       
+          });
+//---------------------------------------------------------------------------------
+PI.kendoWindow({
+	    position: {
+    top: 100, // or "100px"
+    left: winW / 2 - $('#divDashBoard').width() / 2 +40
+  },
+                        width:winW-500,
+						height:500,
+                        title: "",
+                        visible: false,
+                        actions: [                           
+                            "Close"
+                        ],
+                       
+                    });
+//---------------------------------------------------------------------------------
+PI1.kendoWindow({
+	    position: {
+    top: 100, // or "100px"
+    left: winW / 2 - $('#divDashBoard').width() / 2 +40
+  },
+                        width:winW-500,
+						height:500,
+                        title: "Annual volume displaced - 12 month rolling average",
+                        visible: false,
+                        actions: [                           
+                            "Close"
+                        ],
+                       
+                    });
+//---------------------------------------------------------------------------------
+ $("#divFC1").tabs();
+              $("#airpermits").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
+              $("#airpermits li").removeClass("ui-corner-top").addClass("ui-corner-left");
+
+
+              $("#wastepermits").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
+              $("#wastepermits li").removeClass("ui-corner-top").addClass("ui-corner-left");
+
+
+              $("#waterpermits").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
+              $("#waterpermits li").removeClass("ui-corner-top").addClass("ui-corner-left");
+
+
+              $("#otherpermits").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
+              $("#otherpermits li").removeClass("ui-corner-top").addClass("ui-corner-left");
+
+//---------------------------------------------------------------------------------          
+
+ 
+function loadchartdata()
+{
+    var dps = [
+        { x: 2010, y: 1000000 },
+
+         { x: 2011, y: 2000000 },
+
+          { x: 2012, y: 4000000 },
+
+           { x: 2013, y: 5000000 },
+
+            { x: 2014, y: 8000000 },
+
+             { x: 2015, y: 9000000 },
+
+              { x: 2016, y: 10000000 },
+
+
+
+    ]; // dataPoints
+
+    var p = 0;
+    var dps = [
+				{ x: new Date(2007, 0, 3), y: 1000000 },
+				{ x: new Date(2008, 0, 5), y: 3000000 },
+				{ x: new Date(2009, 0, 7), y: 5000000 },
+				{ x: new Date(2010, 0, 9), y: 7000000 },
+				{ x: new Date(2011, 0, 11), y: 9000000 },
+				{ x: new Date(2012, 0, 13), y: 10000000 },
+				{ x: new Date(2013, 0, 15), y: 4000000 },
+				{ x: new Date(2014, 0, 17), y: 3000000 },
+				{ x: new Date(2015, 0, 19), y: 2000000 },
+				{ x: new Date(2016, 0, 21), y: 1000000 },
+				{ x: new Date(2017, 0, 23), y: 5000000 }
+    ];
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+        title: {
+            text: ""
+        },
+		width:800,
+        data: [{
+            type: "line",
+            dataPoints:dps
+        }]
+    });
+    chart.render();
+   
+   
+    var xVal = dps[p].x;
+    var yVal = dps[p].y;
+    var updateInterval = 1000;
+
+    var updateChart = function () {
+       
+
+        yVal = dps[p].y;
+        xVal = dps[p].x;
+        dps.push({ x: xVal, y: yVal, });
+
+        console.log(dps);
+
+        p++;
+        if (dps.length > 10) {
+            p = 0;
+        }
+        chart.render();
+
+        // update chart after specified time. 
+
+    };
+    setInterval(function () { updateChart() }, updateInterval);
+
+   
+}
+//---------------------------------------------------------------------------------
+function loadchartdataps1() {
+    var json = [
+ { "year": 2007, "value": 100000 },
+ { "year": 2008, "value": 200000 },
+ { "year": 2009, "value": 300000 },
+  { "year": 2010, "value": 400000 },
+  { "year": 2011, "value": 450000 },
+   { "year": 2012, "value": 500000 },
+    { "year": 2013, "value": 600000 },
+     { "year": 2014, "value": 700000 },
+       { "year": 2015, "value": 800000 },
+       { "year": 2016, "value": 900000 },
+
+    ];
+    var year=0;
+    FusionCharts.ready(function () {
+
+       
+        var fusioncharts = new FusionCharts({
+            type: 'cylinder',
+            dataFormat: 'json',
+            id: 'fuelMeter-4',
+            renderAt: 'ps1',
+            width: '500',
+            height: '500',
+            dataSource: {
+                "chart": {
+                    "theme": "fint",
+                    "caption": "",
+                    "subcaption": "",
+                    "lowerLimit": "0",
+						"upperLimit": "1000000",
+                    "lowerLimitDisplay": "Empty",
+                    "upperLimitDisplay": "Full",
+                    "numberSuffix": " Gallons",
+                    "showValue": "0",
+                    "chartBottomMargin": "180",
+                     "chartLeftMargin": "100"
+                },
+                "value": "110",
+
+                "annotations": {
+                    "origw": "400",
+                    "origh": "190",
+                    "autoscale": "1",
+                    "groups": [{
+                        "id": "range",
+                        "items": [{
+                            "id": "rangeBg",
+                            "type": "rectangle",
+                            "x": "$canvasCenterX-125",
+                            "y": "$chartEndY-50",
+                            "tox": "$canvasCenterX +145",
+                            "toy": "$chartEndY-95",
+                            "fillcolor": "#FFFFFF"
+                        }, {
+                            "id": "rangeText",
+                            "type": "Text",
+							"align":"center",
+                            "fontSize": "15",
+                            "fillcolor": "#FFFFFF",
+                            "text": "Volume : 110 Gallons",
+                            "x": "$chartCenterX",
+                            "y": "$chartEndY-70"
+                        }]
+                    }]
+                }
+            },
+            "events": {
+                "rendered": function (evtObj, argObj) {
+                    var gaugeRef = evtObj.sender,
+                        fuelVolume = 0;
+                    
+                   
+
+                      var i = 0;
+                    gaugeRef.chartInterval = setInterval(function () {
+                        //console.log(i);
+                       
+                        if (i == json.length)
+                        {
+                            i = 0;
+                        } else
+                            {
+
+                      
+                          
+                            var x=parseInt(json[i].value.toString());
+                          
+                             //   gaugeRef.setChartAttribute('cylFillColor', '#008000');
+                                gaugeRef.feedData("&value=" + x);
+                            
+                            year = json[i].year
+                        i++;
+                        }
+                       
+
+                    }, 1000);
+                },
+                //Using real time update event to update the annotation
+                //showing available volume of Diesel
+                "realTimeUpdateComplete": function (evt, arg) {
+					var gaugeRef = evt.sender;
+                 
+
+                    var annotations = evt.sender.annotations,
+                        dataVal = evt.sender.getData();
+                   
+                    var forecolorval = "#FFFFFF";
+                      //alert(dataVal);
+                        
+                       // colorVal = (dataVal >= 500000) ? "#6caa03" : ((dataVal <= 500000) ? "#008000" : "#f8bd1b");
+                   // console.log(dataVal);
+                    if (dataVal <= 500000)
+                    {
+                        colorVal = "#008000";
+                        forecolorval = "#FFFFFF";
+                        
+                    }
+
+                    if (dataVal > 500000 && dataVal <=800000) {
+                        colorVal = "#FFFF00";
+                        forecolorval = "#000000";
+                    }
+
+                    if (dataVal >= 800000) {
+                        colorVal = "#FF0000";
+                        forecolorval = "#FFFFFF";
+                    }
+
+                    //Updating value
+                    annotations && annotations.update('rangeText', {
+
+                        "text": " Volume: " + dataVal + " Gallons @ " + year,
+                        "fillcolor": forecolorval
+                        
+
+                    });
+                    //Changing background color as per value
+                    annotations && annotations.update('rangeBg', {
+                        "fillcolor": colorVal
+                    });
+
+
+                   
+                },
+                "disposed": function (evt, arg) {
+                    clearInterval(evt.sender.chartInterval);
+                }
+            }
+        }
+    );
+        fusioncharts.render();
+    });
+
+
+}
+
+//---------------------------------------------------------------------------------
+function getScreenWidth() {
+    var height = window.innerHeight;
+    var myHeight;
+    if (typeof (window.innerWidth) == 'number') {
+        //Non-IE
+        myWidth = window.innerWidth;
+    }
+    else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+        //IE 6+ in 'standards compliant mode'
+        myWidth = document.documentElement.clientWidth;
+    }
+    else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+        //IE 4 compatible
+        myWidth = document.body.clientWidth;
+    }
+    height = myWidth;
+    return height;
+	
+}
+$("#btnFCSearch").click(function(){    
+//alert("results");
+
+    document.getElementById("divFCSearchResults").style.display = "block";
+
+});
+//---------------------------------------------------------------------------------
+$("#btnFC1").click(function(){    
+  
+  FCWindow.data("kendoWindow").open();
+		LoadAllFiles();
+});
+//---------------------------------------------------------------------------------
+
+//---------------------------------------------------------------------------------
+$("#btnpi").click(function () {
+  
+    PI.data("kendoWindow").open();
+   
+    loadchartdata();
+});
+//---------------------------------------------------------------------------------
+$("#btnpis").click(function () {
+   
+    PI1.data("kendoWindow").open();
+	
+    loadchartdataps1();
+});
+//---------------------------------------------------------------------------------
+    $("#btnFC").click(function(){
+	
+        $('#divFC').css("display", "block");
+		LoadAllFiles();
+    });
+//---------------------------------------------------------------------------------
+	$("#btnWeather").click(function(){
+	
+        $('#divWeather').css("display", "block");
+		
+    });
+//---------------------------------------------------------------------------------
+	$("#btnSO").click(function(){
+	
+        $('#divSelectObjects').css("display", "block");
+		
+    });
+	
+///////////////////////////////////////////////////////////////////////////////
+            function LoadAllFiles() {
+                var uesrid = "2"; var Type = "POST";              
+			  var Url=serviceURLs["fileslist"];			  ;
+                var Data = '{"Id": "' + uesrid + '"}';
+                var ContentType = "application/json; charset=utf-8";
+                var DataType = "json";
+
+                $.ajax({
+                    type: Type,
+                    url: Url,
+                    data: Data,
+                    contentType: ContentType,
+                    dataType: DataType,
+                    processdata: true,
+                    success: function (msg) {
+                        GetFilesListSucceeded(msg);
+						//alert("success");
+                    },
+                    error: ServiceFailed// When Service call fails
+                });
+            }
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            function ServiceFailed(result) {
+	alert('Service call failed: ' + result.status + '' + result.statusText);
+                Type = null; Url = null; Data = null; ContentType = null; DataType = null; ProcessData = null;
+            }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////        
+
+            function GetFilesListSucceeded(result) {                
+                resultObject = eval(result.GetFilesListResult);
+//alert(resultObject);
+
+//console.log(resultObject);
+
+               
+            
+var tblAirRegulationsJSON = JSLINQ(resultObject)
+   .Where(function (item) { return item.cateogory == "1" && item.subcategory == "5"; });
+
+var tblAirpermitsJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "1" && item.subcategory == "6"; });
+var tblAirguidanceJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "1" && item.subcategory == "7"; });
+
+
+var tblAirdesignJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "1" && item.subcategory == "8"; });
+
+
+var tblAirrecordsdataJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "1" && item.subcategory == "9"; });
+
+
+var tblwasteRegulationsJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "2" && item.subcategory == "5"; });
+
+
+var tblwastepermitsJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "2" && item.subcategory == "6"; });
+
+
+var tblwasteguidanceJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "2" && item.subcategory == "7"; });
+
+
+var tblwastedesignJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "2" && item.subcategory == "8"; });
+
+
+var tblwasterecordsdataJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "2" && item.subcategory == "9"; });
+
+
+var tblwaterRegulationsJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "3" && item.subcategory == "5"; });
+
+
+var tblwaterpermitsJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "3" && item.subcategory == "6"; });
+
+
+var tblwaterguidanceJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "3" && item.subcategory == "7"; });
+
+
+var tblwaterdesignJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "3" && item.subcategory == "8"; });
+
+
+var tblwaterrecordsdataJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "3" && item.subcategory == "9"; });
+
+
+var tblotherRegulationsJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "4" && item.subcategory == "5"; });
+
+var tblotherpermitsJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "4" && item.subcategory == "6"; });
+
+
+var tblotherguidanceJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "4" && item.subcategory == "7"; });
+
+
+var tblotherdesignJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "4" && item.subcategory == "8"; });
+
+
+var tblotherrecordsdataJSON = JSLINQ(resultObject)
+.Where(function (item) { return item.cateogory == "4" && item.subcategory == "9"; });
+
+
+//console.log(JSON.stringify(tblAirRegulationsJSON.items));
+
+if (tblAirRegulationsJSON.items.length > 0)
+{
+    $('#tblAirRegulations').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblAirRegulationsJSON.items)
+        }
+
+
+    });
+}
+
+
+
+
+if (tblAirpermitsJSON.items.length > 0) {
+    $('#tblAirpermits').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblAirpermitsJSON.items)
+        }
+
+
+    });
+}
+
+if (tblAirguidanceJSON.items.length > 0) {
+    $('#tblAirguidance').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblAirguidanceJSON.items)
+        }
+
+
+    });
+}
+
+if (tblAirdesignJSON.items.length > 0) {
+    $('#tblAirpermitdesign').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblAirdesignJSON.items)
+        }
+
+
+    });
+}
+
+if (tblAirrecordsdataJSON.items.length > 0) {
+    $('#tblAirrecordsdata').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblAirrecordsdataJSON.items)
+        }
+
+
+    });
+}
+
+if (tblwaterRegulationsJSON.items.length > 0) {
+    $('#tblwaterRegulations').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblwaterRegulationsJSON.items)
+        }
+
+
+    });
+}
+
+if (tblwaterpermitsJSON.items.length > 0) {
+    $('#tblwaterpermits').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblwaterpermitsJSON.items)
+        }
+
+
+    });
+}
+
+if (tblwaterguidanceJSON.items.length > 0) {
+   $('#tblwaterguidance').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblwaterguidanceJSON.items)
+        }
+
+
+    });
+	
+}
+
+if (tblwaterdesignJSON.items.length > 0) {
+    $('#tblwaterpermitdesign').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblwaterdesignJSON.items)
+        }
+
+
+    });
+}
+
+if (tblwaterrecordsdataJSON.items.length > 0) {
+    $('#tblwaterrecordsdata').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblwaterrecordsdataJSON.items)
+        }
+
+
+    });
+}
+
+if (tblwasteRegulationsJSON.items.length > 0) {
+    $('#tblwasteRegulations').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblwasteRegulationsJSON.items)
+        }
+
+
+    });
+}
+
+if (tblwastepermitsJSON.items.length > 0) {
+    $('#tblwastepermits').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblwastepermitsJSON.items)
+        }
+
+
+    });
+}
+
+if (tblwasteguidanceJSON.items.length > 0) {
+    $('#tblwasteguidance').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblwasteguidanceJSON.items)
+        }
+
+
+    });
+
+
+    
+
+    $('#divFCSearchResults').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for (i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblwasteguidanceJSON.items)
+        }
+
+
+    });
+}
+
+if (tblwastedesignJSON.items.length > 0) {
+    $('#tblwastepermitdesign').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblwastedesignJSON.items)
+        }
+
+
+    });
+}
+
+if (tblwasterecordsdataJSON.items.length > 0) {
+    $('#tblwasterecordsdata').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblwasterecordsdataJSON.items)
+        }
+
+
+    });
+}
+
+if (tblotherRegulationsJSON.items.length > 0) {
+    $('#tblotherRegulations').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblotherRegulationsJSON.items)
+        }
+
+
+    });
+}
+
+if (tblotherpermitsJSON.items.length > 0) {
+    $('#tblotherpermits').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblotherpermitsJSON.items)
+        }
+
+
+    });
+}
+
+if (tblotherguidanceJSON.items.length > 0) {
+    $('#tblotherguidance').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for(i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+       
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblotherguidanceJSON.items)
+        }
+
+
+    });
+}
+
+if (tblotherdesignJSON.items.length > 0) {
+    $('#tblotherpermitdesign').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for (i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblotherdesignJSON.items)
+        }
+
+
+    });
+}
+              
+if (tblotherrecordsdataJSON.items.length > 0) {
+    $('#tblotherrecordsdata').on('changed.jstree', function (e, data) {
+        var i, j, r = [];
+        for (i = 0, j = data.selected.length; i < j; i++) {
+            r.push(data.instance.get_node(data.selected[i]).text);
+        }
+
+        window.open('filecabinet/' + r.join(', '), '_blank');
+    }).jstree({
+        'core': {
+            'data': (tblotherrecordsdataJSON.items)
+        }
+
+
+    });
+}
+
+
+               
+            }
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////			   
+            $('#btnUpload').click(function () {
+
+                $('#divUpload').css("display", "block");
+                $('#divFC1').css("display", "none");
+            });
+            ///////////////////////////////////////////////////////////////////////////////////	  
+            $('#btnFileCabinet').click(function () {
+                $('#divUpload').css("display", "none");
+                $('#divFC1').css("display", "block");
+            });
+			///////////////////////////////////////////////////////////////////////////////
+			$('#imgCloseFC').click(function () {			
+				$('#divFC').css("display", "none");
+			});
+				$('#imgCloseW').click(function () {			
+				$('#divWeather').css("display", "none");
+			});
+			$('#imgCloseSO').click(function () {			
+				$('#divSelectObjects').css("display", "none");
+			});
+            ///////////////////////////////////////////////////////////////////////////////
+			   $('#thair').click(function () {
+                $('#tblWasteFiles').css("display", "none");
+                $('#tblAirFiles').css("display", "block");
+                $('#tblWaterFiles').css("display", "none");
+                $('#tblOtherFiles').css("display", "none");
+				 showTabSelection($('#thair'));
+            });
+			
+            $('#thwaste').click(function () {
+                $('#tblWasteFiles').css("display", "block");
+                $('#tblAirFiles').css("display", "none");
+                $('#tblWaterFiles').css("display", "none");
+                $('#tblOtherFiles').css("display", "none");
+				 showTabSelection($('#thwaste'));
+            });
+            $('#thwater').click(function () {
+                $('#tblWasteFiles').css("display", "none");
+                $('#tblAirFiles').css("display", "none");
+                $('#tblWaterFiles').css("display", "block");
+                $('#tblOtherFiles').css("display", "none");				 
+				 showTabSelection($('#thwater'));
+            });
+            $('#thother').click(function () {
+                $('#tblWasteFiles').css("display", "none");
+                $('#tblAirFiles').css("display", "none");
+                $('#tblWaterFiles').css("display", "none");
+                $('#tblOtherFiles').css("display", "block");				
+				 showTabSelection($('#thother'));
+            });
+			///////////////////////////////////////////////////////////////////////////////
+			
+            $('#btnETInspections').click(function () {
+                ETInspectWindow.data("kendoWindow").open();
+                var uesrid = "2"; var Type = "POST";              
+                var Url = serviceURLs["inspectionslist"];;
+                var Data = '{"Id": "' + uesrid + '"}';
+                var ContentType = "application/json; charset=utf-8";
+                var DataType = "json";
+
+                $.ajax({
+                    type: Type,
+                    url: Url,
+                    data: Data,
+                    contentType: ContentType,
+                    dataType: DataType,
+                    processdata: true,
+                    success: function (msg) {
+                        GetinspectionsListSucceeded(msg);
+                        //alert("success");
+                    },
+                    error: ServiceFailed// When Service call fails
+                });
+            
+            });
+
+            function toDate(value) {
+
+
+                var dateRegExp = /^\/Date\((.*?)\)\/$/;
+                var date = dateRegExp.exec(value);
+                return new Date(parseInt(date[1]));
+            }
+    
+            function GetinspectionsListSucceeded(result) {
+
+                
+                resultObject = eval(result.GetInspectionsListResult);
+
+                console.log(resultObject);
+                $("#datagridinspections").kendoGrid({
+
+                    dataSource: {
+                        data: resultObject
+
+                    },
+                    detailInit: detailInit,
+                    dataBound: function () {
+                        // this.expandRow(this.tbody.find("tr.k-master-row").first());
+
+                        $('td').each(function () { if ($(this).text() == 'Pedning') { $(this).addClass('orange') } });
+                        $('td').each(function () { if ($(this).text() == 'Completed') { $(this).addClass('green') } });
+                        $('td').each(function () { if ($(this).text() == 'In-Progress') { $(this).addClass('orange') } });
+                    },
+
+                    columns: [{ field: "TankID", title: "Tank ID", width: "80px" },
+            { field: "Inspection_name", title: "Inspection Name", width: "120px" },
+           
+            { field: "Created_date", title: "Created Date", width: "90px", template: "#= kendo.toString(kendo.parseDate(Created_date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
+            { field: "Status", title: "Status", width: "100px" },
+           
+             { field: "due_date", title: "Due Date", width: "90px", template: "#= kendo.toString(kendo.parseDate(due_date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
+             { field: "completed_date", title: "Completed Date", width: "90px"}]
+             
+                });
+
+
+              
+               
+            }
+         
+
+            function detailInit(e) {
+                $("<div/>").appendTo(e.detailCell).kendoGrid({
+
+                   
+                    dataSource: [
+     { Comments: "Tank Outer paint color needs to be redone", updateby: "Phani",commentCreated_date:"01/10/2017" },
+     { Comments: "Paint color changed from Tan to brown", updateby: "Hima", commentCreated_date: "01/13/2017" },
+         { Comments: "Inspection completed.", updateby: "John", commentCreated_date: "01/24/2017" },
+                    ],
+                    scrollable: false,
+                    
+                    columns: [
+                        { field: "Comments", title: "Comments", width: "100px" },
+           
+             { field: "updateby", title: "Updated By", width: "100px",  },
+             { field: "commentCreated_date", title: "Date", width: "100px" }]
+                   
+                });
+            }
+
+			function  showTabSelection(obj)
+			{
+				$('#thair').removeClass('tabSelected').addClass('tabNotSelected');
+				$('#thwaste').removeClass('tabSelected').addClass('tabNotSelected');
+				$('#thwater').removeClass('tabSelected').addClass('tabNotSelected');
+				$('#thother').removeClass('tabSelected').addClass('tabNotSelected');
+				 obj.addClass('tabSelected');
+			}
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            $('#btnRead').click(function () {
+                var x = document.getElementById("uploadFiles");
+                var file = x.files[0];
+                var fileData = file;
+
+
+var air=$("#chkAir").is(':checked') ;
+var water=$("#chkWater").is(':checked') ;
+var waste=$("#chkWaste").is(':checked') ;
+var other=$("#chkOther").is(':checked') ;
+var Url=serviceURLs["uploadcustomfile"];	
+                $.ajax({
+                    url: Url,
+                    type: 'POST',
+                    data: fileData,
+                    cache: false,
+                    dataType: 'json',
+                    processData: false, // Don't process the files
+                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                    success: function (data) {
+                        UploadFileServiceSucceeded(data, file.name,air,water,waste,other);
+                    },
+                    error: function (result) {
+                        alert('Service call failed: ' + result.status + '' + result.statusText);
+                    }
+                });
+
+            });
+            ////////////////////////////////////////////////////////////////////////////
+            function UploadFileServiceSucceeded(result, fn,air,water,waste,other) {
+
+                resultObject = result.UploadCustomFileResult;    
+//alert(resultObject)	
+//alert(fn);			;
+				var Url=serviceURLs["fixuploadfile"];
+               // var Data = '{"type": "' + resultObject + '","fn":"' + fn + '"}';
+                var Data = '{"type": "' + resultObject + '","fn":"' + fn + '","air":"' + air + '","water":"' + water + '","waste":"' + waste + '","other":"' + other + '"}';
+               // alert(Data);
+                var ContentType = "application/json; charset=utf-8";
+
+                $.ajax({
+                    type: 'POST',
+                    url: Url,
+                    data: Data,
+                    contentType: ContentType,
+                    dataType: 'json',
+                    processdata: true,
+                    success: function (msg) {
+                        //GetFilesListSucceeded(msg);
+                        alert(msg.FixUploadedFileResult);
+ LoadAllFiles();
+                    },
+                    error: ServiceFailed// When Service call fails
+                });
+
+
+            }
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////
+});
