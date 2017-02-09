@@ -1,9 +1,35 @@
  html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
  table tr td {vertical-align:top;}
+
+
+ .k-tabstrip > .k-tabstrip-items > .k-item {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    margin:1px;
+    padding:2px;
+    background-color:#47A3DA;
+    border-color:white;
+}
+
+.k-tabstrip
+  {background-color:green;
+
+  }
  #calendar {
-                     width: 100%;
+     align-content:center;
+                     width: 60%;
 					 font-size:11px;
                 } 
+ .NoMarginPaddingDIV{
+     padding:0px;
+     margin:0px;
+ }
+ #divCalendar
+ {
+     text-align:center;
+     align-content:center;
+     width:100%;
+ }
  .exhibition,
                 .party,
                 .cocktail {
