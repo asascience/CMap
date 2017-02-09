@@ -1,74 +1,676 @@
-<!DOCTYPE html><html><head>    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">    <title>Complaince MAP</title>    <link rel="stylesheet" href="https://js.arcgis.com/3.19/dijit/themes/soria/soria.css">    <link rel="stylesheet" href="https://js.arcgis.com/3.19/dojox/layout/resources/ExpandoPane.css">    <link rel="stylesheet" href="https://js.arcgis.com/3.19/esri/css/esri.css">      <link rel="stylesheet" href="styles/cmap.css">    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    <script type="text/javascript" src="http://static.fusioncharts.com/code/latest/fusioncharts.js"></script>    <script type="text/javascript" src="http://static.fusioncharts.com/code/latest/themes/fusioncharts.theme.fint.js?cacheBust=56"></script>    <script src="https://code.jquery.com/jquery-3.1.1.js"            integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="            crossorigin="anonymous"></script>    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="js/jQAllRangeSliders-min.js"></script>    <script src="js/sliderDemo.js"></script>    <script src="js/dateSliderDemo.js"></script>    <script src="js/editSliderDemo.js"></script>    <!--<script src="js/demo.js"></script>-->    <script src="js/moment.js"></script>    <link href="css/iThing.css" rel="stylesheet" />    <script src="js/jQDateRangeSlider-withRuler-min.js"></script>    <script src="js/jQRangeSlider-withRuler-min.js"></script> <script type="text/javascript" src="https://kendo.cdn.telerik.com/2017.1.118/js/kendo.all.min.js"></script>    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.common-material.min.css" >    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.material.min.css" >    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.material.mobile.min.css" >    
-    <link href="styles/Mainstyle.css" rel="stylesheet" />
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   
-    <script src="js/modernizr.custom.js"></script>    <script src="js/jstree.min.js"></script>    <link href="styles/style.min.css" rel="stylesheet" /> <link href="styles/dashboardmenu.css" rel="stylesheet" />    <script src="js/JSLINQ.js"></script> 
-    
-    <script src="https://js.arcgis.com/3.19/"></script>    <style>
-        .k-dropdown .k-dropdown-wrap{    height: 47px;}        .vakata-context {            z-index: 10005;            left: 300px;        }
-        #tabstrip h2 {            font-weight: lighter;            font-size: 5em;            line-height: 1;            padding: 0 0 0 30px;            margin: 0;        }
-            #tabstrip h2 span {                background: none;                padding-left: 5px;                font-size: .3em;                vertical-align: top;            }
-        #tabstrip p {            margin: 0;            padding: 0;        }    </style>
-        <script src="js/map.js"></script>    <script src="js/ServiceURLs.js"></script>    <script src="js/func.js"></script>     <script src="js/filecabinet.js"></script>    <script src="js/eventcalendar.js"></script>    <script src="js/moc.js"></script>
-    <style>        .ui-state-active{            background-color:rgba(71, 162, 217, 1);            border-color:rgba(71, 162, 217, 1);        }        .k-block, .k-button, .k-draghandle, .k-grid-header, .k-grouping-header, .k-header, .k-pager-wrap, .k-toolbar, .k-treemap-tile, html .km-pane-wrapper .k-header {            background-color: #47a3da;        }
-        .ui-tabs .ui-tabs-nav li {            list-style: none;        }
-            .ui-tabs .ui-tabs-nav li a {                list-style: none;            }
-        .nolist {            list-style: none;        }
-        .k-grid-header {            border: 1px solid #bbb;        }
-        .k-grid table {            font-size: small;        }
-        k-grid .k-grid-header .k-header .k-link {            height: auto;            word-break: break-all !important;            word-wrap: break-word !important;        }
-        .k-grid .k-grid-header .k-header {            white-space: normal;        }    </style>
-</head><body>
-    <div id="divDashBoard">     <ul id="nav">     <li>                <a href="#" id="btnFC1">File Cabinet</a>            </li>            <li>                <a href="#">Compliance</a>                <ul>                    <li>                        <a id="btncompliance" href="#" class="cbp-tm-icon-archive">                            <label><input type="checkbox" id="chkSComp" value="first_checkbox"> Show Compliance</label>                        </a>                    </li>                    <li><a href="#" >TCT</a></li>                    <li><a href="#" >Audit</a></li>                    <li><a href="#" >Inspections</a></li>                    <li><a href="#" >Operating Procedures</a></li>                    <li><a href="#" >Data and Limits</a></li>                    <li><a href="#" >Permit Conditions</a></li>                    <li><a href="#" >Reports</a></li>                    <!--<li><a href="#" id="btnpi" class="cbp-tm-icon-mobile">PI system Chart</a></li>-->                    <li><a href="#" id="btnpis" class="cbp-tm-icon-mobile">PI system</a></li>                </ul>            </li>            <li>                <a href="#">Management of Change</a>                <ul >                    <li><a href="#" id="btnMOCUnits">Unit</a></li>                    <li><a href="#" >Data</a>                    <ul>                        <li><a href="#">PI</a></li>                        <li><a href="#">ASPEN</a></li>                        <li><a href="#">LDOS</a></li>                        </ul>                    </li>                    <li><a href="#" >Inspection</a>                        <ul>                            <li><a href="#">Air</a></li>                            <li><a href="#">Waste</a></li>                            <li><a href="#">Water</a></li>                            <li><a href="#">Other</a></li>                        </ul>                    </li>                    <li><a href="#" >Requirement</a>                        <ul>                            <li><a href="#">Permit</a></li>                            <li><a href="#">Regulation</a></li>                            <li><a href="#">Report</a></li>                            <li><a href="#">Guidance</a></li>                            <li><a href="#">Work Process</a></li>                        </ul>                    </li>                         <li><a href="#" >Archive</a></li>           <li><a href="#" id="btnFCUpload">File</a>            </li>
-                </ul>            </li>            <li>                <a href="#">Event Tickler</a>
-                <ul >                    <li><a href="#" >Sampling</a></li>                    <li>                        <a id="btnETInspections" href="#" >                            <table><tr><td>Inspections</td><td><div align=center id="EventstatusOrange">2</div></td></tr></table>                        </a>
-                    </li>
-                    <li><a href="#" >Waste Storage</a></li>                    <li>                        <a href="#" >                            <table><tr><td>Training</td><td><div align=center id="EventstatusRed">1</div></td></tr></table>                        </a>                    </li>                    <li><a href="#" >Reporting</a></li>                    <li><a href="#" >Permitting</a></li>     <li><a id="btnETCalendar" href="#" class="cbp-tm-icon-earth">Event Calendar</a></li>
-                </ul>            </li>            <li>                <a href="#">Weather</a>                <ul >                    <iframe id="IFWeather" src="weather/weather.html" frameborder=0 width="350px" height="400px"></iframe>                </ul>            </li></ul>
-    </div>   
-    <div data-dojo-type="dijit/layout/BorderContainer"         data-dojo-props="design:'headline', gutters:true"         style="width: 100%; height: 100%; margin: 0;">
-        <div id="divSelectObjects">            <table style="background-color:#AED6F1;" width="100%">                <tr>                    <td>Select Objects </td>                    <td align=right><img id="imgCloseSO" src="images/dismiss.png"></td>                </tr>            </table>
-            <div style="margin:10px;">
-                <table class="tg">                    <tr>                        <td class="tg-yw4l"><input type="checkbox" id="chkTanks" class="chkTanks" value="Tanks"> Tanks</td>                    </tr>                    <tr>                        <td class="tg-yw4l"><input type="checkbox" class="chkBoilers" value="Boilers"> Boilers</td>                    </tr>                    <tr>                        <th class="tg-yw4l"> <input type="checkbox" class="chkWMBs" value="WMB"> Waste Management Buildings</th>                    </tr>                    <tr>                        <td class="tg-yw4l"><input type="checkbox" class="chkPU" value="PU"> Processing Units</td>                    </tr>                </table>            </div>        </div><!--****************************************************************-->   <div id="divETCalendar">       <div id="divCalendar">           <div id="calendar"></div>       </div>       <br />       <div id="divEventDescriptionsToday">           <h3>Today's Events</h3>           <div>           <ul id="divTodayEvents"></ul>           </div>                 </div>
-       <div id="divEventDescriptionsUpcoming">           <h3>Upcoming Events</h3>           <div>               <ul id="divUpcomingEvents"></ul>           </div>       </div>    </div>        <!--****************************************************************-->        <div id="divETInspections">            <div id="datagridinspections"></div>
-            <div id="details">
-                <table>
-                    <tr>                        <td>                            <p>TankID:</p>                        </td>                        <td>                            <p><input disabled="disabled" style="width:100px" type="text" id="txttankid" /></p>                        </td>                    </tr>                    <tr>                        <td>                 <p>Comments:</p>                        </td>                        <td>                            <!--<p><input style="width:500px" type="text" id="txtcomments" /></p>-->
-                            <textarea style="width:300px" id="txtcomments"></textarea>                        </td>                    </tr>
-                    <tr>                        <td>                            <p>Updated By:</p>                        </td>                        <td>                            <p><input type="text" id="txtUpdatedby" /></p>                        </td>                    </tr>
-                    <tr>                        <td colspan="2">                       
-                            <button id="btncommentsupdate" type="button">Comments Update</button>                        </td>                    </tr>
-                </table>
-            </div>        </div>        <!--****************************************************************-->        <div id="divMOCUnits">            <table>            <tr>                <td>Select Unit</td>                <td><input id="dropdownUnitNames" /><br /><br /><br />                </td>                </tr>                                <tr><td>Type</td>                <td><div id="divUnitType"></div></td></tr>                <tr>                    <td>Diameter</td>                    <td><div id="divUnitDiameter"></div></td>                </tr>                <tr>                    <td>Length</td>                    <td><div id="divUnitLength"></div></td>                </tr>                <tr>                    <td>Width</td>                    <td><div id="divUnitWidth"></div></td>                </tr>                <tr>                    <td>Height</td>                    <td><div id="divUnitHeight"></div></td>                </tr>                <tr>                    <td>Capacity</td>                    <td><div id="divUnitCapacity"></div></td>                </tr>                <tr>                    <td>Service</td>                    <td><div id="divUnitService"></div></td>                </tr>                <tr>                    <td>Date of Construction</td>                    <td><div id="divUnitDOC"></div></td>                </tr>                <tr>                    <td>Date of Modification</td>                    <td><div id="divUnitDOM"></div></td>                </tr>                <tr>                    <td>Material of Construction</td>                    <td><div id="divUnitMaterial"></div></td>                </tr>                <tr>                    <td>Design Basis</td>                    <td><div id="divUnitDesignBasis"></div></td>                </tr>            </table>        </div>  <!--****************************************************************-->        <div id="divFC">            <div id="divFC1">                <ul>                    <li style="list-style:none;"><a href="#Air">Air</a></li>                    <li><a href="#Waste">Waste</a></li>                    <li><a href="#Water">Water</a></li>                    <li><a href="#Other">Other</a></li>                    <li><a href="#divFCSearch">Search Files</a></li>                    <li><a href="#divFCRecent">Recent Files</a></li>                                    </ul>                <div id="Air">                    <div id="airpermits">                        <table>                            <tr>                                <td>                                    <ul>                                        <li><a href="#Regulations">Regulations</a></li>                                        <li><a href="#Permits">Permits</a></li>                                        <li><a href="#Guidance">Guidance</a></li>                                        <li><a href="#Design">Design</a></li>                                        <li><a href="#Records_Data">Records/Data</a></li>                                    </ul>                                </td>                                <td valign="top">                                    <div id="Regulations">
-                                        <div id="tblAirRegulations"></div>
-                                    </div>                                    <div id="Permits">
-                                        <div id="tblAirPermits"></div>                                    </div>                                    <div id="Guidance">                                        <div id="tblAirGuidance"></div>                                    </div>
-                                    <div id="Design">                                        <div id="tblDesign"></div>                                    </div>
-                                    <div id="Records_Data">                                        <div id="tblOtherRecordsData"></div>                                    </div>                                </td>                            </tr>                        </table>                    </div>                </div>                <div id="Waste">                    <div id="wastepermits">                        <table>                            <tr>                                <td>                                    <ul>                                        <li><a href="#Regulations">Regulations</a></li>                                        <li><a href="#Permits">Permits</a></li>                                        <li><a href="#Guidance">Guidance</a></li>                                        <li><a href="#Design">Design</a></li>                                        <li><a href="#Records_Data">Records/Data</a></li>                                    </ul>                                </td>                                <td valign="top">                                    <div id="Regulations">                                        <div id="tblWasteRegulations"></div>                                    </div>                                    <div id="Permits">                                        <div id="tblWastePermits"></div>                                    </div>                                    <div id="Guidance">                                        <div id="tblWasteGuidance"></div>                                    </div>
-                                    <div id="Design">                                        <div id="tblWasteDesign"></div>                                    </div>
-                                    <div id="Records_Data">                                        <div id="tblWasteOtherRecordsData"></div>                                    </div>                                </td>                            </tr>                        </table>                    </div>                </div>                <div id="Water">                    <div id="waterpermits">                        <table>                            <tr>                                <td>                                    <ul>                                        <li><a href="#Regulations">Regulations</a></li>                                        <li><a href="#Permits">Permits</a></li>                                        <li><a href="#Guidance">Guidance</a></li>                                        <li><a href="#Design">Design</a></li>                                        <li><a href="#Records_Data">Records/Data</a></li>                                    </ul>                                </td>                                <td valign="top">                                    <div id="Regulations">                                        <div id="tblWaterRegulations"></div>                                    </div>                                    <div id="Permits">                                        <div id="tblWaterPermits"></div>                                    </div>                                    <div id="Guidance">                                        <div id="tblWaterGuidance"></div>                                    </div>
-                                    <div id="Design">                                        <div id="tblWaterDesign"></div>                                    </div>
-                                    <div id="Records_Data">                                        <div id="tblWaterOtherRecordsData"></div>                                    </div>                                </td>                            </tr>                        </table>                    </div>                </div>                <div id="Other">                    <div id="otherpermits">                        <table>                            <tr>                                <td>                                    <ul>                                        <li><a href="#Regulations">Regulations</a></li>                                        <li><a href="#Permits">Permits</a></li>                                        <li><a href="#Guidance">Guidance</a></li>                                        <li><a href="#Design">Design</a></li>                                        <li><a href="#Records_Data">Records/Data</a></li>                                    </ul>                                </td>                                <td valign="top">                                    <div id="Regulations">                                        <div id="tblOtherRegulations"></div>                                    </div>                                    <div id="Permits">                                        <div id="tblOtherPermits"></div>                                    </div>                                    <div id="Guidance">                                        <div id="tblOtherGuidance"></div>                                    </div>
-                                    <div id="Design">                                        <div id="tblOtherDesign"></div>                                    </div>
-                                    <div id="Records_Data">                                        <div id="tblOtherRecordsdata"></div>                                    </div>                                </td>                            </tr>                        </table>                    </div>                </div>
-                <div id="divFCSearch">                    <table>                        <tr>                            <td>Enter Keyword</td>                            <td><input type=text></td>                            <td><input id="btnFCSearch" type=button value="Search"></td>                        </tr>                        <tr>                            <td colspan=3></td>                        </tr>                    </table><br>                    <div id="divFCSearchResults" style="display:none"></div>                </div>                <div id="divFCRecent">                                        <div id="divRecent20Files"></div>                </div>
-            </div>
-       </div>        <div id="divFCUpload"><table id="tblUpload">
-    <tr>        <td align="right">            Select Category:        </td>
-        <td>            <input id="category" />        </td>    </tr>
-    <tr>        <td align="right">            Select Sub Category:        </td>
-        <td>            <input id="subcategory" />
-        </td>    </tr>
-    <tr>
-        <td align="center" colspan="2"> Select File: <input type=file id="uploadFiles"><br /><br /></td>
-    </tr>    <tr>        <td align="center" colspan="2"><input type=button value="Upload" class="button" id="btnRead"></td>    </tr>
-    <tr>        <td colspan="2">            <div id="divcategorysubcategory">
-            </div>        </td>
-    </tr>
-</table></div>        <!--****************************************************************-->
-        <div id="divps" title="Annual volume displaced - 12 month rolling average">                       <div id="chartContainer">            </div>        </div>
-        <div id="divps1">            <table>                               <tr>                    <td>                        <div id="ps1">                        </div> </td>
-                    <td>                        <div id="speedometer"></div>                    </td>                </tr>            </table>                   <div id="dateRulers"></div>             </div>        <div id="mapDiv" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">            <div id="HomeButton"></div>            <div style="position:absolute; right:20px; top:10px; z-Index:9999999;" class="soria">                <div data-dojo-type="dijit/TitlePane"                     data-dojo-props="title:'Basemap', closable:false, open:false">                    <div data-dojo-type="dijit/layout/ContentPane" style="width:350px; height:280px; overflow:auto;">                        <div id="basemapGallery"></div>                    </div>                </div>            </div>        </div>    </div></body>
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>Complaince MAP</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/3.19/dijit/themes/soria/soria.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.19/dojox/layout/resources/ExpandoPane.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.19/esri/css/esri.css">
+
+    <link rel="stylesheet" href="styles/cmap.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script type="text/javascript" src="http://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
+    <script type="text/javascript" src="http://static.fusioncharts.com/code/latest/themes/fusioncharts.theme.fint.js?cacheBust=56"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"
+            integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+            crossorigin="anonymous"></script>
+
+
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="js/jQAllRangeSliders-min.js"></script>
+    <script src="js/sliderDemo.js"></script>
+    <script src="js/dateSliderDemo.js"></script>
+    <script src="js/editSliderDemo.js"></script>
+    <!--<script src="js/demo.js"></script>-->
+    <script src="js/moment.js"></script>
+    <link href="css/iThing.css" rel="stylesheet" />
+    <script src="js/jQDateRangeSlider-withRuler-min.js"></script>
+    <script src="js/jQRangeSlider-withRuler-min.js"></script>
+    <script type="text/javascript" src="https://kendo.cdn.telerik.com/2017.1.118/js/kendo.all.min.js"></script>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.common-material.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.material.min.css">
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.material.mobile.min.css">
+
+
+    <link href="styles/Mainstyle.css" rel="stylesheet" />
+
+
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+
+    <script src="js/modernizr.custom.js"></script>
+    <script src="js/jstree.min.js"></script>
+    <link href="styles/style.min.css" rel="stylesheet" />
+    <link href="styles/dashboardmenu.css" rel="stylesheet" />
+    <script src="js/JSLINQ.js"></script>
+
+
+
+
+
+
+    <script src="https://js.arcgis.com/3.19/"></script>
+    <style>
+        .k-dropdown .k-dropdown-wrap {
+            height: 47px;
+        }
+
+        .vakata-context {
+            z-index: 10005;
+            left: 300px;
+        }
+
+        #tabstrip h2 {
+            font-weight: lighter;
+            font-size: 5em;
+            line-height: 1;
+            padding: 0 0 0 30px;
+            margin: 0;
+        }
+
+            #tabstrip h2 span {
+                background: none;
+                padding-left: 5px;
+                font-size: .3em;
+                vertical-align: top;
+            }
+
+        #tabstrip p {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+
+
+
+
+
+
+    <script src="js/map.js"></script>
+    <script src="js/ServiceURLs.js"></script>
+    <script src="js/func.js"></script>
+    <script src="js/filecabinet.js"></script>
+    <script src="js/eventcalendar.js"></script>
+    <script src="js/moc.js"></script>
+
+    <style>
+        .ui-state-active {
+            background-color: rgba(71, 162, 217, 1);
+            border-color: rgba(71, 162, 217, 1);
+        }
+
+        .k-block, .k-button, .k-draghandle, .k-grid-header, .k-grouping-header, .k-header, .k-pager-wrap, .k-toolbar, .k-treemap-tile, html .km-pane-wrapper .k-header {
+            background-color: #47a3da;
+        }
+
+        .ui-tabs .ui-tabs-nav li {
+            list-style: none;
+        }
+
+            .ui-tabs .ui-tabs-nav li a {
+                list-style: none;
+            }
+
+        .nolist {
+            list-style: none;
+        }
+
+        .k-grid-header {
+            border: 1px solid #bbb;
+        }
+
+        .k-grid table {
+            font-size: small;
+        }
+
+        k-grid .k-grid-header .k-header .k-link {
+            height: auto;
+            word-break: break-all !important;
+            word-wrap: break-word !important;
+        }
+
+        .k-grid .k-grid-header .k-header {
+            white-space: normal;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div id="divDashBoard">
+        <ul id="nav">
+            <li>
+                <a href="#" id="btnFC1">File Cabinet</a>
+            </li>
+            <li>
+                <a href="#">Compliance</a>
+                <ul>
+                    <li>
+                        <a id="btncompliance" href="#" class="cbp-tm-icon-archive">
+                            <label><input type="checkbox" id="chkSComp" value="first_checkbox"> Show Compliance</label>
+                        </a>
+                    </li>
+                    <li><a href="#">TCT</a></li>
+                    <li><a href="#">Audit</a></li>
+                    <li><a href="#">Inspections</a></li>
+                    <li><a href="#">Operating Procedures</a></li>
+                    <li><a href="#">Data and Limits</a></li>
+                    <li><a href="#">Permit Conditions</a></li>
+                    <li><a href="#">Reports</a></li>
+                    <!--<li><a href="#" id="btnpi" class="cbp-tm-icon-mobile">PI system Chart</a></li>-->
+                    <li><a href="#" id="btnpis" class="cbp-tm-icon-mobile">PI system</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Management of Change</a>
+                <ul>
+                    <li><a href="#" id="btnMOCUnits">Unit</a></li>
+                    <li>
+                        <a href="#">Data</a>
+                        <ul>
+                            <li><a href="#">PI</a></li>
+                            <li><a href="#">ASPEN</a></li>
+                            <li><a href="#">LDOS</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Inspection</a>
+                        <ul>
+                            <li><a href="#">Air</a></li>
+                            <li><a href="#">Waste</a></li>
+                            <li><a href="#">Water</a></li>
+                            <li><a href="#">Other</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Requirement</a>
+                        <ul>
+                            <li><a href="#">Permit</a></li>
+                            <li><a href="#">Regulation</a></li>
+                            <li><a href="#">Report</a></li>
+                            <li><a href="#">Guidance</a></li>
+                            <li><a href="#">Work Process</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Archive</a></li>
+                    <li>
+                        <a href="#" id="btnFCUpload">File</a>
+
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="#">Event Tickler</a>
+
+                <ul>
+                    <li><a href="#">Sampling</a></li>
+                    <li>
+                        <a id="btnETInspections" href="#">
+                            <table><tr><td>Inspections</td><td><div align=center id="EventstatusOrange">2</div></td></tr></table>
+                        </a>
+
+
+
+                    </li>
+
+                    <li><a href="#">Waste Storage</a></li>
+                    <li>
+                        <a href="#">
+                            <table><tr><td>Training</td><td><div align=center id="EventstatusRed">1</div></td></tr></table>
+                        </a>
+                    </li>
+                    <li><a href="#">Reporting</a></li>
+                    <li><a href="#">Permitting</a></li>
+                    <li><a id="btnETCalendar" href="#" class="cbp-tm-icon-earth">Event Calendar</a></li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="#">Weather</a>
+                <ul>
+                    <iframe id="IFWeather" src="weather/weather.html" frameborder=0 width="350px" height="400px"></iframe>
+                </ul>
+            </li>
+        </ul>
+
+
+
+    </div>
+
+
+    <div data-dojo-type="dijit/layout/BorderContainer"
+         data-dojo-props="design:'headline', gutters:true"
+         style="width: 100%; height: 100%; margin: 0;">
+
+
+
+        <div id="divSelectObjects">
+            <table style="background-color:#AED6F1;" width="100%">
+                <tr>
+                    <td>Select Objects </td>
+                    <td align=right><img id="imgCloseSO" src="images/dismiss.png"></td>
+                </tr>
+            </table>
+
+            <div style="margin:10px;">
+
+                <table class="tg">
+                    <tr>
+                        <td class="tg-yw4l"><input type="checkbox" id="chkTanks" class="chkTanks" value="Tanks"> Tanks</td>
+                    </tr>
+                    <tr>
+                        <td class="tg-yw4l"><input type="checkbox" class="chkBoilers" value="Boilers"> Boilers</td>
+                    </tr>
+                    <tr>
+                        <th class="tg-yw4l"> <input type="checkbox" class="chkWMBs" value="WMB"> Waste Management Buildings</th>
+                    </tr>
+                    <tr>
+                        <td class="tg-yw4l"><input type="checkbox" class="chkPU" value="PU"> Processing Units</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!--****************************************************************-->
+        <div id="divETCalendar">
+            <div id="divCalendar">
+                <div id="calendar"></div>
+            </div>
+            <br />
+            <div id="divEventDescriptionsToday">
+                <h3>Today's Events</h3>
+                <div>
+                    <ul id="divTodayEvents"></ul>
+                </div>
+            </div>
+
+            <div id="divEventDescriptionsUpcoming">
+                <h3>Upcoming Events</h3>
+                <div>
+                    <ul id="divUpcomingEvents"></ul>
+                </div>
+            </div>
+
+        </div>
+        <!--****************************************************************-->
+        <div id="divETInspections">
+            <div id="datagridinspections"></div>
+
+            <div id="details">
+
+                <table>
+
+                    <tr>
+                        <td>
+                            <p>TankID:</p>
+                        </td>
+                        <td>
+                            <p><input disabled="disabled" style="width:100px" type="text" id="txttankid" /></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Comments:</p>
+                        </td>
+                        <td>
+                            <!--<p><input style="width:500px" type="text" id="txtcomments" /></p>-->
+
+                            <textarea style="width:300px" id="txtcomments"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <p>Updated By:</p>
+                        </td>
+                        <td>
+                            <p><input type="text" id="txtUpdatedby" /></p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+
+
+                            <button id="btncommentsupdate" type="button">Comments Update</button>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+        <!--****************************************************************-->
+        <div id="divMOCUnits">
+            <table>
+                <tr>
+                    <td>Select Unit</td>
+                    <td>
+                        <input id="dropdownUnitNames" /><br /><br /><br />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Type</td>
+                    <td><div id="divUnitType"></div></td>
+                </tr>
+                <tr>
+                    <td>Diameter</td>
+                    <td><div id="divUnitDiameter"></div></td>
+                </tr>
+                <tr>
+                    <td>Length</td>
+                    <td><div id="divUnitLength"></div></td>
+                </tr>
+                <tr>
+                    <td>Width</td>
+                    <td><div id="divUnitWidth"></div></td>
+                </tr>
+                <tr>
+                    <td>Height</td>
+                    <td><div id="divUnitHeight"></div></td>
+                </tr>
+                <tr>
+                    <td>Capacity</td>
+                    <td><div id="divUnitCapacity"></div></td>
+                </tr>
+                <tr>
+                    <td>Service</td>
+                    <td><div id="divUnitService"></div></td>
+                </tr>
+                <tr>
+                    <td>Date of Construction</td>
+                    <td><div id="divUnitDOC"></div></td>
+                </tr>
+                <tr>
+                    <td>Date of Modification</td>
+                    <td><div id="divUnitDOM"></div></td>
+                </tr>
+                <tr>
+                    <td>Material of Construction</td>
+                    <td><div id="divUnitMaterial"></div></td>
+                </tr>
+                <tr>
+                    <td>Design Basis</td>
+                    <td><div id="divUnitDesignBasis"></div></td>
+                </tr>
+            </table>
+        </div>
+        <!--****************************************************************-->
+        <div id="divFC">
+            <div id="divFC1">
+                <ul>
+                    <li style="list-style:none;"><a href="#Air">Air</a></li>
+                    <li><a href="#Waste">Waste</a></li>
+                    <li><a href="#Water">Water</a></li>
+                    <li><a href="#Other">Other</a></li>
+                    <li><a href="#divFCSearch">Search Files</a></li>
+                    <li><a href="#divFCRecent">Recent Files</a></li>
+
+                </ul>
+                <div id="Air">
+                    <div id="airpermits">
+                        <table>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        <li><a href="#Regulations">Regulations</a></li>
+                                        <li><a href="#Permits">Permits</a></li>
+                                        <li><a href="#Guidance">Guidance</a></li>
+                                        <li><a href="#Design">Design</a></li>
+                                        <li><a href="#Records_Data">Records/Data</a></li>
+                                    </ul>
+                                </td>
+                                <td valign="top">
+                                    <div id="Regulations">
+
+                                        <div id="tblAirRegulations"></div>
+
+                                    </div>
+                                    <div id="Permits">
+
+                                        <div id="tblAirPermits"></div>
+                                    </div>
+                                    <div id="Guidance">
+                                        <div id="tblAirGuidance"></div>
+                                    </div>
+
+                                    <div id="Design">
+                                        <div id="tblDesign"></div>
+                                    </div>
+
+                                    <div id="Records_Data">
+                                        <div id="tblOtherRecordsData"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="Waste">
+                    <div id="wastepermits">
+                        <table>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        <li><a href="#Regulations">Regulations</a></li>
+                                        <li><a href="#Permits">Permits</a></li>
+                                        <li><a href="#Guidance">Guidance</a></li>
+                                        <li><a href="#Design">Design</a></li>
+                                        <li><a href="#Records_Data">Records/Data</a></li>
+                                    </ul>
+                                </td>
+                                <td valign="top">
+                                    <div id="Regulations">
+                                        <div id="tblWasteRegulations"></div>
+                                    </div>
+                                    <div id="Permits">
+                                        <div id="tblWastePermits"></div>
+                                    </div>
+                                    <div id="Guidance">
+                                        <div id="tblWasteGuidance"></div>
+                                    </div>
+
+                                    <div id="Design">
+                                        <div id="tblWasteDesign"></div>
+                                    </div>
+
+                                    <div id="Records_Data">
+                                        <div id="tblWasteOtherRecordsData"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="Water">
+                    <div id="waterpermits">
+                        <table>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        <li><a href="#Regulations">Regulations</a></li>
+                                        <li><a href="#Permits">Permits</a></li>
+                                        <li><a href="#Guidance">Guidance</a></li>
+                                        <li><a href="#Design">Design</a></li>
+                                        <li><a href="#Records_Data">Records/Data</a></li>
+                                    </ul>
+                                </td>
+                                <td valign="top">
+                                    <div id="Regulations">
+                                        <div id="tblWaterRegulations"></div>
+                                    </div>
+                                    <div id="Permits">
+                                        <div id="tblWaterPermits"></div>
+                                    </div>
+                                    <div id="Guidance">
+                                        <div id="tblWaterGuidance"></div>
+                                    </div>
+
+                                    <div id="Design">
+                                        <div id="tblWaterDesign"></div>
+                                    </div>
+
+                                    <div id="Records_Data">
+                                        <div id="tblWaterOtherRecordsData"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="Other">
+                    <div id="otherpermits">
+                        <table>
+                            <tr>
+                                <td>
+                                    <ul>
+                                        <li><a href="#Regulations">Regulations</a></li>
+                                        <li><a href="#Permits">Permits</a></li>
+                                        <li><a href="#Guidance">Guidance</a></li>
+                                        <li><a href="#Design">Design</a></li>
+                                        <li><a href="#Records_Data">Records/Data</a></li>
+                                    </ul>
+                                </td>
+                                <td valign="top">
+                                    <div id="Regulations">
+                                        <div id="tblOtherRegulations"></div>
+                                    </div>
+                                    <div id="Permits">
+                                        <div id="tblOtherPermits"></div>
+                                    </div>
+                                    <div id="Guidance">
+                                        <div id="tblOtherGuidance"></div>
+                                    </div>
+
+                                    <div id="Design">
+                                        <div id="tblOtherDesign"></div>
+                                    </div>
+
+                                    <div id="Records_Data">
+                                        <div id="tblOtherRecordsdata"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div id="divFCSearch">
+                    <table>
+                        <tr>
+                            <td>Enter Keyword</td>
+                            <td><input type=text></td>
+                            <td><input id="btnFCSearch" type=button value="Search"></td>
+                        </tr>
+                        <tr>
+                            <td colspan=3></td>
+                        </tr>
+                    </table><br>
+                    <div id="divFCSearchResults" style="display:none"></div>
+                </div>
+                <div id="divFCRecent">
+
+                    <div id="divRecent20Files"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div id="divFCUpload">
+            <table id="tblUpload">
+
+                <tr>
+                    <td align="right">
+                        Select Category:
+                    </td>
+
+                    <td>
+                        <input id="category" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="right">
+                        Select Sub Category:
+                    </td>
+
+                    <td>
+                        <input id="subcategory" />
+
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td align="center" colspan="2"> Select File: <input type=file id="uploadFiles"><br /><br /></td>
+
+
+                </tr>
+                <tr>
+                    <td align="center" colspan="2"><input type=button value="Upload" class="button" id="btnRead"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <div id="divcategorysubcategory">
+
+                        </div>
+                    </td>
+
+                </tr>
+
+            </table>
+        </div>
+        <!--****************************************************************-->
+
+        <div id="divps" title="Annual volume displaced - 12 month rolling average">
+
+            <div id="chartContainer">
+            </div>
+        </div>
+
+        <div id="divps1">
+            <table>
+
+                <tr>
+                    <td>
+                        <div id="ps1">
+                        </div>
+                    </td>
+
+                    <td>
+                        <div id="speedometer"></div>
+                    </td>
+                </tr>
+            </table>
+
+            <div id="dateRulers"></div>
+        </div>
+        <div id="mapDiv" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
+            <div id="HomeButton"></div>
+            <div style="position:absolute; right:20px; top:10px; z-Index:9999999;" class="soria">
+                <div data-dojo-type="dijit/TitlePane"
+                     data-dojo-props="title:'Basemap', closable:false, open:false">
+                    <div data-dojo-type="dijit/layout/ContentPane" style="width:350px; height:280px; overflow:auto;">
+                        <div id="basemapGallery"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>
