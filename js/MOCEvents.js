@@ -35,7 +35,7 @@
 	        top: 100, // or "100px"
 	        left: winW / 2 - $('#divDashBoard').width() / 2 + 40
 	    },
-	    width: winW - 500,
+	    width: 500,
 	    height: 400,
 	    title: "Schedule Event",
 	    visible: false,
@@ -89,13 +89,14 @@
 	            schema: {
 	                data: "d"
 	            }
+	          
 	        },	             
-	        pageable: true,
+	       
 	        filterable: true,
            sortable:true,
 	        height: 550,
 	        columns: [
-                { field: "EventID", title: "Event ID", width: "70px" },
+                { field: "EventID", title: "Event ID", width: "70px", hidden: true },
                 { field: "EventName", title: "Event Name" },
                 { field: "RegAgency", title: "Regulatory Agency", filterable: { multi: true, search: true, search: true } },
                 { field: "Regulation", title: "Regulation", filterable: { multi: true, search: true, search: true } },
@@ -114,6 +115,7 @@
 	    
 	    LoadEventDetailsSchedule(dataItem.EventID,dataItem.EventName,dataItem.RegAgency,dataItem.Regulation,dataItem.ComplianceDate);
 	    detailsScheduleWindow.data("kendoWindow").open();
+	    detailsScheduleWindow.data("kendoWindow").center();
 	}
 
 	function    LoadEventDetailsSchedule(EventID,EventName,RegAgency,Regulation,Frequency)
