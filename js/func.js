@@ -575,20 +575,20 @@ PI.kendoWindow({
                        
                     });
 //---------------------------------------------------------------------------------
-PI1.kendoWindow({
-	    position: {
-    top: 100, // or "100px"
-    left: winW /2 - $('#divDashBoard').width() / 2 +40
-  },
-                        width:winW-500,
-						height:500,
-                        title: "Annual volume displaced - 12 month rolling average",
-                        visible: false,
-                        actions: [                           
-                            "Close"
-                        ],
+//PI1.kendoWindow({
+//	    position: {
+//    top: 100, // or "100px"
+//    left: winW /2 - $('#divDashBoard').width() / 2 +40
+//  },
+//                        width:winW-500,
+//						height:500,
+//                        title: "Annual volume displaced - 12 month rolling average",
+//                        visible: false,
+//                        actions: [                           
+//                            "Close"
+//                        ],
                        
-                    });
+//                    });
     //---------------------------------------------------------------------------------
 
 detailsWindow.kendoWindow({
@@ -953,8 +953,8 @@ $("#btnpi").click(function () {
 //---------------------------------------------------------------------------------
 $("#btnpis").click(function () {
    
-    PI1.data("kendoWindow").open();
-	
+    //PI1.data("kendoWindow").open();
+    $("#divps12").dialog();
     loadchartdataps1();
 });
 //---------------------------------------------------------------------------------

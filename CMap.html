@@ -44,6 +44,8 @@
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.material.mobile.min.css">
 
 
+
+
     <link href="styles/Mainstyle.css" rel="stylesheet" />
 
 
@@ -95,10 +97,73 @@
             padding: 0;
         }
     </style>
+    <script type="text/javascript">
+        $(".k-listview > div").on("mouseover", function (e) {
+            alert(e.toElement);
+
+            console.log(e.toElement);
+        });
+    </script>
+    <script type="text/x-kendo-tmpl" id="templatefilter">
 
 
+        <div class="listItem">
 
 
+            # if(filechecked=="checked"){ #
+            <input class="check" type="checkbox" checked="checked" />
+            <span>#: filename #</span>
+
+            # } #
+
+            # if(filechecked!="checked"){ #
+            <input class="check" type="checkbox"  />
+            <span>#: filename #</span>
+
+            # } #
+       
+        </div>
+
+
+    </script>
+
+    <script type="text/x-kendo-tmpl" id="templatefiltertank">
+
+
+        <div class="listItem">
+            <input class="checktank" type="checkbox"  />
+            <span>&nbsp;</span>
+            <span>#: unit_name #</span>
+        </div>
+
+
+    </script>
+
+    
+
+    <script type="text/x-kendo-tmpl" id="templatenotes">
+
+
+      
+        <div class="listItem">
+            <span>#: filename #  #: notes #</span>
+
+        </div>
+
+
+    </script>
+
+    <script type="text/x-kendo-tmpl" id="templatesearchresults">
+
+
+        <div class="listItem">
+
+            <span>&nbsp;</span>
+            <span>#: text #</span>
+        </div>
+
+
+    </script>
 
 
     <script src="js/map.js"></script>
@@ -461,6 +526,8 @@
                             </tr>
                         </table>
                     </div>
+
+                   
                 </div>
                 <div id="Waste">
                     <div id="wastepermits">
@@ -576,14 +643,14 @@
                     <table>
                         <tr>
                             <td>Enter Keyword</td>
-                            <td><input type=text></td>
+                            <td><input type=text id="keyserachtext"></td>
                             <td><input id="btnFCSearch" type=button value="Search"></td>
                         </tr>
                         <tr>
                             <td colspan=3></td>
                         </tr>
                     </table><br>
-                    <div id="divFCSearchResults" style="display:none"></div>
+                    <div id="divFCSearchResults" ></div>
                 </div>
                 <div id="divFCRecent">
 
@@ -591,52 +658,121 @@
                 </div>
 
             </div>
-
+            <div id="airnotes">
+              <div id="noteslistview"></div>
+            </div>
         </div>
         <div id="divFCUpload">
-            <table id="tblUpload">
 
-                <tr>
-                    <td align="right">
-                        Select Category:
-                    </td>
-
-                    <td>
-                        <input id="category" />
-                    </td>
-                </tr>
-
-                <tr>
-                    <td align="right">
-                        Select Sub Category:
-                    </td>
-
-                    <td>
-                        <input id="subcategory" />
-
-                    </td>
-                </tr>
-
-                <tr>
-
-                    <td align="center" colspan="2"> Select File: <input type=file id="uploadFiles"><br /><br /></td>
+            <div id="divFCUpload1">
 
 
-                </tr>
-                <tr>
-                    <td align="center" colspan="2"><input type=button value="Upload" class="button" id="btnRead"></td>
-                </tr>
+                <ul>
+                    <li style="list-style:none;"><a href="#fileupload">Upload</a></li>
+                    <li style="list-style:none;"><a href="#filerelate">Relate</a></li>
+                </ul>
 
-                <tr>
-                    <td colspan="2">
-                        <div id="divcategorysubcategory">
+                <div id="fileupload">
+                    <table id="tblUpload">
 
-                        </div>
-                    </td>
+                        <tr>
+                            <td align="right">
+                                Select Category:
+                            </td>
 
-                </tr>
+                            <td>
+                                <input id="category" />
+                            </td>
+                        </tr>
 
-            </table>
+                        <tr>
+                            <td align="right">
+                                Select Sub Category:
+                            </td>
+
+                            <td>
+                                <input id="subcategory" />
+
+                            </td>
+                        </tr>
+
+                        <tr>
+
+                            <td align="center" colspan="2"> Select File: <input type=file id="uploadFiles"><br /><br /></td>
+
+
+                        </tr>
+
+                        <tr>
+                            <td align="center" colspan="2"><textarea style="width:200px;height:100px" id="notestext"></textarea><br /><br /></td>
+
+                        </tr>
+                        <tr>
+                            <td align="center" colspan="2"><input type=button value="Upload" class="button" id="btnRead"></td>
+                        </tr>
+
+                       
+
+                        <tr>
+                            <td colspan="2">
+                                <div id="divcategorysubcategory">
+
+                                </div>
+                            </td>
+
+                        </tr>
+
+                    </table>
+                </div>
+
+                <div id="filerelate">
+                    <table id="tblUpload">
+
+                        <tr>
+                            <td align="right">
+                                Select Category:
+                            </td>
+
+                            <td>
+                                <input id="categoryr" />
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td align="right">
+                                Select Sub Category:
+                            </td>
+
+                            <td>
+                                <input id="subcategoryr" />
+
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <div id="listView2filter"></div>
+                            </td>
+
+                            <td>
+                                <div id="listViewtank"></div>
+
+                            </td>
+                        </tr>
+
+                       
+                        <tr>
+                            <td align="center" colspan="2"><input type=button value="Relate" class="button" id="btnRelate"></td>
+                        </tr>
+
+                      
+
+                    </table>
+
+                </div>
+
+            </div>
         </div>
         <!--****************************************************************-->
 
@@ -646,7 +782,7 @@
             </div>
         </div>
 
-        <div id="divps1">
+        <div id="divps12">
             <table>
 
                 <tr>

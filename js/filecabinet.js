@@ -77,6 +77,9 @@
         }
     });
 
+    $("#divFCUpload1").tabs();
+
+
     LoadRecent20Files();
     function LoadRecent20Files() {
          var Type = "POST";
@@ -102,20 +105,47 @@
     {
         
         var resultObject = eval(result.GetRecent20FilesResult);
-        var data = {
-            "d": resultObject
-        };
+        //var data = {
+        //    "d": resultObject
+        //};
+        //$("#divRecent20Files").kendoGrid({
+        //    dataSource: {
+        //        transport: {
+        //            read: function (options) {
+        //                options.success(data);
+        //            }
+        //        },
+        //        schema: {
+        //            data: "d"
+        //        }
+        //    }
+        //});
+
+        
         $("#divRecent20Files").kendoGrid({
+
             dataSource: {
-                transport: {
-                    read: function (options) {
-                        options.success(data);
-                    }
-                },
-                schema: {
-                    data: "d"
-                }
-            }
+                data: resultObject
+
+            },
+            dataBound: function () {
+                this.expandRow(this.tbody.find("tr.k-master-row"));
+            },
+            
+            dataBound: function () {
+                // this.expandRow(this.tbody.find("tr.k-master-row").first());
+
+            },
+
+            columns: [{ field: "Cateogory", title: "Category" },
+    { field: "SubCateogory", title: "Sub Cateogory" },
+
+    { field: "filename", title: "File Name" },
+   
+
+     { field: "upload_date", title: "Upload Date", template: "#= kendo.toString(kendo.parseDate(upload_date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" }, ]
+           
+
         });
     }
 
@@ -194,6 +224,47 @@
                     }
                     if (operation === "delete_node") {
                         alert("Deleted");
+
+                        var x = document.getElementById("uploadFiles");
+                        var file = x.files[0];
+                        var fileData = file;
+
+                        var dropdownlist = $("#category").data("kendoDropDownList");
+
+                        var dropdownsubcategory = $("#subcategory").data("kendoDropDownList");
+
+                        var category = $("#category").data("kendoDropDownList").value();
+
+                        var subcategory = $("#subcategory").data("kendoDropDownList").value();
+
+                        var Url = serviceURLs["Removenode"];
+
+                        var parent = $("#divcategorysubcategory").jstree().get_selected(true)[0].parent;
+                        var Data = '{"filename": "' + node.text + '"}';
+                        alert(Data);
+
+                        var Type = "POST";
+                        var Url = serviceURLs["Removenode"];
+                        var ContentType = "application/json; charset=utf-8";
+                        var DataType = "json";
+
+                        $.ajax({
+                            type: Type,
+                            url: Url,
+                            data: Data,
+                            contentType: ContentType,
+                            dataType: DataType,
+                            processdata: true,
+                            success: function (data) {
+                                //console.log(data);
+
+                                alert("Sucessfully Deleted Node");
+
+                            },
+                            error: function (result) {
+                                alert('Service call failed: ' + result.status + '' + result.statusText);
+                            }
+                        });
                     }
 
                     if (operation === "rename_node") {
@@ -245,7 +316,7 @@
     function onsubcategoryChange() {
 
         var uesrid = "2"; var Type = "POST";
-        var Url = serviceURLs["fileslist"];;
+       
         var Data = '{"Id": "' + uesrid + '"}';
         var ContentType = "application/json; charset=utf-8";
         var DataType = "json";
@@ -267,24 +338,237 @@
 
 
     };
-    /*$("#FCTabs").kendoTabStrip({
-        animation:false
+
+    var Data = '{"category":"AIR","subcategory":"REGULATIONS"}';
+    var ContentType = "application/json; charset=utf-8";
+    var Url = serviceURLs["Getnotes"];
+    //alert(Data);
+    $.ajax({
+        type: 'POST',
+        url: Url,
+        data: Data,
+        contentType: ContentType,
+        dataType: 'json',
+        processdata: true,
+        success: function (msg) {
+
+            console.log(msg.GetnotesResult);
+
+            var json = (msg.GetnotesResult);
+
+
+            var dataSource = new kendo.data.DataSource({
+                data: eval(json)
+
+            });
+
+            console.log(dataSource);
+           
+            $("#noteslistview").kendoListView({
+                dataSource: dataSource,
+                selectable: "multiple",
+                template: kendo.template($("#templatenotes").html())
+
+            });
+        },
+        error: ServiceFailed// When Service call fails
     });
-    $("#FCAirTabs").kendoTabStrip({
-        tabPosition: "left"
+
+
+
+    $('#airpermits').click('tabsselect', function (event, ui) {
+
+        var selectedTabm = $("#divFC1").tabs('option', 'active');
+      
+
+        var selectedTab = $("#airpermits").tabs('option', 'active');
+       // alert(selectedTab);
+
+
+        var Url = serviceURLs["Getnotes"];
+        var ContentType = "application/json; charset=utf-8";
+
+        if (selectedTabm == "0" && selectedTab == "0") {
+            category = "AIR";
+
+            SubCateogory = "REGULATIONS";
+
+        }
+        if (selectedTabm == "0" && selectedTab == "1") {
+            category = "AIR";
+
+            SubCateogory = "PERMITS";
+
+        }
+        if (selectedTabm == "0" && selectedTab == "2") {
+            category = "AIR";
+
+            SubCateogory = "GUIDANCE";
+
+        }
+        if (selectedTabm == "0" && selectedTab == "3") {
+            category = "AIR";
+
+            SubCateogory = "DESIGN";
+
+        }
+        if (selectedTabm == "0" && selectedTab == "4") {
+            category = "AIR";
+
+            SubCateogory = "RECORDS/DATA";
+
+
+        }
+
+        //waste
+
+
+
+        if (selectedTabm == "1" && selectedTab == "0") {
+            category = "AIR";
+
+            SubCateogory = "REGULATIONS";
+
+        }
+        if (selectedTabm == "1" && selectedTab == "1") {
+            category = "AIR";
+
+            SubCateogory = "PERMITS";
+
+        }
+        if (selectedTabm == "1" && selectedTab == "2") {
+            category = "AIR";
+
+            SubCateogory = "GUIDANCE";
+
+
+        }
+        if (selectedTabm == "1" && selectedTab == "3") {
+            category = "AIR";
+
+            SubCateogory = "DESIGN";
+
+        }
+        if (selectedTabm == "1" && selectedTab == "4") {
+            category = "AIR";
+
+            SubCateogory = "RECORDS/DATA";
+
+
+        }
+        //water
+
+
+
+        if (selectedTabm == "2" && selectedTab == "0") {
+            category = "AIR";
+
+            SubCateogory = "REGULATIONS";
+
+        }
+        if (selectedTabm == "2" && selectedTab == "1") {
+            category = "AIR";
+
+            SubCateogory = "PERMITS";
+
+        }
+        if (selectedTabm == "2" && selectedTab == "2") {
+            category = "AIR";
+
+            SubCateogory = "GUIDANCE";
+
+        }
+        if (selectedTabm == "2" && selectedTab == "3") {
+            category = "AIR";
+
+            SubCateogory = "DESIGN";
+
+        }
+        if (selectedTabm == "2" && selectedTab == "4") {
+            category = "AIR";
+
+            SubCateogory = "RECORDS/DATA";
+
+
+        }
+        //Other
+
+
+
+
+        if (selectedTabm == "3" && selectedTab == "0") {
+            category = "AIR";
+
+            SubCateogory = "Regulations";
+
+        }
+        if (selectedTabm == "3" && selectedTab == "1") {
+            category = "AIR";
+
+            SubCateogory = "PERMITS";
+
+
+        }
+        if (selectedTabm == "3" && selectedTab == "2") {
+            category = "AIR";
+
+            SubCateogory = "GUIDANCE";
+
+        }
+        if (selectedTabm == "3" && selectedTab == "3") {
+            category = "AIR";
+
+            SubCateogory = "DESIGN";
+
+        }
+        if (selectedTabm == "3" && selectedTab == "4") {
+            category = "AIR";
+
+            SubCateogory = "RECORDS/DATA";
+
+
+        }
+
+
+
+
+        var Data = '{"category":"' + category + '","subcategory":"' + SubCateogory + '"}';
+        var Url = serviceURLs["Getnotes"];
+        //alert(Data);
+        $.ajax({
+            type: 'POST',
+            url: Url,
+            data: Data,
+            contentType: ContentType,
+            dataType: 'json',
+            processdata: true,
+            success: function (msg) {
+
+                console.log(msg.GetnotesResult);
+
+                var json = (msg.GetnotesResult);
+
+
+                var dataSource = new kendo.data.DataSource({
+                    data: eval(json)
+
+                });
+
+                console.log(dataSource);
+                var listView = $("#noteslistview").data("kendoListView");
+                listView.destroy();
+                $("#noteslistview").kendoListView({
+                    dataSource: dataSource,
+                    selectable: "multiple",
+                    template: kendo.template($("#templatenotes").html())
+
+                });
+            },
+            error: ServiceFailed// When Service call fails
+        });
+
+       
     });
-    $("#FCWasteTabs").kendoTabStrip({
-        tabPosition: "left"
-    });
-    $("#FCWaterTabs").kendoTabStrip({
-        tabPosition: "left"
-    });
-    $("#FCOtherTabs").kendoTabStrip({
-        tabPosition: "left"       
-    });
-    $("#FCSearchTabs").kendoTabStrip({
-        tabPosition: "left"
-    });*/
 
     $("#divFC1").tabs();
     $("#airpermits").tabs().addClass("ui-tabs-vertical ui-helper-clearfix");
@@ -304,9 +588,47 @@
 
 
     $("#btnFCSearch").click(function () {
-        alert(document.getElementById("divFCSearchResults").style.display);
+      
+        var uesrid = "2"; var Type = "POST";
+        var Url = serviceURLs["Keywordsearch"];
+        var key = $('#keyserachtext').val();
 
-        document.getElementById("divFCSearchResults").style.display = "block";
+        var Data = '{"key": "' + key + '"}';
+
+
+        var ContentType = "application/json; charset=utf-8";
+        var DataType = "json";
+
+        $.ajax({
+            type: Type,
+            url: Url,
+            data: Data,
+            contentType: ContentType,
+            dataType: DataType,
+            processdata: true,
+            success: function (msg) {
+
+                console.log(msg);
+                console.log(eval(msg.KeywordsearchResult));
+                var json = (msg.KeywordsearchResult);
+                var dataSource = new kendo.data.DataSource({
+                    data: eval(msg.KeywordsearchResult)
+
+                });
+                console.log(dataSource);
+
+                $("#divFCSearchResults").kendoListView({
+                    dataSource: dataSource,
+                    selectable: "multiple",
+                    template: kendo.template($("#templatesearchresults").html())
+
+                });
+              
+            },
+            error: ServiceFailed// When Service call fails
+        });
+
+
 
     });
     //---------------------------------------------------------------------------------
@@ -365,25 +687,22 @@ var loadAllFilesResults;
 
                 var divtreename = "#tbl" + category[i].text + subcategory[j].text;
 
-                //alert(divtreename);
-
-                //alert(category[0].value);
-
-                //alert(subcategory[0].value);
 
                 loadtree(resultObject, divtreename, category[i].value, subcategory[j].value);
             }
         }
-        loadtree(resultObject, '#divFCSearchResults', 'AIR', 'REGULATIONS');
+        //loadtree(resultObject, '#divFCSearchResults', 'AIR', 'REGULATIONS');
         
 
     }
 
-    function loadtree(loadAllFilesResults,divtreename, category,subcategory) {
+    function loadtree(loadAllFilesResults, divtreename, category, subcategory) {
+
 
 	  var json = JSLINQ(loadAllFilesResults)
            .Where(function (item) { return item.cateogory == category && item.subcategory == subcategory; });
 	
+	  console.log(json.items);
         $(divtreename).on('changed.jstree', function (e, data) {
            
           
@@ -454,6 +773,8 @@ var loadAllFilesResults;
 
         var parent = $("#divcategorysubcategory").jstree().get_selected(true)[0].id;
 
+        var textarea = $("#notestext").val();
+
         // alert(parent);
 
         $.ajax({
@@ -465,7 +786,7 @@ var loadAllFilesResults;
             processData: false, // Don't process the files
             contentType: false, // Set content type to false as jQuery will tell the server its a query string request
             success: function (data) {
-                UploadFileServiceSucceeded(data, file.name, category, subcategory, parent, "File");
+                UploadFileServiceSucceeded(data, file.name, category, subcategory, parent, "File",textarea);
 
 
             },
@@ -475,15 +796,18 @@ var loadAllFilesResults;
         });
 
     });
+   
+
+
     ////////////////////////////////////////////////////////////////////////////
-    function UploadFileServiceSucceeded(result, fn, category, subcategory, parent, type) {
+    function UploadFileServiceSucceeded(result, fn, category, subcategory, parent, type,textarea) {
 
         resultObject = result.UploadCustomFileResult;
 
 
         var Url = serviceURLs["fixuploadfile"];
         // var Data = '{"type": "' + resultObject + '","fn":"' + fn + '"}';
-        var Data = '{"type": "' + resultObject + '","fn":"' + fn + '","category":"' + category + '","subcategory":"' + subcategory + '","parent":"' + parent + '"}';
+        var Data = '{"type": "' + resultObject + '","fn":"' + fn + '","category":"' + category + '","subcategory":"' + subcategory + '","parent":"' + parent + '","textarea":"'+textarea+'"}';
         // alert(Data);
         var ContentType = "application/json; charset=utf-8";
 
