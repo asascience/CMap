@@ -554,20 +554,20 @@ $(document).ready(function () {
 
     });
     //---------------------------------------------------------------------------------
-    PI1.kendoWindow({
-        position: {
-            top: 100, // or "100px"
-            left: winW / 2 - $('#divDashBoard').width() / 2 + 40
-        },
-        width: winW - 500,
-        height: 500,
-        title: "Annual volume displaced - 12 month rolling average",
-        visible: false,
-        actions: [
-            "Close"
-        ],
+//    PI1.kendoWindow({
+//        position: {
+//            top: 100, // or "100px"
+//            left: winW / 2 - $('#divDashBoard').width() / 2 + 40
+//        },
+//        width: winW - 500,
+//        height: 500,
+//        title: "Annual volume displaced - 12 month rolling average",
+//        visible: false,
+//        actions: [
+//            "Close"
+//        ],
 
-    });
+//    });
     //---------------------------------------------------------------------------------
 
     //---------------------------------------------------------------------------------
@@ -676,12 +676,12 @@ $(document).ready(function () {
                 id: 'fuelMeter-4',
                 renderAt: 'ps1',
                 width: '500',
-                height: '500',
+                height: '300',
                 dataSource: {
                     "chart": {
                         "theme": "fint",
-                        "caption": "Diesel Level in Generator",
-                        "subcaption": "Bakersfield Central",
+                        "caption": "",
+                        "subcaption": "",
                         "lowerLimit": "0",
                         "upperLimit": "1000000",
                         "dataStreamUrl": "http://localhost/CMap/datastream.php",
@@ -690,7 +690,7 @@ $(document).ready(function () {
                         "upperLimitDisplay": "Full",
                         "numberSuffix": " Gallons",
                         "showValue": "1",
-                        "chartBottomMargin": "45",
+                        "chartBottomMargin": "5",
                         "refreshInterval": "2",
                     },
                     "value": "110"
@@ -790,13 +790,13 @@ $(document).ready(function () {
                 var fusioncharts = new FusionCharts({
                     type: 'angulargauge',
                     renderAt: 'speedometer',
-                    width: '400',
-                    height: '300',
+                    width: '500',
+                   
                     dataFormat: 'json',
                     dataSource: {
                         "chart": {
-                            "caption": "Server CPU Utilization",
-                            "subcaption": "forum.hsm.com",
+                            "caption": "",
+                            "subcaption": "",
                             "lowerLimit": "0",
                             "upperLimit": "1000000",
                             "editMode": "1",
@@ -806,7 +806,8 @@ $(document).ready(function () {
                             "gaugeFillMix": "{dark-30},{light-60},{dark-10}",
                             "gaugeFillRatio": "15",
                             "theme": "fint",
-                            "valueFontSize": "14"
+                            "valueFontSize": "14",
+                            "chartBottomMargin": "5"
                         },
                         "colorRange": {
                             "color": [{
@@ -917,7 +918,16 @@ $(document).ready(function () {
     //---------------------------------------------------------------------------------
     $("#btnpis").click(function () {
 
-        PI1.data("kendoWindow").open();
+//        PI1.data("kendoWindow").open();
+        
+        //alert(winW -200);
+
+        PI1.dialog({
+            open: function( event, ui ) {
+                PI1.closest("div[role='dialog']").css({ top: 100, left: winW / 2 - $('#divDashBoard').width() / 2 + 10, width: 'auto' });
+                    
+            }
+        });
 
         loadchartdataps1();
     });

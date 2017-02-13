@@ -78,6 +78,9 @@
     -webkit-box-shadow: 0px 1px rgba(0, 0, 0, 0.05);
     box-shadow: 0px 1px rgba(0, 0, 0, 0.05);
 }
+.detailsSchedule .k-content, .k-editable-area, .k-panel > li.k-item, .k-panelbar > li.k-item, .k-tiles {
+    background-color: rgba(63, 81, 181, 1);
+}
 
         .k-header{
             font-size:12px;
@@ -403,30 +406,30 @@
         <div id="detailsSchedule">
             <table align="center" border="1" cellpadding="9" cellspacing="2">
                 <tr>
-                    <td>Event Name</td>
+                    <td style="color:#47A3DA">Event Name</td>
                     <td>
                         <div id="divEID" style="display:none;"></div>
                         <div id="divEName"></div>
                     </td>
                 </tr>
                 <tr>
-                    <td>Regulatory Agency</td>
+                    <td style="color:#47A3DA">Regulatory Agency</td>
                 <td><div id="divEAgency"></div></td>
                 </tr>
                 <tr>
-                    <td>Regulation</td>
+                    <td style="color:#47A3DA">Regulation</td>
                     <td><div id="divERegulation"></div></td>
                 </tr>
                 <tr>
-                    <td>Frequency</td>
+                    <td style="color:#47A3DA">Frequency</td>
                     <td><div id="divEFrequency"></div></td>
                 </tr>
                 <tr>
-                    <td>Unit</td>
+                    <td style="color:#47A3DA">Unit</td>
                     <td><input id="dropdownUnits" /></td>
                 </tr>
                 <tr>
-                    <td>Due Date</td>
+                    <td style="color:#47A3DA">Due Date</td>
                     <td>                       
                                 <input id="duedatevalue" value="02/13/2017" />
                                                
@@ -845,19 +848,22 @@
             </div>
         </div>
 
-        <div id="divps12">
+        <div id="divps1" >
             <table>
 
                 <tr>
-                    <td>
+                    <td style="vertical-align:top">
+
+                        <br />
+                        <br />
                         <div id="ps1">
                         </div>
                     </td>
 
-                    <td>
+                    <td style ="vertical-align:top">
                         <div id="speedometer"></div>
-                    </td>
-                </tr>
+                        </td>
+</tr>
             </table>
 
             <div id="dateRulers"></div>
