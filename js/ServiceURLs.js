@@ -9,7 +9,10 @@ var serviceURLslocal = {
     EventCalendar: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetEvents",    
     LoadUnits: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetUnitNames",
     UnitDetails: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetUnitDetails",
-    GetRecent20Files: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecent20Files"
+    GetRecent20Files: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecent20Files",
+    GetAllEvents: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetAllEvents",
+    ScheduleNewEvent: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/ScheduleNewEvent",
+    GetEventsByType: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetEventsByType"
 };
 
 
@@ -24,7 +27,10 @@ var serviceURLsProd = {
     EventCalendar: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetEvents",
     LoadUnits: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetUnitNames",
     UnitDetails: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetUnitDetails",
-    GetRecent20Files: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecent20Files"
+    GetRecent20Files: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecent20Files",
+    GetAllEvents: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetAllEvents",
+    ScheduleNewEvent: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/ScheduleNewEvent",
+    GetEventsByType: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetEventsByType"
 };
  
  
