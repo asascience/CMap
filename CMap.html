@@ -249,645 +249,1088 @@
     <link href="/styles/custom.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
-    <div id="divDashBoard">
-        <ul id="nav">
-            <li>
-                <a href="#" id="btnFC1">File Cabinet</a>
-            </li>
-            <li>
-                <a href="#">Compliance</a>
-                <ul>
-                    <li>
-                        <a id="btncompliance" href="#" class="cbp-tm-icon-archive">
-                            <label><input type="checkbox" id="chkSComp" value="first_checkbox"> Show Compliance</label>
-                        </a>
-                    </li>
-                    <li><a href="#">TCT</a></li>
-                    <li><a href="#">Audit</a></li>
-                    <li><a href="#">Inspections</a></li>
-                    <li><a href="#">Operating Procedures</a></li>
-                    <li><a href="#">Data and Limits</a></li>
-                    <li><a href="#">Permit Conditions</a></li>
-                    <li><a href="#">Reports</a></li>
-                    <!--<li><a href="#" id="btnpi" class="cbp-tm-icon-mobile">PI system Chart</a></li>-->
-                    <li><a href="#" id="btnpis" class="cbp-tm-icon-mobile">PI system</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Management of Change</a>
-                <ul>
-                    <li><a href="#" id="btnMOCUnits">Unit</a></li>
-                    <li>
-                        <a href="#">Data</a>
-                        <ul>
-                            <li><a href="#">PI</a></li>
-                            <li><a href="#">ASPEN</a></li>
-                            <li><a href="#">LDOS</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Inspection</a>
-                        <ul>
-                            <li><a href="#">Air</a></li>
-                            <li><a href="#">Waste</a></li>
-                            <li><a href="#">Water</a></li>
-                            <li><a href="#">Other</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">Requirement</a>
-                        <ul>
-                            <li><a href="#">Permit</a></li>
-                            <li><a href="#">Regulation</a></li>
-                            <li><a href="#">Report</a></li>
-                            <li><a href="#">Guidance</a></li>
-                            <li><a href="#">Work Process</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Archive</a></li>
-                    <li>
-                        <a href="#" id="btnFCUpload">File</a>
-
-                    </li>
-                    <li><a href="#" id="btnMOCEvents">Events</a></li>
-
-                </ul>
-            </li>
-            <li>
-                <a href="#">Event Tickler</a>
-
-                <ul>
-                    <li><a href="#">Sampling</a></li>
-                    <li>
-                        <a id="btnETInspections" href="#">
-                            <table><tr><td>Inspections</td><td><div align=center id="EventstatusOrange">2</div></td></tr></table>
-                        </a>
-
-
-
-                    </li>
-
-                    <li><a href="#">Waste Storage</a></li>
-                    <li>
-                        <a href="#">
-                            <table><tr><td>Training</td><td><div align=center id="EventstatusRed">1</div></td></tr></table>
-                        </a>
-                    </li>
-                    <li><a href="#">Reporting</a></li>
-                    <li><a href="#">Permitting</a></li>
-                    <li><a id="btnETCalendar" href="#" class="cbp-tm-icon-earth">Event Calendar</a></li>
-
-                </ul>
-            </li>
-            <li>
-                <a href="#">Weather</a>
-                <ul>
-                    <iframe id="IFWeather" src="weather/weather.html" frameborder=0 width="350px" height="400px"></iframe>
-                </ul>
-            </li>
-        </ul>
-
-
-
-    </div>
-
-
-    <div data-dojo-type="dijit/layout/BorderContainer"
-         data-dojo-props="design:'headline', gutters:true"
-         style="width: 100%; height: 100%; margin: 0;">
-
-
-
-        <div id="divSelectObjects">
-            <table style="background-color:#AED6F1;" width="100%">
-                <tr>
-                    <td>Select Objects </td>
-                    <td align=right><img id="imgCloseSO" src="images/dismiss.png"></td>
-                </tr>
-            </table>
-
-            <div style="margin:10px;">
-
-                <table class="tg">
-                    <tr>
-                        <td class="tg-yw4l"><input type="checkbox" id="chkTanks" class="chkTanks" value="Tanks"> Tanks</td>
-                    </tr>
-                    <tr>
-                        <td class="tg-yw4l"><input type="checkbox" class="chkBoilers" value="Boilers"> Boilers</td>
-                    </tr>
-                    <tr>
-                        <th class="tg-yw4l"> <input type="checkbox" class="chkWMBs" value="WMB"> Waste Management Buildings</th>
-                    </tr>
-                    <tr>
-                        <td class="tg-yw4l"><input type="checkbox" class="chkPU" value="PU"> Processing Units</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <!--****************************************************************-->
-        <div id="divETCalendar">
-            <div id="divCalendar">
-                <div id="calendar"></div>
-            </div>
-            <br />
-            <div id="divEventDescriptionsToday">
-                <h3>Today's Events</h3>
-                <div>
-                    <ul id="divTodayEvents"></ul>
-                </div>
-            </div>
-
-            <div id="divEventDescriptionsUpcoming">
-                <h3>Upcoming Events</h3>
-                <div>
-                    <ul id="divUpcomingEvents"></ul>
-                </div>
-            </div>
-
-        </div>
-        <!--****************************************************************-->
-        <div id="divMOCEvents">
-           
-
-            
-            <div id="gridMOCEvents"></div>
-               
-            
-
-            </div>
-        <div id="detailsSchedule">
-            <table align="center" border="1" cellpadding="9" cellspacing="2">
-                <tr>
-                    <td style="color:#47A3DA">Event Name</td>
-                    <td>
-                        <div id="divEID" style="display:none;"></div>
-                        <div id="divEName"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="color:#47A3DA">Regulatory Agency</td>
-                <td><div id="divEAgency"></div></td>
-                </tr>
-                <tr>
-                    <td style="color:#47A3DA">Regulation</td>
-                    <td><div id="divERegulation"></div></td>
-                </tr>
-                <tr>
-                    <td style="color:#47A3DA">Frequency</td>
-                    <td><div id="divEFrequency"></div></td>
-                </tr>
-                <tr>
-                    <td style="color:#47A3DA">Unit</td>
-                    <td><input id="dropdownUnits" /></td>
-                </tr>
-                <tr>
-                    <td style="color:#47A3DA">Due Date</td>
-                    <td>                       
-                                <input id="duedatevalue" value="02/13/2017" />
-                                               
-                    <div id="calendarEventsDueDate"></div></td>
-                </tr>
-                <tr><td align="center" colspan="2"><button id="btnSchedule">Schedule</button></td></tr>
-            </table>
-        </div>
-        <!--****************************************************************-->
-        <div id="divETInspections">
-            <div id="datagridinspections"></div>
-
-            <div id="details">
-
-                <table>
-
-                    <tr>
-                        <td>
-                            <p>Event Name:</p>
-                        </td>
-                        <td>
-                            <p><div id="txttankid" /></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p>Comments:</p>
-                        </td>
-                        <td>
-                            <!--<p><input style="width:500px" type="text" id="txtcomments" /></p>-->
-
-                            <textarea style="width:300px" id="txtcomments"></textarea>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <p>Updated By:</p>
-                        </td>
-                        <td>
-                            <p><input type="text" id="txtUpdatedby" /></p>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2">
-
-
-                            <button id="btncommentsupdate" type="button">Comments Update</button>
-                        </td>
-                    </tr>
-
-                </table>
-
-            </div>
-        </div>
-        <!--****************************************************************-->
-        <div id="divMOCUnits">
-            <table>
-                <tr>
-                    <td>Select Unit</td>
-                    <td>
-                        <input id="dropdownUnitNames" /><br /><br /><br />
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>Type</td>
-                    <td><div id="divUnitType"></div></td>
-                </tr>
-                <tr>
-                    <td>Diameter</td>
-                    <td><div id="divUnitDiameter"></div></td>
-                </tr>
-                <tr>
-                    <td>Length</td>
-                    <td><div id="divUnitLength"></div></td>
-                </tr>
-                <tr>
-                    <td>Width</td>
-                    <td><div id="divUnitWidth"></div></td>
-                </tr>
-                <tr>
-                    <td>Height</td>
-                    <td><div id="divUnitHeight"></div></td>
-                </tr>
-                <tr>
-                    <td>Capacity</td>
-                    <td><div id="divUnitCapacity"></div></td>
-                </tr>
-                <tr>
-                    <td>Service</td>
-                    <td><div id="divUnitService"></div></td>
-                </tr>
-                <tr>
-                    <td>Date of Construction</td>
-                    <td><div id="divUnitDOC"></div></td>
-                </tr>
-                <tr>
-                    <td>Date of Modification</td>
-                    <td><div id="divUnitDOM"></div></td>
-                </tr>
-                <tr>
-                    <td>Material of Construction</td>
-                    <td><div id="divUnitMaterial"></div></td>
-                </tr>
-                <tr>
-                    <td>Design Basis</td>
-                    <td><div id="divUnitDesignBasis"></div></td>
-                </tr>
-            </table>
-        </div>
-        <!--****************************************************************-->
-        <div id="divFC">
-            <div id="divFC1">
-                <ul>
-                    <li style="list-style:none;"><a href="#Air">Air</a></li>
-                    <li><a href="#Waste">Waste</a></li>
-                    <li><a href="#Water">Water</a></li>
-                    <li><a href="#Other">Other</a></li>
-                    <li><a href="#divFCSearch">Search Files</a></li>
-                    <li><a href="#divFCRecent">Recent Files</a></li>
-
-                </ul>
-                <div id="Air">
-                    <div id="airpermits">
-                        <table>
-                            <tr>
-                                <td>
-                                    <ul>
-                                        <li><a href="#Regulations">Regulations</a></li>
-                                        <li><a href="#Permits">Permits</a></li>
-                                        <li><a href="#Guidance">Guidance</a></li>
-                                        <li><a href="#Design">Design</a></li>
-                                        <li><a href="#Records_Data">Records/Data</a></li>
+    <div class="page-wrapper">
+        <div class="page-wrapper-row">
+            <div class="page-wrapper-top">
+                    <!-- BEGIN HEADER -->
+                    <div class="page-header">
+                        <!-- BEGIN HEADER TOP -->
+                        <div class="page-header-top">
+                            <div class="container-fluid">
+                                <!-- BEGIN LOGO -->
+                                <div class="page-logo">
+                                    <a href="CMap.html"></a>
+                                </div>
+                                <!-- END LOGO -->
+                                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                                <a href="javascript:;" class="menu-toggler"></a>
+                                <!-- END RESPONSIVE MENU TOGGLER -->
+                                <!-- BEGIN TOP NAVIGATION MENU -->
+                                <div class="top-menu">
+                                    <ul class="nav navbar-nav pull-right">
+                                        <!-- BEGIN NOTIFICATION DROPDOWN -->
+                                        <li class="dropdown dropdown-extended dropdown-notification dropdown-dark" id="header_notification_bar">
+                                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                                <i class="icon-bell"></i>
+                                                <span class="badge badge-default">7</span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li class="external">
+                                                    <h3>You have
+                                                        <strong>12 pending</strong> tasks</h3>
+                                                    <a href="app_todo.html">view all</a>
+                                                </li>
+                                                <li>
+                                                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><ul class="dropdown-menu-list scroller" style="height: 250px; overflow: hidden; width: auto;" data-handle-color="#637283" data-initialized="1">
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="time">just now</span>
+                                                                <span class="details">
+                                                                    <span class="label label-sm label-icon label-success">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </span> New user registered. </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="time">3 mins</span>
+                                                                <span class="details">
+                                                                    <span class="label label-sm label-icon label-danger">
+                                                                        <i class="fa fa-bolt"></i>
+                                                                    </span> Server #12 overloaded. </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="time">10 mins</span>
+                                                                <span class="details">
+                                                                    <span class="label label-sm label-icon label-warning">
+                                                                        <i class="fa fa-bell-o"></i>
+                                                                    </span> Server #2 not responding. </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="time">14 hrs</span>
+                                                                <span class="details">
+                                                                    <span class="label label-sm label-icon label-info">
+                                                                        <i class="fa fa-bullhorn"></i>
+                                                                    </span> Application error. </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="time">2 days</span>
+                                                                <span class="details">
+                                                                    <span class="label label-sm label-icon label-danger">
+                                                                        <i class="fa fa-bolt"></i>
+                                                                    </span> Database overloaded 68%. </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="time">3 days</span>
+                                                                <span class="details">
+                                                                    <span class="label label-sm label-icon label-danger">
+                                                                        <i class="fa fa-bolt"></i>
+                                                                    </span> A user IP blocked. </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="time">4 days</span>
+                                                                <span class="details">
+                                                                    <span class="label label-sm label-icon label-warning">
+                                                                        <i class="fa fa-bell-o"></i>
+                                                                    </span> Storage Server #4 not responding dfdfdfd. </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="time">5 days</span>
+                                                                <span class="details">
+                                                                    <span class="label label-sm label-icon label-info">
+                                                                        <i class="fa fa-bullhorn"></i>
+                                                                    </span> System Error. </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="time">9 days</span>
+                                                                <span class="details">
+                                                                    <span class="label label-sm label-icon label-danger">
+                                                                        <i class="fa fa-bolt"></i>
+                                                                    </span> Storage server failed. </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul><div class="slimScrollBar" style="background: rgb(99, 114, 131); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!-- END NOTIFICATION DROPDOWN -->
+                                        <!-- BEGIN TODO DROPDOWN -->
+                                        <li class="dropdown dropdown-extended dropdown-tasks dropdown-dark" id="header_task_bar">
+                                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                                <i class="icon-calendar"></i>
+                                                <span class="badge badge-default">3</span>
+                                            </a>
+                                            <ul class="dropdown-menu extended tasks">
+                                                <li class="external">
+                                                    <h3>You have
+                                                        <strong>12 pending</strong> tasks</h3>
+                                                    <a href="app_todo_2.html">view all</a>
+                                                </li>
+                                                <li>
+                                                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 275px;"><ul class="dropdown-menu-list scroller" style="height: 275px; overflow: hidden; width: auto;" data-handle-color="#637283" data-initialized="1">
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="task">
+                                                                    <span class="desc">New release v1.2 </span>
+                                                                    <span class="percent">30%</span>
+                                                                </span>
+                                                                <span class="progress">
+                                                                    <span style="width: 40%;" class="progress-bar progress-bar-success" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                                                                        <span class="sr-only">40% Complete</span>
+                                                                    </span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="task">
+                                                                    <span class="desc">Application deployment</span>
+                                                                    <span class="percent">65%</span>
+                                                                </span>
+                                                                <span class="progress">
+                                                                    <span style="width: 65%;" class="progress-bar progress-bar-danger" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
+                                                                        <span class="sr-only">65% Complete</span>
+                                                                    </span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="task">
+                                                                    <span class="desc">Mobile app release</span>
+                                                                    <span class="percent">98%</span>
+                                                                </span>
+                                                                <span class="progress">
+                                                                    <span style="width: 98%;" class="progress-bar progress-bar-success" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100">
+                                                                        <span class="sr-only">98% Complete</span>
+                                                                    </span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="task">
+                                                                    <span class="desc">Database migration</span>
+                                                                    <span class="percent">10%</span>
+                                                                </span>
+                                                                <span class="progress">
+                                                                    <span style="width: 10%;" class="progress-bar progress-bar-warning" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                                                                        <span class="sr-only">10% Complete</span>
+                                                                    </span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="task">
+                                                                    <span class="desc">Web server upgrade</span>
+                                                                    <span class="percent">58%</span>
+                                                                </span>
+                                                                <span class="progress">
+                                                                    <span style="width: 58%;" class="progress-bar progress-bar-info" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
+                                                                        <span class="sr-only">58% Complete</span>
+                                                                    </span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="task">
+                                                                    <span class="desc">Mobile development</span>
+                                                                    <span class="percent">85%</span>
+                                                                </span>
+                                                                <span class="progress">
+                                                                    <span style="width: 85%;" class="progress-bar progress-bar-success" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                                                                        <span class="sr-only">85% Complete</span>
+                                                                    </span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:;">
+                                                                <span class="task">
+                                                                    <span class="desc">New UI release</span>
+                                                                    <span class="percent">38%</span>
+                                                                </span>
+                                                                <span class="progress progress-striped">
+                                                                    <span style="width: 38%;" class="progress-bar progress-bar-important" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100">
+                                                                        <span class="sr-only">38% Complete</span>
+                                                                    </span>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul><div class="slimScrollBar" style="background: rgb(99, 114, 131); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!-- END TODO DROPDOWN -->
+                                        <li class="droddown dropdown-separator">
+                                            <span class="separator"></span>
+                                        </li>
+                                        <!-- BEGIN INBOX DROPDOWN -->
+                                        <li class="dropdown dropdown-extended dropdown-inbox dropdown-dark" id="header_inbox_bar">
+                                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                                <span class="circle">3</span>
+                                                <span class="corner"></span>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li class="external">
+                                                    <h3>You have
+                                                        <strong>7 New</strong> Messages</h3>
+                                                    <a href="app_inbox.html">view all</a>
+                                                </li>
+                                                <li>
+                                                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 275px;"><ul class="dropdown-menu-list scroller" style="height: 275px; overflow: hidden; width: auto;" data-handle-color="#637283" data-initialized="1">
+                                                        <li>
+                                                            <a href="#">
+                                                                <span class="photo">
+                                                                    <img src="/img/avatar2.jpg" class="img-circle" alt=""> </span>
+                                                                <span class="subject">
+                                                                    <span class="from"> Lisa Wong </span>
+                                                                    <span class="time">Just Now </span>
+                                                                </span>
+                                                                <span class="message"> Vivamus sed auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <span class="photo">
+                                                                    <img src="/img/avatar3.jpg" class="img-circle" alt=""> </span>
+                                                                <span class="subject">
+                                                                    <span class="from"> Richard Doe </span>
+                                                                    <span class="time">16 mins </span>
+                                                                </span>
+                                                                <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <span class="photo">
+                                                                    <img src="/img/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                                <span class="subject">
+                                                                    <span class="from"> Bob Nilson </span>
+                                                                    <span class="time">2 hrs </span>
+                                                                </span>
+                                                                <span class="message"> Vivamus sed nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <span class="photo">
+                                                                    <img src="/img/avatar2.jpg" class="img-circle" alt=""> </span>
+                                                                <span class="subject">
+                                                                    <span class="from"> Lisa Wong </span>
+                                                                    <span class="time">40 mins </span>
+                                                                </span>
+                                                                <span class="message"> Vivamus sed auctor 40% nibh congue nibh... </span>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
+                                                                <span class="photo">
+                                                                    <img src="/img/avatar3.jpg" class="img-circle" alt=""> </span>
+                                                                <span class="subject">
+                                                                    <span class="from"> Richard Doe </span>
+                                                                    <span class="time">46 mins </span>
+                                                                </span>
+                                                                <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul><div class="slimScrollBar" style="background: rgb(99, 114, 131); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!-- END INBOX DROPDOWN -->
+                                        <!-- BEGIN USER LOGIN DROPDOWN -->
+                                        <li class="dropdown dropdown-user dropdown-dark">
+                                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                                <img alt="" class="img-circle" src="/img/avatar9.jpg">
+                                                <span class="username username-hide-mobile">Nick</span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-default">
+                                                <li>
+                                                    <a href="page_user_profile_1.html">
+                                                        <i class="icon-user"></i> My Profile </a>
+                                                </li>
+                                                <li>
+                                                    <a href="app_calendar.html">
+                                                        <i class="icon-calendar"></i> My Calendar </a>
+                                                </li>
+                                                <li>
+                                                    <a href="app_inbox.html">
+                                                        <i class="icon-envelope-open"></i> My Inbox
+                                                        <span class="badge badge-danger"> 3 </span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="app_todo_2.html">
+                                                        <i class="icon-rocket"></i> My Tasks
+                                                        <span class="badge badge-success"> 7 </span>
+                                                    </a>
+                                                </li>
+                                                <li class="divider"> </li>
+                                                <li>
+                                                    <a href="page_user_lock_1.html">
+                                                        <i class="icon-lock"></i> Lock Screen </a>
+                                                </li>
+                                                <li>
+                                                    <a href="page_user_login_1.html">
+                                                        <i class="icon-key"></i> Log Out </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!-- END USER LOGIN DROPDOWN -->
+                                        <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+                                        <li class="dropdown dropdown-extended quick-sidebar-toggler">
+                                            <span class="sr-only">Toggle Quick Sidebar</span>
+                                            <i class="icon-logout"></i>
+                                        </li>
+                                        <!-- END QUICK SIDEBAR TOGGLER -->
                                     </ul>
-                                </td>
-                                <td valign="top">
-                                    <div id="Regulations">
-
-                                        <div id="tblAirRegulations"></div>
-
+                                </div>
+                                <!-- END TOP NAVIGATION MENU -->
+                            </div>
+                        </div>
+                        <!-- END HEADER TOP -->
+                        <!-- BEGIN HEADER MENU -->
+                        <div class="page-header-menu">
+                            <div class="container-fluid">
+                                <!-- BEGIN HEADER SEARCH BOX -->
+                                <form class="search-form" action="page_general_search.html" method="GET">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search" name="query">
+                                        <span class="input-group-btn">
+                                            <a href="javascript:;" class="btn submit">
+                                                <i class="icon-magnifier"></i>
+                                            </a>
+                                        </span>
                                     </div>
-                                    <div id="Permits">
+                                </form>
+                                <!-- END HEADER SEARCH BOX -->
+                                <!-- BEGIN MEGA MENU -->
+                                <div class="hor-menu  ">
+                                    <ul class="nav navbar-nav">
+                                        <li aria-haspopup="true" class=" ">
+                                            <a href="javascript:;" id="btnFC1"> File Cabinet
+                                            </a>
+                                        </li>
+                                        <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
+                                            <a href="javascript:;" id="btncompliance"> Compliance
+                                                <span class="arrow"></span>
+                                            </a>
+                                            <ul class="dropdown-menu pull-left">
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a id="btncompliance" href="#" class="cbp-tm-icon-archive">
+                                                        <label><input type="checkbox" id="chkSComp" value="first_checkbox"> Show Compliance</label>
+                                                    </a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#">TCT</a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#">Audit</a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#">Inspections</a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#">Operating Procedures</a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#">Data and Limits</a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#">Permit Conditions</a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#">Reports</a>
+                                                </li>
+                                                <!--<li aria-haspopup="true" class=" ">
+                                                    <a href="#" id="btnpi" class="cbp-tm-icon-mobile">PI system Chart</a>
+                                                </li>-->
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#" id="btnpis" class="cbp-tm-icon-mobile">PI system</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
+                                            <a href="javascript:;">Management of Change<span class="arrow"></span>
+                                            </a>
+                                            <ul class="dropdown-menu pull-left">
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a id="btnMOCUnits" href="#">Unit</a>
+                                                </li>
+                                                <li aria-haspopup="true" class="dropdown-submenu ">
+                                                    <a href="javascript:;" class="nav-link nav-toggle ">
+                                                        Data <span class="arrow"></span>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li aria-haspopup="true" class=" ">
+                                                            <a href="#" class="nav-link "> PI</a>
+                                                        </li>
+                                                        <li aria-haspopup="true" class=" ">
+                                                            <a href="#" class="nav-link "> ASPEN</a>
+                                                        </li>
+                                                        <li aria-haspopup="true" class=" ">
+                                                            <a href="#" class="nav-link "> LDOS</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li aria-haspopup="true" class="dropdown-submenu ">
+                                                    <a href="javascript:;" class="nav-link nav-toggle ">
+                                                        Inspection <span class="arrow"></span>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li aria-haspopup="true" class=" ">
+                                                            <a href="#" class="nav-link "> Air</a>
+                                                        </li>
+                                                        <li aria-haspopup="true" class=" ">
+                                                            <a href="#" class="nav-link "> Waste</a>
+                                                        </li>
+                                                        <li aria-haspopup="true" class=" ">
+                                                            <a href="#" class="nav-link "> Water</a>
+                                                        </li>
+                                                        <li aria-haspopup="true" class=" ">
+                                                            <a href="#" class="nav-link "> Other</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li aria-haspopup="true" class="dropdown-submenu ">
+                                                    <a href="javascript:;" class="nav-link nav-toggle ">
+                                                        Requirement <span class="arrow"></span>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li aria-haspopup="true" class=" ">
+                                                            <a href="#" class="nav-link "> Permit</a>
+                                                        </li>
+                                                        <li aria-haspopup="true" class=" ">
+                                                            <a href="#" class="nav-link "> Regulation</a>
+                                                        </li>
+                                                        <li aria-haspopup="true" class=" ">
+                                                            <a href="#" class="nav-link "> Report</a>
+                                                        </li>
+                                                        <li aria-haspopup="true" class=" ">
+                                                            <a href="#" class="nav-link "> Guidance</a>
+                                                        </li>
+                                                        <li aria-haspopup="true" class=" ">
+                                                            <a href="#" class="nav-link "> Work Process</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#">Archive</a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#" id="btnFCUpload">File</a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#" id="btnMOCEvents">Events</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
+                                            <a href="javascript:;">Event Tickler<span class="arrow"></span>
+                                            </a>
+                                            <ul class="dropdown-menu pull-left">
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#">Sampling</a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a id="btnETInspections" href="#">
+                                                        <table><tr><td>Inspections</td><td><div align=center id="EventstatusOrange">2</div></td></tr></table>
+                                                    </a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#">Waste Storage</a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#">
+                                                        <table><tr><td>Training</td><td><div align=center id="EventstatusRed">1</div></td></tr></table>
+                                                    </a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#">Reporting</a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a href="#">Permitting</a>
+                                                </li>
+                                                <li aria-haspopup="true" class=" ">
+                                                    <a id="btnETCalendar" href="#" class="cbp-tm-icon-earth">Event Calendar</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
+                                            <a href="javascript:;" id="btncompliance"> Weather
+                                                <span class="arrow"></span>
+                                            </a>
+                                            <ul class="dropdown-menu pull-left">
+                                                <li aria-haspopup="true" class=" ">
+                                                    <iframe id="IFWeather" src="weather/weather.html" frameborder=0 width="350px" height="400px"></iframe>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- END MEGA MENU -->
+                            </div>
+                        </div>
+                        <!-- END HEADER MENU -->
+                    </div>
+                    <!-- END HEADER -->
+                </div>
+        </div>
+        <div class="page-wrapper-row full-height">
+            <div data-dojo-type="dijit/layout/BorderContainer"
+                data-dojo-props="design:'headline', gutters:true"
+                style="width: 100%; height: 100%; margin: 0;">
 
-                                        <div id="tblAirPermits"></div>
-                                    </div>
-                                    <div id="Guidance">
-                                        <div id="tblAirGuidance"></div>
-                                    </div>
 
-                                    <div id="Design">
-                                        <div id="tblDesign"></div>
-                                    </div>
 
-                                    <div id="Records_Data">
-                                        <div id="tblOtherRecordsData"></div>
-                                    </div>
-                                </td>
+                <div id="divSelectObjects">
+                    <table style="background-color:#AED6F1;" width="100%">
+                        <tr>
+                            <td>Select Objects </td>
+                            <td align=right><img id="imgCloseSO" src="images/dismiss.png"></td>
+                        </tr>
+                    </table>
+
+                    <div style="margin:10px;">
+
+                        <table class="tg">
+                            <tr>
+                                <td class="tg-yw4l"><input type="checkbox" id="chkTanks" class="chkTanks" value="Tanks"> Tanks</td>
+                            </tr>
+                            <tr>
+                                <td class="tg-yw4l"><input type="checkbox" class="chkBoilers" value="Boilers"> Boilers</td>
+                            </tr>
+                            <tr>
+                                <th class="tg-yw4l"> <input type="checkbox" class="chkWMBs" value="WMB"> Waste Management Buildings</th>
+                            </tr>
+                            <tr>
+                                <td class="tg-yw4l"><input type="checkbox" class="chkPU" value="PU"> Processing Units</td>
                             </tr>
                         </table>
                     </div>
-
-                   
                 </div>
-                <div id="Waste">
-                    <div id="wastepermits">
+                <!--****************************************************************-->
+                <div id="divETCalendar">
+                    <div id="divCalendar">
+                        <div id="calendar"></div>
+                    </div>
+                    <br />
+                    <div id="divEventDescriptionsToday">
+                        <h3>Today's Events</h3>
+                        <div>
+                            <ul id="divTodayEvents"></ul>
+                        </div>
+                    </div>
+
+                    <div id="divEventDescriptionsUpcoming">
+                        <h3>Upcoming Events</h3>
+                        <div>
+                            <ul id="divUpcomingEvents"></ul>
+                        </div>
+                    </div>
+
+                </div>
+                <!--****************************************************************-->
+                <div id="divMOCEvents">
+
+
+
+                    <div id="gridMOCEvents"></div>
+
+
+
+                    </div>
+                <div id="detailsSchedule">
+                    <table align="center" border="1" cellpadding="9" cellspacing="2">
+                        <tr>
+                            <td style="color:#47A3DA">Event Name</td>
+                            <td>
+                                <div id="divEID" style="display:none;"></div>
+                                <div id="divEName"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color:#47A3DA">Regulatory Agency</td>
+                        <td><div id="divEAgency"></div></td>
+                        </tr>
+                        <tr>
+                            <td style="color:#47A3DA">Regulation</td>
+                            <td><div id="divERegulation"></div></td>
+                        </tr>
+                        <tr>
+                            <td style="color:#47A3DA">Frequency</td>
+                            <td><div id="divEFrequency"></div></td>
+                        </tr>
+                        <tr>
+                            <td style="color:#47A3DA">Unit</td>
+                            <td><input id="dropdownUnits" /></td>
+                        </tr>
+                        <tr>
+                            <td style="color:#47A3DA">Due Date</td>
+                            <td>
+                                        <input id="duedatevalue" value="02/13/2017" />
+
+                            <div id="calendarEventsDueDate"></div></td>
+                        </tr>
+                        <tr><td align="center" colspan="2"><button id="btnSchedule">Schedule</button></td></tr>
+                    </table>
+                </div>
+                <!--****************************************************************-->
+                <div id="divETInspections">
+                    <div id="datagridinspections"></div>
+
+                    <div id="details">
+
                         <table>
+
                             <tr>
                                 <td>
-                                    <ul>
-                                        <li><a href="#Regulations">Regulations</a></li>
-                                        <li><a href="#Permits">Permits</a></li>
-                                        <li><a href="#Guidance">Guidance</a></li>
-                                        <li><a href="#Design">Design</a></li>
-                                        <li><a href="#Records_Data">Records/Data</a></li>
-                                    </ul>
+                                    <p>Event Name:</p>
                                 </td>
-                                <td valign="top">
-                                    <div id="Regulations">
-                                        <div id="tblWasteRegulations"></div>
-                                    </div>
-                                    <div id="Permits">
-                                        <div id="tblWastePermits"></div>
-                                    </div>
-                                    <div id="Guidance">
-                                        <div id="tblWasteGuidance"></div>
-                                    </div>
-
-                                    <div id="Design">
-                                        <div id="tblWasteDesign"></div>
-                                    </div>
-
-                                    <div id="Records_Data">
-                                        <div id="tblWasteOtherRecordsData"></div>
-                                    </div>
+                                <td>
+                                    <p><div id="txttankid" /></p>
                                 </td>
                             </tr>
-                        </table>
-                    </div>
-                </div>
-                <div id="Water">
-                    <div id="waterpermits">
-                        <table>
                             <tr>
                                 <td>
-                                    <ul>
-                                        <li><a href="#Regulations">Regulations</a></li>
-                                        <li><a href="#Permits">Permits</a></li>
-                                        <li><a href="#Guidance">Guidance</a></li>
-                                        <li><a href="#Design">Design</a></li>
-                                        <li><a href="#Records_Data">Records/Data</a></li>
-                                    </ul>
+                                    <p>Comments:</p>
                                 </td>
-                                <td valign="top">
-                                    <div id="Regulations">
-                                        <div id="tblWaterRegulations"></div>
-                                    </div>
-                                    <div id="Permits">
-                                        <div id="tblWaterPermits"></div>
-                                    </div>
-                                    <div id="Guidance">
-                                        <div id="tblWaterGuidance"></div>
-                                    </div>
+                                <td>
+                                    <!--<p><input style="width:500px" type="text" id="txtcomments" /></p>-->
 
-                                    <div id="Design">
-                                        <div id="tblWaterDesign"></div>
-                                    </div>
-
-                                    <div id="Records_Data">
-                                        <div id="tblWaterOtherRecordsData"></div>
-                                    </div>
+                                    <textarea style="width:300px" id="txtcomments"></textarea>
                                 </td>
                             </tr>
-                        </table>
-                    </div>
-                </div>
-                <div id="Other">
-                    <div id="otherpermits">
-                        <table>
+
                             <tr>
                                 <td>
-                                    <ul>
-                                        <li><a href="#Regulations">Regulations</a></li>
-                                        <li><a href="#Permits">Permits</a></li>
-                                        <li><a href="#Guidance">Guidance</a></li>
-                                        <li><a href="#Design">Design</a></li>
-                                        <li><a href="#Records_Data">Records/Data</a></li>
-                                    </ul>
+                                    <p>Updated By:</p>
                                 </td>
-                                <td valign="top">
-                                    <div id="Regulations">
-                                        <div id="tblOtherRegulations"></div>
-                                    </div>
-                                    <div id="Permits">
-                                        <div id="tblOtherPermits"></div>
-                                    </div>
-                                    <div id="Guidance">
-                                        <div id="tblOtherGuidance"></div>
-                                    </div>
-
-                                    <div id="Design">
-                                        <div id="tblOtherDesign"></div>
-                                    </div>
-
-                                    <div id="Records_Data">
-                                        <div id="tblOtherRecordsdata"></div>
-                                    </div>
+                                <td>
+                                    <p><input type="text" id="txtUpdatedby" /></p>
                                 </td>
                             </tr>
+
+                            <tr>
+                                <td colspan="2">
+
+
+                                    <button id="btncommentsupdate" type="button">Comments Update</button>
+                                </td>
+                            </tr>
+
                         </table>
+
                     </div>
                 </div>
-
-
-                <div id="divFCSearch">
+                <!--****************************************************************-->
+                <div id="divMOCUnits">
                     <table>
                         <tr>
-                            <td>Enter Keyword</td>
-                            <td><input type=text id="keyserachtext"></td>
-                            <td><input id="btnFCSearch" type=button value="Search"></td>
-                        </tr>
-                        <tr>
-                            <td colspan=3></td>
-                        </tr>
-                    </table><br>
-                    <div id="divFCSearchResults" ></div>
-                </div>
-                <div id="divFCRecent">
-
-                    <div id="divRecent20Files"></div>
-                </div>
-
-            </div>
-            <div id="airnotes">
-              <div id="noteslistview"></div>
-            </div>
-        </div>
-        <div id="divFCUpload">
-
-            <div id="divFCUpload1">
-
-
-                <ul>
-                    <li style="list-style:none;"><a href="#fileupload">Upload</a></li>
-                    <li style="list-style:none;"><a href="#filerelate">Relate</a></li>
-                </ul>
-
-                <div id="fileupload">
-                    <table id="tblUpload">
-
-                        <tr>
-                            <td align="right">
-                                Select Category:
-                            </td>
-
+                            <td>Select Unit</td>
                             <td>
-                                <input id="category" />
+                                <input id="dropdownUnitNames" /><br /><br /><br />
                             </td>
                         </tr>
 
                         <tr>
-                            <td align="right">
-                                Select Sub Category:
-                            </td>
-
-                            <td>
-                                <input id="subcategory" />
-
-                            </td>
-                        </tr>
-
-                        <tr>
-
-                            <td align="center" colspan="2"> Select File: <input type=file id="uploadFiles"><br /><br /></td>
-
-
-                        </tr>
-
-                        <tr>
-                            <td align="center" colspan="2"><textarea style="width:200px;height:100px" id="notestext"></textarea><br /><br /></td>
-
+                            <td>Type</td>
+                            <td><div id="divUnitType"></div></td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="2"><input type=button value="Upload" class="button" id="btnRead"></td>
+                            <td>Diameter</td>
+                            <td><div id="divUnitDiameter"></div></td>
                         </tr>
+                        <tr>
+                            <td>Length</td>
+                            <td><div id="divUnitLength"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Width</td>
+                            <td><div id="divUnitWidth"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Height</td>
+                            <td><div id="divUnitHeight"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Capacity</td>
+                            <td><div id="divUnitCapacity"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Service</td>
+                            <td><div id="divUnitService"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Date of Construction</td>
+                            <td><div id="divUnitDOC"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Date of Modification</td>
+                            <td><div id="divUnitDOM"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Material of Construction</td>
+                            <td><div id="divUnitMaterial"></div></td>
+                        </tr>
+                        <tr>
+                            <td>Design Basis</td>
+                            <td><div id="divUnitDesignBasis"></div></td>
+                        </tr>
+                    </table>
+                </div>
+                <!--****************************************************************-->
+                <div id="divFC">
+                    <div id="divFC1">
+                        <ul>
+                            <li style="list-style:none;"><a href="#Air">Air</a></li>
+                            <li><a href="#Waste">Waste</a></li>
+                            <li><a href="#Water">Water</a></li>
+                            <li><a href="#Other">Other</a></li>
+                            <li><a href="#divFCSearch">Search Files</a></li>
+                            <li><a href="#divFCRecent">Recent Files</a></li>
 
-                       
+                        </ul>
+                        <div id="Air">
+                            <div id="airpermits">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <ul>
+                                                <li><a href="#Regulations">Regulations</a></li>
+                                                <li><a href="#Permits">Permits</a></li>
+                                                <li><a href="#Guidance">Guidance</a></li>
+                                                <li><a href="#Design">Design</a></li>
+                                                <li><a href="#Records_Data">Records/Data</a></li>
+                                            </ul>
+                                        </td>
+                                        <td valign="top">
+                                            <div id="Regulations">
+
+                                                <div id="tblAirRegulations"></div>
+
+                                            </div>
+                                            <div id="Permits">
+
+                                                <div id="tblAirPermits"></div>
+                                            </div>
+                                            <div id="Guidance">
+                                                <div id="tblAirGuidance"></div>
+                                            </div>
+
+                                            <div id="Design">
+                                                <div id="tblDesign"></div>
+                                            </div>
+
+                                            <div id="Records_Data">
+                                                <div id="tblOtherRecordsData"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+                        </div>
+                        <div id="Waste">
+                            <div id="wastepermits">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <ul>
+                                                <li><a href="#Regulations">Regulations</a></li>
+                                                <li><a href="#Permits">Permits</a></li>
+                                                <li><a href="#Guidance">Guidance</a></li>
+                                                <li><a href="#Design">Design</a></li>
+                                                <li><a href="#Records_Data">Records/Data</a></li>
+                                            </ul>
+                                        </td>
+                                        <td valign="top">
+                                            <div id="Regulations">
+                                                <div id="tblWasteRegulations"></div>
+                                            </div>
+                                            <div id="Permits">
+                                                <div id="tblWastePermits"></div>
+                                            </div>
+                                            <div id="Guidance">
+                                                <div id="tblWasteGuidance"></div>
+                                            </div>
+
+                                            <div id="Design">
+                                                <div id="tblWasteDesign"></div>
+                                            </div>
+
+                                            <div id="Records_Data">
+                                                <div id="tblWasteOtherRecordsData"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="Water">
+                            <div id="waterpermits">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <ul>
+                                                <li><a href="#Regulations">Regulations</a></li>
+                                                <li><a href="#Permits">Permits</a></li>
+                                                <li><a href="#Guidance">Guidance</a></li>
+                                                <li><a href="#Design">Design</a></li>
+                                                <li><a href="#Records_Data">Records/Data</a></li>
+                                            </ul>
+                                        </td>
+                                        <td valign="top">
+                                            <div id="Regulations">
+                                                <div id="tblWaterRegulations"></div>
+                                            </div>
+                                            <div id="Permits">
+                                                <div id="tblWaterPermits"></div>
+                                            </div>
+                                            <div id="Guidance">
+                                                <div id="tblWaterGuidance"></div>
+                                            </div>
+
+                                            <div id="Design">
+                                                <div id="tblWaterDesign"></div>
+                                            </div>
+
+                                            <div id="Records_Data">
+                                                <div id="tblWaterOtherRecordsData"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="Other">
+                            <div id="otherpermits">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <ul>
+                                                <li><a href="#Regulations">Regulations</a></li>
+                                                <li><a href="#Permits">Permits</a></li>
+                                                <li><a href="#Guidance">Guidance</a></li>
+                                                <li><a href="#Design">Design</a></li>
+                                                <li><a href="#Records_Data">Records/Data</a></li>
+                                            </ul>
+                                        </td>
+                                        <td valign="top">
+                                            <div id="Regulations">
+                                                <div id="tblOtherRegulations"></div>
+                                            </div>
+                                            <div id="Permits">
+                                                <div id="tblOtherPermits"></div>
+                                            </div>
+                                            <div id="Guidance">
+                                                <div id="tblOtherGuidance"></div>
+                                            </div>
+
+                                            <div id="Design">
+                                                <div id="tblOtherDesign"></div>
+                                            </div>
+
+                                            <div id="Records_Data">
+                                                <div id="tblOtherRecordsdata"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <div id="divFCSearch">
+                            <table>
+                                <tr>
+                                    <td>Enter Keyword</td>
+                                    <td><input type=text id="keyserachtext"></td>
+                                    <td><input id="btnFCSearch" type=button value="Search"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan=3></td>
+                                </tr>
+                            </table><br>
+                            <div id="divFCSearchResults" ></div>
+                        </div>
+                        <div id="divFCRecent">
+
+                            <div id="divRecent20Files"></div>
+                        </div>
+
+                    </div>
+                    <div id="airnotes">
+                    <div id="noteslistview"></div>
+                    </div>
+                </div>
+                <div id="divFCUpload">
+
+                    <div id="divFCUpload1">
+
+
+                        <ul>
+                            <li style="list-style:none;"><a href="#fileupload">Upload</a></li>
+                            <li style="list-style:none;"><a href="#filerelate">Relate</a></li>
+                        </ul>
+
+                        <div id="fileupload">
+                            <table id="tblUpload">
+
+                                <tr>
+                                    <td align="right">
+                                        Select Category:
+                                    </td>
+
+                                    <td>
+                                        <input id="category" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="right">
+                                        Select Sub Category:
+                                    </td>
+
+                                    <td>
+                                        <input id="subcategory" />
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+
+                                    <td align="center" colspan="2"> Select File: <input type=file id="uploadFiles"><br /><br /></td>
+
+
+                                </tr>
+
+                                <tr>
+                                    <td align="center" colspan="2"><textarea style="width:200px;height:100px" id="notestext"></textarea><br /><br /></td>
+
+                                </tr>
+                                <tr>
+                                    <td align="center" colspan="2"><input type=button value="Upload" class="button" id="btnRead"></td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td colspan="2">
+                                        <div id="divcategorysubcategory">
+
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+                            </table>
+                        </div>
+
+                        <div id="filerelate">
+                            <table id="tblUpload">
+
+                                <tr>
+                                    <td align="right">
+                                        Select Category:
+                                    </td>
+
+                                    <td>
+                                        <input id="categoryr" />
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="right">
+                                        Select Sub Category:
+                                    </td>
+
+                                    <td>
+                                        <input id="subcategoryr" />
+
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        <div id="listView2filter"></div>
+                                    </td>
+
+                                    <td>
+                                        <div id="listViewtank"></div>
+
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td align="center" colspan="2"><input type=button value="Relate" class="button" id="btnRelate"></td>
+                                </tr>
+
+
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+                <!--****************************************************************-->
+
+                <div id="divps" title="Annual volume displaced - 12 month rolling average">
+
+                    <div id="chartContainer">
+                    </div>
+                </div>
+
+                <div id="divps1" >
+                    <table>
 
                         <tr>
-                            <td colspan="2">
-                                <div id="divcategorysubcategory">
+                            <td style="vertical-align:top">
 
+                                <br />
+                                <br />
+                                <div id="ps1">
                                 </div>
                             </td>
 
-                        </tr>
-
-                    </table>
-                </div>
-
-                <div id="filerelate">
-                    <table id="tblUpload">
-
-                        <tr>
-                            <td align="right">
-                                Select Category:
-                            </td>
-
-                            <td>
-                                <input id="categoryr" />
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td align="right">
-                                Select Sub Category:
-                            </td>
-
-                            <td>
-                                <input id="subcategoryr" />
-
-                            </td>
-                        </tr>
-
-
-                        <tr>
-                            <td>
-                                <div id="listView2filter"></div>
-                            </td>
-
-                            <td>
-                                <div id="listViewtank"></div>
-
-                            </td>
-                        </tr>
-
-                       
-                        <tr>
-                            <td align="center" colspan="2"><input type=button value="Relate" class="button" id="btnRelate"></td>
-                        </tr>
-
-                      
-
+                            <td style ="vertical-align:top">
+                                <div id="speedometer"></div>
+                                </td>
+        </tr>
                     </table>
 
+                    <div id="dateRulers"></div>
                 </div>
-
-            </div>
-        </div>
-        <!--****************************************************************-->
-
-        <div id="divps" title="Annual volume displaced - 12 month rolling average">
-
-            <div id="chartContainer">
-            </div>
-        </div>
-
-        <div id="divps1" >
-            <table>
-
-                <tr>
-                    <td style="vertical-align:top">
-
-                        <br />
-                        <br />
-                        <div id="ps1">
+                <div id="mapDiv" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
+                    <div id="HomeButton"></div>
+                    <div style="position:absolute; right:20px; top:10px; z-Index:9999999;" class="soria">
+                        <div data-dojo-type="dijit/TitlePane"
+                            data-dojo-props="title:'Basemap', closable:false, open:false">
+                            <div data-dojo-type="dijit/layout/ContentPane" style="width:350px; height:280px; overflow:auto;">
+                                <div id="basemapGallery"></div>
+                            </div>
                         </div>
-                    </td>
-
-                    <td style ="vertical-align:top">
-                        <div id="speedometer"></div>
-                        </td>
-</tr>
-            </table>
-
-            <div id="dateRulers"></div>
-        </div>
-        <div id="mapDiv" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
-            <div id="HomeButton"></div>
-            <div style="position:absolute; right:20px; top:10px; z-Index:9999999;" class="soria">
-                <div data-dojo-type="dijit/TitlePane"
-                     data-dojo-props="title:'Basemap', closable:false, open:false">
-                    <div data-dojo-type="dijit/layout/ContentPane" style="width:350px; height:280px; overflow:auto;">
-                        <div id="basemapGallery"></div>
                     </div>
                 </div>
             </div>
