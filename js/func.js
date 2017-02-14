@@ -399,8 +399,8 @@ $(document).ready(function () {
                     dataFormat: 'json',
                     dataSource: {
                         "chart": {
-                            "caption": "Server CPU Utilization",
-                            "subcaption": "forum.hsm.com",
+                            "caption": "",
+                            "subcaption": "",
                             "lowerLimit": "0",
                             "upperLimit": "1000000",
                             "editMode": "1",
@@ -545,7 +545,7 @@ $(document).ready(function () {
             left: winW / 2 - $('#divDashBoard').width() / 2 + 40
         },
         width: winW - 500,
-        height: 500,
+        height: 550,
         title: "",
         visible: false,
         actions: [
@@ -924,7 +924,7 @@ $(document).ready(function () {
 
         PI1.dialog({
             open: function( event, ui ) {
-                PI1.closest("div[role='dialog']").css({ top: 100, left: winW / 2 - $('#divDashBoard').width() / 2 + 10, width: 'auto' });
+                PI1.closest("div[role='dialog']").css({ top: 100,height:550, left: winW / 2 - $('#divDashBoard').width() / 2 -50, width: 'auto' });
                     
             }
         });

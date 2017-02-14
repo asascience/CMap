@@ -5,6 +5,10 @@
  var winW = $(window).width();
  var FCWindow = $("#divFC");
  var FCUploadWindow = $("#divFCUpload");
+
+ $('#airnotes').width(winW-600);
+
+ $("#notesgridview").width(winW - 600);
    //---------------------------------------------------------------------------------
    FCWindow.kendoWindow({
 	    position: {
@@ -95,7 +99,7 @@
             processdata: true,
             success: function (msg) {
                 LoadRecent20FilesSucceded(msg);
-                // alert("success");
+                 //alert("success");
             },
             error: ServiceFailed// When Service call fails
         });
@@ -105,22 +109,7 @@
     {
         
         var resultObject = eval(result.GetRecent20FilesResult);
-        //var data = {
-        //    "d": resultObject
-        //};
-        //$("#divRecent20Files").kendoGrid({
-        //    dataSource: {
-        //        transport: {
-        //            read: function (options) {
-        //                options.success(data);
-        //            }
-        //        },
-        //        schema: {
-        //            data: "d"
-        //        }
-        //    }
-        //});
-
+        
         
         $("#divRecent20Files").kendoGrid({
 
@@ -128,6 +117,7 @@
                 data: resultObject
 
             },
+            filterable: true,
             dataBound: function () {
                 this.expandRow(this.tbody.find("tr.k-master-row"));
             },
@@ -137,10 +127,10 @@
 
             },
 
-            columns: [{ field: "Cateogory", title: "Category" },
-    { field: "SubCateogory", title: "Sub Cateogory" },
+            columns: [{ field: "Cateogory", title: "Category", filterable: { multi: true, search: true, search: true } },
+    { field: "SubCateogory", title: "Sub Cateogory", filterable: { multi: true, search: true, search: true } },
 
-    { field: "filename", title: "File Name" },
+    { field: "filename", title: "File Name", template: '<a href="#=filepath#" target="_blank">#=filename#</a>', filterable: { multi: true, search: true, search: true } },
    
 
      { field: "upload_date", title: "Upload Date", template: "#= kendo.toString(kendo.parseDate(upload_date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" }, ]
@@ -182,8 +172,7 @@
 
     function LoadFilesListSucceeded(result) {
 
-       // console.log(result);
-
+   
         var dropdownlist = $("#category").data("kendoDropDownList");
 
         var dropdownsubcategory = $("#subcategory").data("kendoDropDownList");
@@ -352,6 +341,8 @@
         processdata: true,
         success: function (msg) {
 
+            //alert("success");
+
             console.log(msg.GetnotesResult);
 
             var json = (msg.GetnotesResult);
@@ -364,16 +355,55 @@
 
             console.log(dataSource);
            
-            $("#noteslistview").kendoListView({
-                dataSource: dataSource,
-                selectable: "multiple",
-                template: kendo.template($("#templatenotes").html())
+          
+
+            $("#notesgridview").kendoGrid({
+                
+                dataSource: {
+                    data: eval(msg.GetnotesResult)
+
+                },
+                filterable: false,
+                dataBound: function () {
+                    this.expandRow(this.tbody.find("tr.k-master-row"));
+                },
+
+                dataBound: function () {
+                    // this.expandRow(this.tbody.find("tr.k-master-row").first());
+
+                },
+
+               
+                columns: [
+              
+
+                 { field: "filename", title: "File Name", template: '<a href="#=filepath#" target="_blank">#=filename#</a>' },
+                 { field: "notes", title: "Notes", filterable: { multi: false, search: false, search: false } },
+
+                 ]
 
             });
         },
         error: ServiceFailed// When Service call fails
     });
 
+    $('#divFC1').click('tabsselect', function (event, ui) {
+        var selectedTabm = $("#divFC1").tabs('option', 'active');
+        //alert(selectedTabm);
+
+        if(selectedTabm=="4" || selectedTabm=="5")
+        {
+            
+           
+
+            document.getElementById("airnotes").style.display = "none";
+
+        }else
+        {
+            document.getElementById("airnotes").style.display = "block";
+        }
+        
+    });
 
 
     $('#airpermits').click('tabsselect', function (event, ui) {
@@ -608,21 +638,48 @@
             processdata: true,
             success: function (msg) {
 
-                console.log(msg);
-                console.log(eval(msg.KeywordsearchResult));
+              
                 var json = (msg.KeywordsearchResult);
                 var dataSource = new kendo.data.DataSource({
                     data: eval(msg.KeywordsearchResult)
 
                 });
-                console.log(dataSource);
+                console.log(msg.KeywordsearchResult);
 
-                $("#divFCSearchResults").kendoListView({
-                    dataSource: dataSource,
-                    selectable: "multiple",
-                    template: kendo.template($("#templatesearchresults").html())
+              
+
+                //
+                $("#divFCSearchResults").kendoGrid({
+
+                    dataSource: {
+                        data: eval(msg.KeywordsearchResult)
+
+                    },
+                    filterable: false,
+                    dataBound: function () {
+                        this.expandRow(this.tbody.find("tr.k-master-row"));
+                    },
+
+                    dataBound: function () {
+                        // this.expandRow(this.tbody.find("tr.k-master-row").first());
+
+                    },
+
+
+                    columns: [{ field: "cateogory", title: "Category", filterable: { multi: true, search: true, search: true } },
+  { field: "subcategory", title: "Sub Cateogory", filterable: { multi: true, search: true, search: true } },
+
+  { field: "text", title: "File Name", template: '<a href="#=filepath#" target="_blank">#=text#</a>', filterable: { multi: true, search: true, search: true } },
+   
+
+   { field: "upload_date", title: "Upload Date", template: "#= kendo.toString(kendo.parseDate(upload_date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" }, ]
+           
 
                 });
+
+                
+
+                //
               
             },
             error: ServiceFailed// When Service call fails

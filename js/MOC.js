@@ -210,7 +210,7 @@
         content: function (e) {
             var listView = $("#listView2filter").data("kendoListView");
             var item = listView.dataSource.getByUid(e.target.attr("data-uid"));
-            return "TankID: " + (item.tankid);
+            return "Unit: " + (item.tankid);
 
         }
     })
@@ -467,7 +467,7 @@
      //alert("change");
 
      var uesrid = "2"; var Type = "POST";
-     var Url = serviceURLs["fileslist"];;
+     var Url = serviceURLs["GetFilesListRelate"];
      var Data = '{"Id": "' + uesrid + '"}';
      var ContentType = "application/json; charset=utf-8";
      var DataType = "json";
