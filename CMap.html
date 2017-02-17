@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
-    <title>Complaince MAP</title>
+    <title>Compliance MAP</title>
 
     <link rel="stylesheet" href="https://js.arcgis.com/3.19/dijit/themes/soria/soria.css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.19/dojox/layout/resources/ExpandoPane.css">
@@ -96,25 +96,11 @@
             left: 300px;
         }
 
-        #tabstrip h2 {
-            font-weight: lighter;
-            font-size: 5em;
-            line-height: 1;
-            padding: 0 0 0 30px;
-            margin: 0;
-        }
+       
 
-            #tabstrip h2 span {
-                background: none;
-                padding-left: 5px;
-                font-size: .3em;
-                vertical-align: top;
-            }
+           
 
-        #tabstrip p {
-            margin: 0;
-            padding: 0;
-        }
+       
     </style>
     <script type="text/javascript">
         $(".k-listview > div").on("mouseover", function (e) {
@@ -400,7 +386,50 @@
             
             <div id="gridMOCEvents"></div>
                
-            
+            <script type="text/x-kendo-template" id="templateEventDetails">
+                <div class="tabstrip">
+                    <ul>
+                        <li class="k-state-active">
+                            Details
+                        </li>
+                        <li>
+                            History
+                        </li>
+                    </ul>
+                    <div>
+                        <div class="gridEventDetails">
+                            <table>
+                                <tr>
+                                    <td style="width:100px;">Description</td>
+                                    <td>#= EventDesc #</td>
+                                </tr>
+                                <tr>
+                                    <td>Notes</td>
+                                    <td>#= Notes #</td>
+                                </tr>
+                                <tr>
+                                    <td>Event Type</td>
+                                    <td>#= EventType #</td>
+                                </tr>
+                                <tr>
+                                    <td>Regulation</td>
+                                    <td>#= Regulation #</td>
+                                </tr>
+                                
+                            </table>
+                           
+
+                        </div>
+                    </div>
+                    <div>
+                        <div class="eventid">#= EventID #</div>
+                        <div class='gridEventsHistory'>
+                            
+</div>
+                    </div>
+                </div>
+
+            </script>
 
             </div>
         <div id="detailsSchedule">

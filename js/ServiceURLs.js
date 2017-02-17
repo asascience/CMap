@@ -18,7 +18,8 @@ var serviceURLslocal = {
     Keywordsearch: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Keywordsearch",
     Getnotes: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Getnotes",
     Getnotes: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Getnotes",
-    Removenode: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Removenotes"
+    Removenode: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Removenotes",
+    GetEventsByID: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetEventsByID"
 };
 
 
@@ -42,7 +43,8 @@ var serviceURLsProd = {
     Keywordsearch: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/Keywordsearch",
     Getnotes: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/Getnotes",
     Getnotes: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/Getnotes",
-    Removenode: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/Removenotes"
+    Removenode: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/Removenotes",
+    GetEventsByID: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetEventsByID"
 };
  
  

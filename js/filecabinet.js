@@ -73,12 +73,16 @@
         change: onsubcategoryChange
 
     });
+    //$("#tabstrip").kendoTabStrip({
+    //    animation: {
+    //        open: {
+    //            effects: "fadeIn"
+    //        }
+    //    }
+    //});
     $("#tabstrip").kendoTabStrip({
-        animation: {
-            open: {
-                effects: "fadeIn"
-            }
-        }
+        tabPosition: "left",
+        animation: { open: { effects: "fadeIn" } }
     });
 
     $("#divFCUpload1").tabs();

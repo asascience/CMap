@@ -105,7 +105,8 @@
             
         resultObject = eval(result.GetEventsByTypeResult);
 
-       // alert(resultObject);
+        // alert(resultObject);
+        $("#datagridinspections").empty();
         $("#datagridinspections").kendoGrid({
 
             dataSource: {

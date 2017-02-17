@@ -1,6 +1,9 @@
 ﻿$(document).ready(function () {
     var serviceURLs = window.serviceURLs;
-    
+
+
+ 
+
   
  function ServiceFailed(result) {
         alert('Service call failed: ' + result.status + '' + result.statusText);
@@ -17,9 +20,9 @@
 	MOCEventsWindow.kendoWindow({
 	    position: {
 	        top: 100, // or "100px"
-	        left: winW / 2 - $('#divDashBoard').width() / 2 + 40
+	        left: winW / 2 - $('#divDashBoard').width() / 2 
 	    },
-	    width: winW - 500,
+    width: $('#divDashBoard').width(),
 	    height: 700,
 	    title: "Management of change - Events",
 	    visible: false,
@@ -71,6 +74,46 @@
 
 	  
 	}
+	function detailInitEvents(e) {
+	    var detailRow = e.detailRow;
+	    detailRow.find(".tabstrip").kendoTabStrip({	      
+	        animation: {	           
+	            open: { effects: "fadeIn" }
+	        }
+	    });
+	    var eventID = detailRow.find(".eventid").text();
+	    var Url = serviceURLs["GetEventsByID"];
+	    var Data = '{"EventID": "' + eventID + '"}';
+	    var ContentType = "application/json; charset=utf-8";
+	    $.ajax({
+	        type: 'POST',
+	        url: Url,
+	        data: Data,
+	        contentType: ContentType,
+	        dataType: 'json',
+	        processdata: true,
+	        success: function (msg) {
+	            var resultObject = eval(msg.GetEventsByIDResult);
+	          //  alert(resultObject);
+	           
+	          //  alert($("#gridEventsHistory"));
+	            $("#gridEventsHistory").empty();
+
+	            detailRow.find(".gridEventsHistory").kendoGrid({
+	                dataSource: {
+	                    data: resultObject
+	                },	              
+	                columns: [ 
+                        { field: "Due_Date", title: "Due Date", template: "#= kendo.toString(kendo.parseDate(Due_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
+                        { field: "Created_Date", title: "Created Date", template: "#= kendo.toString(kendo.parseDate(Created_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" }, 
+                        { field: "Event_Unit", title: "Unit" }]                   
+
+	            });
+	        },
+	        error: ServiceFailed// When Service call fails
+	    });
+	 
+	}
 	function LoadAllEventsSucceeded(result) {
 
 	    var resultObject = eval(result.GetAllEventsResult);
@@ -78,6 +121,8 @@
 	    var data = {
 	        "d": resultObject
 	    };
+
+	    $("#gridMOCEvents").empty();
 
 	   $("#gridMOCEvents").kendoGrid({
 	        dataSource: {
@@ -94,14 +139,21 @@
 	       
 	        filterable: true,
            sortable:true,
-	        height: 550,
+           height: 550,
+           detailTemplate: kendo.template($("#templateEventDetails").html()),
+           detailInit: detailInitEvents,
+           //dataBound: function () {
+           //    // this.expandRow(this.tbody.find("tr.k-master-row").first());
+             
+           //},
 	        columns: [
-                { field: "EventID", title: "Event ID", width: "70px", hidden: true },
+                { field: "EventID", title: "Event ID", hidden: true },
+               { field: "EventMedium", title: "Medium", width: "100px", filterable: { multi: true, search: true, search: true } },
                 { field: "EventName", title: "Event Name" },
-                { field: "RegAgency", title: "Regulatory Agency", filterable: { multi: true, search: true, search: true } },
-                { field: "Regulation", title: "Regulation", filterable: { multi: true, search: true, search: true } },
+                { field: "RegAgency", title: "Regulatory Agency", filterable: { multi: true, search: true, search: true } },              
                 { field: "ComplianceDate", title: "Frequency", filterable: { multi: true, search: true, search: true } },
-	         { command: { text: "Schedule", click: showDetails }, title: " " }]
+	         { command: { text: "Reminder", click: showDetails }, width: "120px" },
+             { command: { text: "Schedule", click: showDetails }, width:"120px" }]
                             
 	    }); 
 	

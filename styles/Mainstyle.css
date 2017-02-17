@@ -4,19 +4,11 @@
  #divFC1 ul li{
      list-style:none;
  }
- .k-tabstrip > .k-tabstrip-items > .k-item {
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    margin:1px;
-    padding:2px;
-    background-color:#47A3DA;
-    border-color:white;
-}
 
-.k-tabstrip
-  {background-color:green;
+ .eventid
+ {display:none;}
 
-  }
+
  #calendar {
      align-content:center;
                      width: 60%;
