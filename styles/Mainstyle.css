@@ -1,6 +1,8 @@
  html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
  table tr td {vertical-align:top;}
-
+ #divFC1 ul li{
+     list-style:none;
+ }
 
  .k-tabstrip > .k-tabstrip-items > .k-item {
     border-top-right-radius: 5px;
@@ -212,7 +214,7 @@
 #divUpload{display:none;}
 #btnUpload{background-color:#AED6F1;cursor:pointer;}
 #btnFileCabinet{background-color:#AED6F1;cursor:pointer;}
-#uploadFiles{width:350px;}
+#uploadFiles{width:250px;}
 .button {
    background-color: #3360aa;
     border: none;

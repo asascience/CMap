@@ -19,7 +19,7 @@
 
     $('#divDashBoard').css('left', winW / 2 - $('#divDashBoard').width() / 2 - 20);
 
-    $('#divFC1').css('width', winW - 600);
+
 
     $('#chartContainer').css('width', winW - 600);
     var ETCalendarWindow = $("#divETCalendar");//---------------------------------------------------------------------------------
