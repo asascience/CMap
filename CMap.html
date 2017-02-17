@@ -25,6 +25,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
+    <script src="js/PI.js"></script>
+
 
     <script src="js/jQAllRangeSliders-min.js"></script>
     <script src="js/sliderDemo.js"></script>
@@ -50,7 +52,9 @@
 
     <link href="styles/Mainstyle.css" rel="stylesheet" />
 
+    <script src="js/raphael-2.1.4.min.js"></script>
 
+    <script src="js/justgage.js"></script>
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -1086,20 +1090,26 @@
             <table>
 
                 <tr>
-                    <td style="vertical-align:top">
+                    <td style="vertical-align:top" align="right">
 
-                        <br />
-                        <br />
+                        <!--<input type="button"  value="Stop Update" id="toggleBtn" />-->
+                        
                         <div id="ps1">
                         </div>
+                       
                     </td>
 
                     <td style="vertical-align:top">
                         <div id="speedometer"></div>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                       
+                    </td>
+                </tr>
             </table>
-
+            <span id="labeltext"></span>
             <div id="dateRulers"></div>
         </div>
         <div id="mapDiv" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
