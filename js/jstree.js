@@ -5797,22 +5797,24 @@
 						});
 					}
 				},
-				"rename" : {
-					"separator_before"	: false,
-					"separator_after"	: false,
-					"_disabled"			: false, //(this.check("rename_node", data.reference, this.get_parent(data.reference), "")),
-					"label"				: "Rename",
-					/*!
-					"shortcut"			: 113,
-					"shortcut_label"	: 'F2',
-					"icon"				: "glyphicon glyphicon-leaf",
-					*/
-					"action"			: function (data) {
-						var inst = $.jstree.reference(data.reference),
+				"archive" : {
+				    "separator_before"	: false,
+				    "icon"				: false,
+				    "separator_after"	: false,
+				    "_disabled"			: false, //(this.check("delete_node", data.reference, this.get_parent(data.reference), "")),
+				    "label"				: "Archive",
+				    "action"			: function (data) {
+				        var inst = $.jstree.reference(data.reference),
 							obj = inst.get_node(data.reference);
-						inst.edit(obj);
-					}
+				        if(inst.is_selected(obj)) {
+				            inst.delete_node(inst.get_selected());
+				        }
+				        else {
+				            inst.delete_node(obj);
+				        }
+				    }
 				},
+				
 				"remove" : {
 					"separator_before"	: false,
 					"icon"				: false,
@@ -5829,217 +5831,163 @@
 							inst.delete_node(obj);
 						}
 					}
-				},
-				"ccp" : {
-					"separator_before"	: true,
-					"icon"				: false,
-					"separator_after"	: false,
-					"label"				: "Edit",
-					"action"			: false,
-					"submenu" : {
-						"cut" : {
-							"separator_before"	: false,
-							"separator_after"	: false,
-							"label"				: "Cut",
-							"action"			: function (data) {
-								var inst = $.jstree.reference(data.reference),
-									obj = inst.get_node(data.reference);
-								if(inst.is_selected(obj)) {
-									inst.cut(inst.get_top_selected());
-								}
-								else {
-									inst.cut(obj);
-								}
-							}
-						},
-						"copy" : {
-							"separator_before"	: false,
-							"icon"				: false,
-							"separator_after"	: false,
-							"label"				: "Copy",
-							"action"			: function (data) {
-								var inst = $.jstree.reference(data.reference),
-									obj = inst.get_node(data.reference);
-								if(inst.is_selected(obj)) {
-									inst.copy(inst.get_top_selected());
-								}
-								else {
-									inst.copy(obj);
-								}
-							}
-						},
-						"paste" : {
-							"separator_before"	: false,
-							"icon"				: false,
-							"_disabled"			: function (data) {
-								return !$.jstree.reference(data.reference).can_paste();
-							},
-							"separator_after"	: false,
-							"label"				: "Paste",
-							"action"			: function (data) {
-								var inst = $.jstree.reference(data.reference),
-									obj = inst.get_node(data.reference);
-								inst.paste(obj);
-							}
-						}
-					}
 				}
 			};
 		}
 	};
 
-	$.jstree.plugins.contextmenu = function (options, parent) {
-		this.bind = function () {
-			parent.bind.call(this);
+	//$.jstree.plugins.contextmenu = function (options, parent) {
+	//	this.bind = function () {
+	//		parent.bind.call(this);
 
-			var last_ts = 0, cto = null, ex, ey;
-			this.element
-				.on("contextmenu.jstree", ".jstree-anchor", $.proxy(function (e, data) {
-						if (e.target.tagName.toLowerCase() === 'input') {
-							return;
-						}
-						e.preventDefault();
-						last_ts = e.ctrlKey ? +new Date() : 0;
-						if(data || cto) {
-							last_ts = (+new Date()) + 10000;
-						}
-						if(cto) {
-							clearTimeout(cto);
-						}
-						if(!this.is_loading(e.currentTarget)) {
-							this.show_contextmenu(e.currentTarget, e.pageX, e.pageY, e);
-						}
-					}, this))
-				.on("click.jstree", ".jstree-anchor", $.proxy(function (e) {
-						if(this._data.contextmenu.visible && (!last_ts || (+new Date()) - last_ts > 250)) { // work around safari & macOS ctrl+click
-							$.vakata.context.hide();
-						}
-						last_ts = 0;
-					}, this))
-				.on("touchstart.jstree", ".jstree-anchor", function (e) {
-						if(!e.originalEvent || !e.originalEvent.changedTouches || !e.originalEvent.changedTouches[0]) {
-							return;
-						}
-						ex = e.originalEvent.changedTouches[0].clientX;
-						ey = e.originalEvent.changedTouches[0].clientY;
-						cto = setTimeout(function () {
-							$(e.currentTarget).trigger('contextmenu', true);
-						}, 750);
-					})
-				.on('touchmove.vakata.jstree', function (e) {
-						if(cto && e.originalEvent && e.originalEvent.changedTouches && e.originalEvent.changedTouches[0] && (Math.abs(ex - e.originalEvent.changedTouches[0].clientX) > 50 || Math.abs(ey - e.originalEvent.changedTouches[0].clientY) > 50)) {
-							clearTimeout(cto);
-						}
-					})
-				.on('touchend.vakata.jstree', function (e) {
-						if(cto) {
-							clearTimeout(cto);
-						}
-					});
+	//		var last_ts = 0, cto = null, ex, ey;
+	//		this.element
+	//			.on("contextmenu.jstree", ".jstree-anchor", $.proxy(function (e, data) {
+	//					if (e.target.tagName.toLowerCase() === 'input') {
+	//						return;
+	//					}
+	//					e.preventDefault();
+	//					last_ts = e.ctrlKey ? +new Date() : 0;
+	//					if(data || cto) {
+	//						last_ts = (+new Date()) + 10000;
+	//					}
+	//					if(cto) {
+	//						clearTimeout(cto);
+	//					}
+	//					if(!this.is_loading(e.currentTarget)) {
+	//						this.show_contextmenu(e.currentTarget, e.pageX, e.pageY, e);
+	//					}
+	//				}, this))
+	//			.on("click.jstree", ".jstree-anchor", $.proxy(function (e) {
+	//					if(this._data.contextmenu.visible && (!last_ts || (+new Date()) - last_ts > 250)) { // work around safari & macOS ctrl+click
+	//						$.vakata.context.hide();
+	//					}
+	//					last_ts = 0;
+	//				}, this))
+	//			.on("touchstart.jstree", ".jstree-anchor", function (e) {
+	//					if(!e.originalEvent || !e.originalEvent.changedTouches || !e.originalEvent.changedTouches[0]) {
+	//						return;
+	//					}
+	//					ex = e.originalEvent.changedTouches[0].clientX;
+	//					ey = e.originalEvent.changedTouches[0].clientY;
+	//					cto = setTimeout(function () {
+	//						$(e.currentTarget).trigger('contextmenu', true);
+	//					}, 750);
+	//				})
+	//			.on('touchmove.vakata.jstree', function (e) {
+	//					if(cto && e.originalEvent && e.originalEvent.changedTouches && e.originalEvent.changedTouches[0] && (Math.abs(ex - e.originalEvent.changedTouches[0].clientX) > 50 || Math.abs(ey - e.originalEvent.changedTouches[0].clientY) > 50)) {
+	//						clearTimeout(cto);
+	//					}
+	//				})
+	//			.on('touchend.vakata.jstree', function (e) {
+	//					if(cto) {
+	//						clearTimeout(cto);
+	//					}
+	//				});
 
-			/*!
-			if(!('oncontextmenu' in document.body) && ('ontouchstart' in document.body)) {
-				var el = null, tm = null;
-				this.element
-					.on("touchstart", ".jstree-anchor", function (e) {
-						el = e.currentTarget;
-						tm = +new Date();
-						$(document).one("touchend", function (e) {
-							e.target = document.elementFromPoint(e.originalEvent.targetTouches[0].pageX - window.pageXOffset, e.originalEvent.targetTouches[0].pageY - window.pageYOffset);
-							e.currentTarget = e.target;
-							tm = ((+(new Date())) - tm);
-							if(e.target === el && tm > 600 && tm < 1000) {
-								e.preventDefault();
-								$(el).trigger('contextmenu', e);
-							}
-							el = null;
-							tm = null;
-						});
-					});
-			}
-			*/
-			$(document).on("context_hide.vakata.jstree", $.proxy(function (e, data) {
-				this._data.contextmenu.visible = false;
-				$(data.reference).removeClass('jstree-context');
-			}, this));
-		};
-		this.teardown = function () {
-			if(this._data.contextmenu.visible) {
-				$.vakata.context.hide();
-			}
-			parent.teardown.call(this);
-		};
+	//		/*!
+	//		if(!('oncontextmenu' in document.body) && ('ontouchstart' in document.body)) {
+	//			var el = null, tm = null;
+	//			this.element
+	//				.on("touchstart", ".jstree-anchor", function (e) {
+	//					el = e.currentTarget;
+	//					tm = +new Date();
+	//					$(document).one("touchend", function (e) {
+	//						e.target = document.elementFromPoint(e.originalEvent.targetTouches[0].pageX - window.pageXOffset, e.originalEvent.targetTouches[0].pageY - window.pageYOffset);
+	//						e.currentTarget = e.target;
+	//						tm = ((+(new Date())) - tm);
+	//						if(e.target === el && tm > 600 && tm < 1000) {
+	//							e.preventDefault();
+	//							$(el).trigger('contextmenu', e);
+	//						}
+	//						el = null;
+	//						tm = null;
+	//					});
+	//				});
+	//		}
+	//		*/
+	//		$(document).on("context_hide.vakata.jstree", $.proxy(function (e, data) {
+	//			this._data.contextmenu.visible = false;
+	//			$(data.reference).removeClass('jstree-context');
+	//		}, this));
+	//	};
+	//	this.teardown = function () {
+	//		if(this._data.contextmenu.visible) {
+	//			$.vakata.context.hide();
+	//		}
+	//		parent.teardown.call(this);
+	//	};
 
-		/**
-		 * prepare and show the context menu for a node
-		 * @name show_contextmenu(obj [, x, y])
-		 * @param {mixed} obj the node
-		 * @param {Number} x the x-coordinate relative to the document to show the menu at
-		 * @param {Number} y the y-coordinate relative to the document to show the menu at
-		 * @param {Object} e the event if available that triggered the contextmenu
-		 * @plugin contextmenu
-		 * @trigger show_contextmenu.jstree
-		 */
-		this.show_contextmenu = function (obj, x, y, e) {
-			obj = this.get_node(obj);
-			if(!obj || obj.id === $.jstree.root) { return false; }
-			var s = this.settings.contextmenu,
-				d = this.get_node(obj, true),
-				a = d.children(".jstree-anchor"),
-				o = false,
-				i = false;
-			if(s.show_at_node || x === undefined || y === undefined) {
-				o = a.offset();
-				x = o.left;
-				y = o.top + this._data.core.li_height;
-			}
-			if(this.settings.contextmenu.select_node && !this.is_selected(obj)) {
-				this.activate_node(obj, e);
-			}
+	//	/**
+	//	 * prepare and show the context menu for a node
+	//	 * @name show_contextmenu(obj [, x, y])
+	//	 * @param {mixed} obj the node
+	//	 * @param {Number} x the x-coordinate relative to the document to show the menu at
+	//	 * @param {Number} y the y-coordinate relative to the document to show the menu at
+	//	 * @param {Object} e the event if available that triggered the contextmenu
+	//	 * @plugin contextmenu
+	//	 * @trigger show_contextmenu.jstree
+	//	 */
+	//	this.show_contextmenu = function (obj, x, y, e) {
+	//		obj = this.get_node(obj);
+	//		if(!obj || obj.id === $.jstree.root) { return false; }
+	//		var s = this.settings.contextmenu,
+	//			d = this.get_node(obj, true),
+	//			a = d.children(".jstree-anchor"),
+	//			o = false,
+	//			i = false;
+	//		if(s.show_at_node || x === undefined || y === undefined) {
+	//			o = a.offset();
+	//			x = o.left;
+	//			y = o.top + this._data.core.li_height;
+	//		}
+	//		if(this.settings.contextmenu.select_node && !this.is_selected(obj)) {
+	//			this.activate_node(obj, e);
+	//		}
 
-			i = s.items;
-			if($.isFunction(i)) {
-				i = i.call(this, obj, $.proxy(function (i) {
-					this._show_contextmenu(obj, x, y, i);
-				}, this));
-			}
-			if($.isPlainObject(i)) {
-				this._show_contextmenu(obj, x, y, i);
-			}
-		};
-		/**
-		 * show the prepared context menu for a node
-		 * @name _show_contextmenu(obj, x, y, i)
-		 * @param {mixed} obj the node
-		 * @param {Number} x the x-coordinate relative to the document to show the menu at
-		 * @param {Number} y the y-coordinate relative to the document to show the menu at
-		 * @param {Number} i the object of items to show
-		 * @plugin contextmenu
-		 * @trigger show_contextmenu.jstree
-		 * @private
-		 */
-		this._show_contextmenu = function (obj, x, y, i) {
-			var d = this.get_node(obj, true),
-				a = d.children(".jstree-anchor");
-			$(document).one("context_show.vakata.jstree", $.proxy(function (e, data) {
-				var cls = 'jstree-contextmenu jstree-' + this.get_theme() + '-contextmenu';
-				$(data.element).addClass(cls);
-				a.addClass('jstree-context');
-			}, this));
-			this._data.contextmenu.visible = true;
-			$.vakata.context.show(a, { 'x' : x, 'y' : y }, i);
-			/**
-			 * triggered when the contextmenu is shown for a node
-			 * @event
-			 * @name show_contextmenu.jstree
-			 * @param {Object} node the node
-			 * @param {Number} x the x-coordinate of the menu relative to the document
-			 * @param {Number} y the y-coordinate of the menu relative to the document
-			 * @plugin contextmenu
-			 */
-			this.trigger('show_contextmenu', { "node" : obj, "x" : x, "y" : y });
-		};
-	};
+	//		i = s.items;
+	//		if($.isFunction(i)) {
+	//			i = i.call(this, obj, $.proxy(function (i) {
+	//				this._show_contextmenu(obj, x, y, i);
+	//			}, this));
+	//		}
+	//		if($.isPlainObject(i)) {
+	//			this._show_contextmenu(obj, x, y, i);
+	//		}
+	//	};
+	//	/**
+	//	 * show the prepared context menu for a node
+	//	 * @name _show_contextmenu(obj, x, y, i)
+	//	 * @param {mixed} obj the node
+	//	 * @param {Number} x the x-coordinate relative to the document to show the menu at
+	//	 * @param {Number} y the y-coordinate relative to the document to show the menu at
+	//	 * @param {Number} i the object of items to show
+	//	 * @plugin contextmenu
+	//	 * @trigger show_contextmenu.jstree
+	//	 * @private
+	//	 */
+	//	this._show_contextmenu = function (obj, x, y, i) {
+	//		var d = this.get_node(obj, true),
+	//			a = d.children(".jstree-anchor");
+	//		$(document).one("context_show.vakata.jstree", $.proxy(function (e, data) {
+	//			var cls = 'jstree-contextmenu jstree-' + this.get_theme() + '-contextmenu';
+	//			$(data.element).addClass(cls);
+	//			a.addClass('jstree-context');
+	//		}, this));
+	//		this._data.contextmenu.visible = true;
+	//		$.vakata.context.show(a, { 'x' : x, 'y' : y }, i);
+	//		/**
+	//		 * triggered when the contextmenu is shown for a node
+	//		 * @event
+	//		 * @name show_contextmenu.jstree
+	//		 * @param {Object} node the node
+	//		 * @param {Number} x the x-coordinate of the menu relative to the document
+	//		 * @param {Number} y the y-coordinate of the menu relative to the document
+	//		 * @plugin contextmenu
+	//		 */
+	//		this.trigger('show_contextmenu', { "node" : obj, "x" : x, "y" : y });
+	//	};
+	//};
 
 	// contextmenu helper
 	(function ($) {

@@ -6,6 +6,7 @@ var serviceURLslocal = {
     uploadinspectionhistory: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/uploadinspectionhistory",
     uploadcustomfile: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/UploadCustomFile",
     fixuploadfile: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/FixUploadedFile",
+    FixUploadedFolder: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/FixUploadedFolder",
     EventCalendar: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetEvents",    
     LoadUnits: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetUnitNames",
     UnitDetails: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetUnitDetails",
@@ -19,7 +20,12 @@ var serviceURLslocal = {
     Getnotes: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Getnotes",
     Getnotes: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Getnotes",
     Removenode: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Removenotes",
+<<<<<<< HEAD
     GetEventsByID: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetEventsByID"
+=======
+    Archivenode: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Archivenotes",
+    GetArchiveFiles: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetArchiveFiles",
+>>>>>>> b84b0dbb2280e40f3d5955b94c8a843c4ae138bf
 };
 
 
@@ -31,6 +37,7 @@ var serviceURLsProd = {
     uploadinspectionhistory: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/uploadinspectionhistory",
     uploadcustomfile: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/UploadCustomFile",
     fixuploadfile: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/FixUploadedFile",
+    FixUploadedFolder: "http://tct.reservoirkb.com/CMapSVCtest/Service1.svc/FixUploadedFolder",
     EventCalendar: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetEvents",
     LoadUnits: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetUnitNames",
     UnitDetails: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetUnitDetails",
@@ -44,7 +51,12 @@ var serviceURLsProd = {
     Getnotes: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/Getnotes",
     Getnotes: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/Getnotes",
     Removenode: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/Removenotes",
+<<<<<<< HEAD
     GetEventsByID: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetEventsByID"
+=======
+
+    Archivenode: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/Archivenotes"
+>>>>>>> b84b0dbb2280e40f3d5955b94c8a843c4ae138bf
 };
  
  

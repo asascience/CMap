@@ -529,7 +529,7 @@ $(document).ready(function () {
 
     $('#divDashBoard').css('left', winW / 2 - $('#divDashBoard').width() / 2 - 20);
 
-    $('#divFC1').css('width', winW - 600);
+    $('#divFC1').css('width', winW);
 
     $('#chartContainer').css('width', winW - 600);
 
@@ -924,7 +924,7 @@ $(document).ready(function () {
 
         PI1.dialog({
             open: function( event, ui ) {
-                PI1.closest("div[role='dialog']").css({ top: 100,height:550, left: winW / 2 - $('#divDashBoard').width() / 2 -50, width: 'auto' });
+                PI1.closest("div[role='dialog']").css({ top: 100,height:500, left: winW / 2 - $('#divDashBoard').width() / 2 + 10, width: 'auto' });
                     
             }
         });

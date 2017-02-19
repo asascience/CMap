@@ -30,6 +30,8 @@
     <script src="js/sliderDemo.js"></script>
     <script src="js/dateSliderDemo.js"></script>
     <script src="js/editSliderDemo.js"></script>
+    <script src="js/jquery.jeditable.js"></script>
+
 	
     <!--Testin Hello g-->
     
@@ -43,7 +45,7 @@
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.material.min.css">
     <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.material.mobile.min.css">
 
-
+    <link href="css/jstree-sample.css" rel="stylesheet" />
 
 
     <link href="styles/Mainstyle.css" rel="stylesheet" />
@@ -68,7 +70,47 @@
 
     <script src="https://js.arcgis.com/3.19/"></script>
     <style>
-        .gridMOCEvents {
+
+        .ui-dialog 
+        {
+ z-index:10000000
+      
+      
+        }
+        .ui-corner-all
+        {
+             z-index:10000000
+        }
+        
+         .ui-widget
+         {
+              z-index:10000000
+         } 
+         .ui-widget-content
+         {
+              z-index:10000000
+         } 
+         .ui-front 
+           {
+              z-index:10000000
+           }
+           .ui-dialog-buttons 
+           {
+                z-index:10000000
+           }
+           
+           .ui-draggable 
+           {
+                z-index:10000000
+           }
+
+           .ui-resizable
+           {
+                z-index:10000000
+           }
+
+
+         .gridMOCEvents {
     border-color: #bbb;
     font-size: 12px;
     max-width: 850px;
@@ -91,16 +133,24 @@
             height: 27px;
         }
 
-        .vakata-context {
-            z-index: 10005;
-            left: 300px;
-        }
+      
 
        
 
            
 
+<<<<<<< HEAD
        
+=======
+        #tabstrip p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .k-grid-content{
+            overflow-y:hidden;
+        }
+>>>>>>> b84b0dbb2280e40f3d5955b94c8a843c4ae138bf
     </style>
     <script type="text/javascript">
         $(".k-listview > div").on("mouseover", function (e) {
@@ -167,6 +217,79 @@
             <span>#: text #</span>
         </div>
 
+
+    </script>
+
+    <script type="text/javascript">
+        function demo_create() {
+
+            //alert("democreate");
+            //$("#divcategorysubcategory").jstree('create_node', '#', 'New');
+
+            var ref = $('#divcategorysubcategory').jstree(true),
+                           sel = ref.get_selected();
+            if (!sel.length) {
+                return false;
+            }
+            sel = sel[0];
+            sel = ref.create_node(sel, {
+                "type": "file"
+            });
+            if (sel) {
+                ref.edit(sel);
+            }
+            var node = $("#divcategorysubcategory").jstree('get_selected');
+
+            alert(node.text);
+           // $("#divcategorysubcategory").jstree('delete_node', node);
+
+            //var x = document.getElementById("uploadFiles");
+            //                var file = x.files[0];
+            //                var fileData = file;
+
+            //                var dropdownlist = $("#category").data("kendoDropDownList");
+
+            //                var dropdownsubcategory = $("#subcategory").data("kendoDropDownList");
+
+            //                var category = $("#category").data("kendoDropDownList").value();
+
+            //                var subcategory = $("#subcategory").data("kendoDropDownList").value();
+
+            //                var Url = serviceURLs["uploadcustomfile"];
+
+            //                var parent = $("#divcategorysubcategory").jstree().get_selected(true)[0].parent;
+
+            //                // alert(parent);
+            //                $.ajax({
+            //                    url: Url,
+            //                    type: 'POST',
+            //                    data: fileData,
+            //                    cache: false,
+            //                    dataType: 'json',
+            //                    processData: false, // Don't process the files
+            //                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+            //                    success: function (data) {
+            //                        UploadFileServiceSucceeded(data, node.text, category, subcategory, parent, "Folder");
+
+            //                    },
+            //                    error: function (result) {
+            //                        alert('Service call failed: ' + result.status + '' + result.statusText);
+            //                    }
+            //                });
+        }
+
+        function demo_archive() {
+
+            alert("demo_archive");
+            var node = $("#divcategorysubcategory").jstree('get_selected'),
+                text = 'New Node';
+            $("#divcategorysubcategory").jstree('rename_node', node, text);
+        }
+
+        function demo_delete() {
+            var node = $("#divcategorysubcategory").jstree('get_selected');
+            $("#divcategorysubcategory").jstree('delete_node', node);
+        }
 
     </script>
 
@@ -582,6 +705,8 @@
                     <li><a href="#divFCSearch">Search Files</a></li>
                     <li><a href="#divFCRecent">Recent Files</a></li>
 
+                    <li><a href="#divFCArchive">Archived Files</a></li>
+
                 </ul>
                 <div id="Air">
                     <div id="airpermits">
@@ -751,6 +876,10 @@
 
                     <div id="divRecent20Files"></div>
                 </div>
+                <div id="divFCArchive">
+
+                    <div id="divarchivefiles"></div>
+                </div>
 
             </div>
             <div id="airnotes">
@@ -768,56 +897,165 @@
                 </ul>
 
                 <div id="fileupload">
-                    <table id="tblUpload">
 
+                    <table style="width:100%">
                         <tr>
-                            <td align="right">
-                                Select Category:
+                            <td style="width:40%">
+                                <table id="tblUpload">
+
+                                    <tr>
+                                        <td align="right">
+                                            Select Category:
+                                        </td>
+
+                                        <td>
+                                            <input id="category" />
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="right">
+                                            Select Sub Category:
+                                        </td>
+
+                                        <td>
+                                            <input id="subcategory" />
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div id="divcategorysubcategory" class="demo" style="margin-top:1em; min-height:200px;"></div>
+
+                                                </div>
+                                            </div>
+
+             
+
+
+                                        </td>
+
+                                    </tr>
+                                 
+
+
+                                  
+                                </table>
+
                             </td>
+                            <td style ="width:60%">
 
-                            <td>
-                                <input id="category" />
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td align="right">
-                                Select Sub Category:
-                            </td>
-
-                            <td>
-                                <input id="subcategory" />
-
-                            </td>
-                        </tr>
-
-                        <tr>
-
-                            <td align="center" colspan="2"> Select File: <input type=file id="uploadFiles"><br /><br /></td>
+                                <div id="customupload">
 
 
-                        </tr>
+                                    <ul>
+                                        <li style="list-style:none;"><a href="#createfolder">Create Folder</a></li>
 
-                        <tr>
-                            <td align="center" colspan="2"><textarea style="width:200px;height:100px" id="notestext"></textarea><br /><br /></td>
+                                        <li style="list-style:none;"><a href="#defaultupload">Upload</a></li>
 
-                        </tr>
-                        <tr>
-                            <td align="center" colspan="2"><input type=button value="Upload" class="button" id="btnRead"></td>
-                        </tr>
 
-                       
+                                        <li style="list-style:none;"><a href="#archive">Archive</a></li>
 
-                        <tr>
-                            <td colspan="2">
-                                <div id="divcategorysubcategory">
+                                        <li style="list-style:none;"><a href="#remove">Remove</a></li>
+
+                                    </ul>
+                                    <div id="createfolder">
+                                        <table>
+                                            <tr>
+
+                                                <td align="right">Folder Name:</td>
+                                                <td align="right"> <input id="txtfoldername" type="text" /><br /><br /></td>
+
+
+                                            </tr>
+
+
+                                            <tr>
+                                                <td align="center" colspan="2"><input type=button value="Upload" class="button" id="btnCreate"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <div id="defaultupload">
+
+                                        <table>
+
+                                            <tr>
+
+                                                <td align="left" style="width:30px;"> File:</td>
+                                                <td align="left"> <input type=file id="uploadFiles"><br /><br /></td>
+
+
+                                            </tr>
+                                            <tr>
+                                                <td align="left">Notes:</td>
+                                                <td align="left"><textarea style="width:200px;height:100px" id="notestext"></textarea><br /><br /></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td align="right"></td>
+                                                <td align="left"><input type=button value="Upload" class="button" id="btnRead"></td>
+                                            </tr>
+
+
+                                        </table>
+
+                                    </div>
+
+                                    <div id="archive">
+                                        <table>
+
+                                            <tr style="display:none">
+
+                                                <td align="left" style="width:30px;">File:</td>
+                                                <td align="left"> <input disabled="disabled" type="text" id="archivefile"><br /><br /></td>
+
+
+                                            </tr>
+
+                                            <tr>
+                                                <td align="right"></td>
+                                                <td align="left"><input type=button value="Archive" class="button" id="btnArchive"></td>
+                                            </tr>
+
+
+                                        </table>
+                                    </div>
+
+                                    <div id="remove">
+                                        <table>
+
+                                            <tr style="display:none">
+
+                                                <td align="left" style="width:30px;">File:</td>
+                                                <td align="left"> <input disabled="disabled" type="text" id="archivefile"><br /><br /></td>
+
+
+                                            </tr>
+
+                                            <tr>
+                                                <td align="right"></td>
+                                                <td align="left"><input type=button value="Delete" class="button" id="btnRemove"></td>
+                                            </tr>
+
+
+                                        </table>
+                                    </div>
+
+
 
                                 </div>
-                            </td>
 
-                        </tr>
-
+                                </td>
+</tr>
                     </table>
+
+                  
+
+                  
                 </div>
 
                 <div id="filerelate">
@@ -856,7 +1094,10 @@
                             </td>
                         </tr>
 
-                       
+                        <tr>
+                            <td align="center" colspan="2"><input type=button value="UnRelate" class="button" id="btnunRelate"></td>
+                        </tr>
+
                         <tr>
                             <td align="center" colspan="2"><input type=button value="Relate" class="button" id="btnRelate"></td>
                         </tr>
@@ -907,6 +1148,14 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div id="archivedialog" title="Confirmation Required">
+            Are you sure want to Archive?
+        </div>
+
+        <div id="dialog"  title="Confirmation Required">
+            Are you sure want to Delete?
         </div>
     </div>
 </body>
