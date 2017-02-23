@@ -43,6 +43,9 @@ $(document).ready(function () {
 
     $('#divDashBoard').css('left', winW / 2 - $('#divDashBoard').width() / 2 - 20);
 
+
+    
+
     $('#divFC1').css('width', winW);
 
     $('#chartContainer').css('width', winW - 600);
