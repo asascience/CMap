@@ -18,8 +18,8 @@
     <script src="https://code.jquery.com/jquery-3.1.1.js"
             integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
             crossorigin="anonymous"></script>
-
-
+   
+    
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/redmond/jquery-ui.css" rel="stylesheet" type="text/css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -35,26 +35,21 @@
     <script src="js/jquery.jeditable.js"></script>
 
 	
-    <!--Testin Hello g-->
-    
-    <!--<script src="js/demo.js"></script>-->
     <script src="js/moment.js"></script>
     <link href="css/iThing.css" rel="stylesheet" />
     <script src="js/jQDateRangeSlider-withRuler-min.js"></script>
     <script src="js/jQRangeSlider-withRuler-min.js"></script>
     <script type="text/javascript" src="https://kendo.cdn.telerik.com/2017.1.118/js/kendo.all.min.js"></script>
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.common-material.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.material.min.css">
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.material.mobile.min.css">
+   
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.material.mobile.min.css" />
 
     <link href="css/jstree-sample.css" rel="stylesheet" />
 
 
     <link href="styles/Mainstyle.css" rel="stylesheet" />
 
-    <script src="js/raphael-2.1.4.min.js"></script>
-
-    <script src="js/justgage.js"></script>
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -67,7 +62,7 @@
     <link href="styles/dashboardmenu.css" rel="stylesheet" />
     <script src="js/JSLINQ.js"></script>
 
-
+    <script src="js/MOC.js"></script>
 
 
 
@@ -143,9 +138,9 @@
 
            
 
-<<<<<<< HEAD
+
        
-=======
+
         #tabstrip p {
             margin: 0;
             padding: 0;
@@ -154,7 +149,7 @@
         .k-grid-content{
             overflow-y:hidden;
         }
->>>>>>> b84b0dbb2280e40f3d5955b94c8a843c4ae138bf
+
     </style>
     <script type="text/javascript">
         $(".k-listview > div").on("mouseover", function (e) {
@@ -223,6 +218,38 @@
 
 
     </script>
+    <style>
+        .km-widget.km-buttongroup {
+            margin: 0 auto;
+        }
+
+        .play {
+        width:30px;
+        height:30px;
+        background-image: url(img/play.png);
+       padding: 0;
+border: none;
+background-repeat:no-repeat;
+background-color:transparent;
+
+border:0px
+
+      }
+      .pause {
+        width:30px;
+        height:30px;
+        background-image: url(img/pause.png);
+ 
+            padding: 0;
+border: none;
+background-repeat:no-repeat;
+
+background-color:transparent;
+
+
+border:0px
+      }
+    </style>
 
     <script type="text/javascript">
         function demo_create() {
@@ -245,41 +272,7 @@
             var node = $("#divcategorysubcategory").jstree('get_selected');
 
             alert(node.text);
-           // $("#divcategorysubcategory").jstree('delete_node', node);
-
-            //var x = document.getElementById("uploadFiles");
-            //                var file = x.files[0];
-            //                var fileData = file;
-
-            //                var dropdownlist = $("#category").data("kendoDropDownList");
-
-            //                var dropdownsubcategory = $("#subcategory").data("kendoDropDownList");
-
-            //                var category = $("#category").data("kendoDropDownList").value();
-
-            //                var subcategory = $("#subcategory").data("kendoDropDownList").value();
-
-            //                var Url = serviceURLs["uploadcustomfile"];
-
-            //                var parent = $("#divcategorysubcategory").jstree().get_selected(true)[0].parent;
-
-            //                // alert(parent);
-            //                $.ajax({
-            //                    url: Url,
-            //                    type: 'POST',
-            //                    data: fileData,
-            //                    cache: false,
-            //                    dataType: 'json',
-            //                    processData: false, // Don't process the files
-            //                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-            //                    success: function (data) {
-            //                        UploadFileServiceSucceeded(data, node.text, category, subcategory, parent, "Folder");
-
-            //                    },
-            //                    error: function (result) {
-            //                        alert('Service call failed: ' + result.status + '' + result.statusText);
-            //                    }
-            //                });
+         
         }
 
         function demo_archive() {
@@ -293,6 +286,11 @@
         function demo_delete() {
             var node = $("#divcategorysubcategory").jstree('get_selected');
             $("#divcategorysubcategory").jstree('delete_node', node);
+        }
+
+        function closepanel()
+        {
+            document.getElementById("divps1").style.display = "none";
         }
 
     </script>
@@ -372,6 +370,9 @@
                     <li><a href="#">Reports</a></li>
                     <!--<li><a href="#" id="btnpi" class="cbp-tm-icon-mobile">PI system Chart</a></li>-->
                     <li><a href="#" id="btnpis" class="cbp-tm-icon-mobile">PI system</a></li>
+
+                    
+                   
                 </ul>
             </li>
             <li>
@@ -1152,11 +1153,19 @@
                                     <div id="listView2filter"></div>
                                 </td>
 
+
                                 <td>
                                     <div id="listViewtank"></div>
 
                                 </td>
                             </tr>
+
+                      
+                        <tr>
+                            <td align="center" colspan="1"><input type=button value="UnRelate" class="button" id="btnunRelate"></td>
+                            <td align="center" colspan="1"><input type=button value="Relate" class="button" id="btnRelate"></td>
+                        </tr>
+
 
                             <tr>
                                 <td align="center" colspan="2"><input type=button value="UnRelate" class="button" id="btnunRelate"></td>
@@ -1182,6 +1191,7 @@
                 </div>
             </div>
 
+
             <div id="divps1" title="Annual volume displaced - 12 month rolling average">
                 <table>
 
@@ -1189,6 +1199,39 @@
                         <td style="vertical-align:top" align="right">
 
                             <!--<input type="button"  value="Stop Update" id="toggleBtn" />-->
+
+        <div   id="divps1" >
+            <table>
+               <tr>
+                   <td colspan="2">
+                       <div class="demo-section k-content">
+                           <ul id="select-period">
+                               <li>
+                                   Daily
+                               </li>
+                               <li>
+                                   Monthly
+                               </li>
+                               <li>
+                                   Yearly
+                               </li>
+                           </ul>
+                       </div>
+
+                   </td>
+                       
+               </tr>
+
+
+                <tr>
+                    <td style="vertical-align:top" align="right">
+                        <br />
+                        <br />
+                        <div id="ps1">
+                        </div>
+                       
+                    </td>
+
 
                             <div id="ps1">
                             </div>

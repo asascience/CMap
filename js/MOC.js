@@ -323,6 +323,73 @@
 	   
 
 	});
+
+    //
+
+
+	$('#btnunRelate').click(function () {
+
+
+
+	    var values = new Array();
+	    var list2 = $("#listView2filter").data("kendoListView");
+	    var category = $("#categoryr").data("kendoDropDownList").value();
+
+	    var subcategory = $("#subcategoryr").data("kendoDropDownList").value();
+
+
+
+	    var listt = $("#listViewtank").data("kendoListView");
+
+	    var tankid = "";
+
+	   
+	    list2.select().each(function (idx, element) {
+
+	        console.log(element);
+	        var uid = $(element).data("uid");
+	        var dsItem = list2.dataSource.getByUid(uid);
+
+	        console.log(dsItem);
+	        //alert(dsItem.filename);
+
+	        values.push(dsItem.filename);
+
+
+	    });
+
+	    var filename = values.join("$");
+
+	    var Data = '{"category":"' + category + '","subcategory":"' + subcategory + '","fn":"' + filename + '"}';
+	    console.log(Data);
+	    var Type = "POST";
+	    var Url = serviceURLs["UNRelateTank"];
+	    var ContentType = "application/json; charset=utf-8";
+	    var DataType = "json";
+
+	    $.ajax({
+	        type: Type,
+	        url: Url,
+	        data: Data,
+	        contentType: ContentType,
+	        dataType: DataType,
+	        processdata: true,
+	        success: function (msg) {
+	            console.log(msg);
+	            alert(msg.BreakRelateFileResult);
+	             //alert("success");
+	        },
+	        error: ServiceFailed// When Service call fails
+	    });
+
+
+
+
+
+
+	});
+
+
 	function LoadUnitDetails()
 	{
 	    var color = $("#dropdownUnitNames").data("kendoDropDownList");
