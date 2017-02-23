@@ -494,21 +494,30 @@
                 <div id="calendar"></div>
             </div>
             <br />
-            <div id="divEventDescriptionsToday">
-                <h3>Today's Events</h3>
-                <div>
-                    <ul id="divTodayEvents"></ul>
-                </div>
-            </div>
+            <ul id="panelbarEvents">
+                <li class="k-state-active">
+                    Today's Events
+                    <div style="padding:10px;">
+                        <ul id="divTodayEvents"></ul>
+                    </div>
+                </li>
+                <li>
+                    Upcoming Events
 
-            <div id="divEventDescriptionsUpcoming">
-                <h3>Upcoming Events</h3>
-                <div>
-                    <ul id="divUpcomingEvents"></ul>
-                </div>
-            </div>
+                    <div id="divUpcomingEvents"></div>
+
+
+                </li>
+                <li>
+                    Reminders
+                    <div id="divEventReminders"></div>
+
+                </li>
+
+            </ul>
 
         </div>
+        <div id="dialogEventReminders"></div>
         <!--****************************************************************-->
         <div id="divMOCEvents">
 
@@ -516,11 +525,54 @@
 
             <div id="gridMOCEvents"></div>
 
+            <script type="text/x-kendo-template" id="templateEventDetails">
+                <div class="tabstrip">
+                    <ul>
+                        <li class="k-state-active">
+                            Details
+                        </li>
+                        <li>
+                            History
+                        </li>
+                    </ul>
+                    <div>
+                        <div class="gridEventDetails">
+                            <table>
+                                <tr>
+                                    <td style="width:100px;">Description</td>
+                                    <td>#= EventDesc #</td>
+                                </tr>
+                                <tr>
+                                    <td>Notes</td>
+                                    <td>#= Notes #</td>
+                                </tr>
+                                <tr>
+                                    <td>Event Type</td>
+                                    <td>#= EventType #</td>
+                                </tr>
+                                <tr>
+                                    <td>Regulation</td>
+                                    <td>#= Regulation #</td>
+                                </tr>
 
+                            </table>
+
+
+                        </div>
+                    </div>
+                    <div>
+                        <div class="eventid">#= EventID #</div>
+                        <div class='gridEventsHistory'>
+
+                        </div>
+                    </div>
+                </div>
+
+            </script>
 
         </div>
         <div id="detailsSchedule">
-            <table align="center" border="1" cellpadding="9" cellspacing="2">
+            <table align="center" class="tblDetailSchedule" cellpadding="9" cellspacing="2">
                 <tr>
                     <td style="color:#47A3DA">Event Name</td>
                     <td>
@@ -540,19 +592,21 @@
                     <td style="color:#47A3DA">Frequency</td>
                     <td><div id="divEFrequency"></div></td>
                 </tr>
-                <tr>
+                <tr id="trUnits">
                     <td style="color:#47A3DA">Unit</td>
-                    <td><input id="dropdownUnits" /></td>
+                    <td>
+                        <input type="checkbox" value="Sitewide" id="chkSiteWide" checked />Sitewide
+                    <input id="dropdownUnits" /></td>
                 </tr>
                 <tr>
                     <td style="color:#47A3DA">Due Date</td>
                     <td>
-                        <input id="duedatevalue" value="02/13/2017" />
+                        <input id="duedatevalue" value="02/23/2017" />
 
                         <div id="calendarEventsDueDate"></div>
                     </td>
                 </tr>
-                <tr><td align="center" colspan="2"><button id="btnSchedule">Schedule</button></td></tr>
+                <tr><td align="center" colspan="2"><button id="btnSchedule">Schedule</button><button id="btnReminder">Set Reminder</button></td></tr>
             </table>
         </div>
         <!--****************************************************************-->
@@ -605,58 +659,102 @@
         </div>
         <!--****************************************************************-->
         <div id="divMOCUnits">
-            <table>
+            <br />
+            <table id="tblMOCUnits">
+                <colgroup>
+                    <col class="headings" />
+                    <col class="noedit" />
+                    <col class="noedit" />
+                    <col class="noedit" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <td colspan=3>
+                            <button id="btnMOCUnitAdd">Add</button>
+                            <button id="btnMOCUnitEdit">Edit</button>
+                            <button id="btnMOCUnitUpdate">Update</button>
+                            <button id="btnMOCUnitCancel">Cancel</button>
+                        </td>
+                    </tr>
+                </thead>
                 <tr>
-                    <td>Select Unit</td>
+                    <td>Unit</td>
                     <td>
-                        <input id="dropdownUnitNames" /><br /><br /><br />
+                        <input id="dropdownUnitNames" />
                     </td>
+                    <td>
+                        <input id="dropdownUnitNames1" />
+                    </td>
+                    <td><input type="text" id="AddUnitName"></td>
                 </tr>
 
                 <tr>
                     <td>Type</td>
                     <td><div id="divUnitType"></div></td>
+                    <td><input type="text" id="editUnitType"></td>
+                    <td><input type="text" id="AddUnitType"></td>
                 </tr>
                 <tr>
                     <td>Diameter</td>
                     <td><div id="divUnitDiameter"></div></td>
+                    <td><input type="text" id="editUnitDiameter"></td>
+                    <td><input type="text" id="AddUnitDiameter"></td>
                 </tr>
                 <tr>
                     <td>Length</td>
                     <td><div id="divUnitLength"></div></td>
+                    <td><input type="text" id="editUnitLength"></td>
+                    <td><input type="text" id="AddUnitLength"></td>
                 </tr>
                 <tr>
                     <td>Width</td>
                     <td><div id="divUnitWidth"></div></td>
+                    <td><input type="text" id="editUnitWidth"></td>
+                    <td><input type="text" id="AddUnitWidth"></td>
                 </tr>
                 <tr>
                     <td>Height</td>
                     <td><div id="divUnitHeight"></div></td>
+                    <td><input type="text" id="editUnitHeight"></td>
+                    <td><input type="text" id="AddUnitHeight"></td>
                 </tr>
                 <tr>
                     <td>Capacity</td>
                     <td><div id="divUnitCapacity"></div></td>
+                    <td><input type="text" id="editUnitCapacity"></td>
+                    <td><input type="text" id="AddUnitCapacity"></td>
                 </tr>
                 <tr>
                     <td>Service</td>
                     <td><div id="divUnitService"></div></td>
+                    <td><input type="text" id="editUnitService"></td>
+                    <td><input type="text" id="AddUnitService"></td>
                 </tr>
                 <tr>
                     <td>Date of Construction</td>
                     <td><div id="divUnitDOC"></div></td>
+                    <td><input type="text" id="editUnitDOC"></td>
+                    <td><input type="text" id="AddUnitDOC"></td>
                 </tr>
                 <tr>
                     <td>Date of Modification</td>
                     <td><div id="divUnitDOM"></div></td>
+                    <td><input type="text" id="editUnitDOM"></td>
+                    <td><input type="text" id="AddUnitDOM"></td>
                 </tr>
                 <tr>
                     <td>Material of Construction</td>
                     <td><div id="divUnitMaterial"></div></td>
+                    <td><input type="text" id="editUnitMaterial"></td>
+                    <td><input type="text" id="AddUnitMaterial"></td>
                 </tr>
                 <tr>
                     <td>Design Basis</td>
                     <td><div id="divUnitDesignBasis"></div></td>
+                    <td><input type="text" id="editUnitDesignBasis"></td>
+                    <td><input type="text" id="AddUnitDB"></td>
                 </tr>
+
             </table>
         </div>
         <!--****************************************************************-->

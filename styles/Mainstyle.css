@@ -2,7 +2,15 @@
  table tr td {vertical-align:top;}
  .tblDetailSchedule{border-collapse:collapse;border-spacing:0;}
  
-
+ #tblPIVolume td th
+ {
+      border: 1px solid black;
+    text-align: left;
+ }
+ #tblPIVolume  th
+ {
+    background-color:#AED6F1;
+ }
  #tblMOCUnits {
     width:70%; 
     margin-left:15%; 
