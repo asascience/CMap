@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     //document.getElementById("divps1").style.display = "none";
-   
+
 
 
     var json = [
@@ -1804,7 +1804,7 @@
    { "year": "2014-10-01", "value": 900000 },
    { "year": "2014-11-01", "value": 100000 },
    { "year": "2014-12-01", "value": 650000 },
-  
+
    { "year": "2015-01-01", "value": 100000 },
    { "year": "2015-02-01", "value": 650000 },
    { "year": "2015-03-01", "value": 750000 },
@@ -1819,7 +1819,7 @@
    { "year": "2015-12-01", "value": 650000 },
 
 
-   
+
    { "year": "2016-01-01", "value": 100000 },
    { "year": "2016-02-01", "value": 650000 },
    { "year": "2016-03-01", "value": 750000 },
@@ -1832,7 +1832,7 @@
    { "year": "2016-10-01", "value": 900000 },
    { "year": "2016-11-01", "value": 100000 },
    { "year": "2016-12-01", "value": 650000 }
-  
+
 
     ];
 
@@ -1852,7 +1852,7 @@
 
     //loadata("2014-01-01","2014-03-01","0");
 
-   
+
     var PI1 = $("#divps1");
     var winW = $(window).width();
 
@@ -1887,7 +1887,7 @@
         },
         events: {
             "rendered": function (evtObj, argObj) {
-                
+
                 console.log(evtObj);
                 console.log(fusionchartsspeedometer);
                 var gaugeRef = evtObj.sender,
@@ -1895,17 +1895,14 @@
 
                 var speedoref = fusionchartsspeedometer,
                     fuelVolume = 0;
-              
+
                 var i = 0;
                 var stored = 0;
                 gaugeRef.chartInterval = setInterval(function () {
 
-                    if (slider)
-                    {
+                    if (slider) {
 
-                    } else
-
-                    {
+                    } else {
                         gaugeRef.stopUpdate();
                         // speedoref.restartUpdate();
 
@@ -1915,7 +1912,7 @@
 
                             var btn = document.getElementById('toggleBtn');
 
-                            
+
                             console.log(btn.value);
 
                             if (btn.value == "Stop Update") {
@@ -1928,7 +1925,7 @@
                                 year = json1[i].year.toString();
                                 document.getElementById('datevalue').innerHTML = year;
                                 stored = x;
-                                console.log("basic"+i);
+                                console.log("basic" + i);
                                 i++;
                             } else {
                                 // year = json1[i].year.toString();
@@ -1947,7 +1944,7 @@
 
                     }
 
-                   
+
 
 
                 }, 1000);
@@ -1968,12 +1965,12 @@
                 //controllers.style.cssText = "text-align: left;";
                 var btn = document.getElementById('toggleBtn'),
                     startStopUpdate = function () {
-                       
+
                         if (!isStopped) {
                             document.getElementById("toggleBtn").className = "pause";
                             isStopped = true
                             btn.value = "Restart Update";
-                         
+
                             gaugeRef.stopUpdate();
                         } else {
                             isStopped = false;
@@ -2046,27 +2043,27 @@
 
     //---------------------------------------------------------------------------------
     var myVar = "";
-  
+
     $("#btnpis").click(function () {
 
-  alert("Testing");
+
 
         PI1.dialog({
             open: function (event, ui) {
-                PI1.closest("div[role='dialog']").css({ top: 100,height:500, left: winW / 2 - $('#divDashBoard').width() / 2+20, width: $('#divDashBoard').width()-100});
+                PI1.closest("div[role='dialog']").css({ top: 100, height: 500, left: winW / 2 - $('#divDashBoard').width() / 2 + 20, width: $('#divDashBoard').width() - 100 });
 
             }
         });
 
-   
-   
+
+
 
     });
 
 
     $("#select-period").kendoMobileButtonGroup({
         select: function (e) {
-      
+
             $("#dateRulers").dateRangeSlider("destroy");
 
             if (e.index == 0) {
@@ -2085,11 +2082,11 @@
                 });
 
                 clearInterval(myVar);
-                loadata((moment("2014-01-02").format('YYYY-MM-DD')), (moment("2014-06-26").format('YYYY-MM-DD')),"d");
+                loadata((moment("2014-01-01").format('YYYY-MM-DD')), (moment("2014-06-26").format('YYYY-MM-DD')), "d");
             }
 
             if (e.index == 1) {
-           
+
                 $("#dateRulers").dateRangeSlider({
 
                     bounds: { min: new Date(2014, 0), max: new Date(2016, 11) },
@@ -2106,10 +2103,10 @@
                 });
                 //var json1 = getFilter(moment("2014-01-01").format('YYYY-MM-DD'), moment("2014-06-26").format('YYYY-MM-DD'), json);
                 clearInterval(myVar);
-                loadata((moment("2014-02-01").format('YYYY-MM-DD')), (moment("2014-06-01").format('YYYY-MM-DD')),"m");
+                loadata((moment("2014-01-01").format('YYYY-MM-DD')), (moment("2014-06-01").format('YYYY-MM-DD')), "m");
             }
             if (e.index == 2) {
-           
+
                 $("#dateRulers").dateRangeSlider({
 
                     bounds: { min: new Date(2014, 0), max: new Date(2016, 11) },
@@ -2125,7 +2122,7 @@
 
                 });
                 clearInterval(myVar);
-                loadata((moment("2014-01-02").format('YYYY-MM-DD')), (moment("2015-06-26").format('YYYY-MM-DD')),"y");
+                loadata((moment("2014-01-02").format('YYYY-MM-DD')), (moment("2015-06-26").format('YYYY-MM-DD')), "y");
             }
         },
         index: 0
@@ -2135,9 +2132,9 @@
 
     $("#dateRulers").dateRangeSlider({
 
-        bounds: { min: new Date(2014, 0,1), max: new Date(2016, 11,30) },
-        defaultValues: { min: new Date(2014, 0,1), max: new Date(2014, 5,26) }
-   
+        bounds: { min: new Date(2014, 0, 1), max: new Date(2016, 11, 30) },
+        defaultValues: { min: new Date(2014, 0, 1), max: new Date(2014, 5, 26) }
+
 
 
 
@@ -2152,18 +2149,17 @@
 
         var maxdate = (data.values.max.toString());
 
-        alert(mindate);
+        //alert(mindate);
 
-        alert(maxdate);
+        //alert(maxdate);
 
 
-    
 
-        if(($("#select-period").data("kendoMobileButtonGroup").current().index()==1))
-        {
+
+        if (($("#select-period").data("kendoMobileButtonGroup").current().index() == 1)) {
             clearInterval(myVar);
 
-            loadata((mindate), (maxdate),"m");
+            loadata((mindate), (maxdate), "m");
         }
         if (($("#select-period").data("kendoMobileButtonGroup").current().index() == 2)) {
             clearInterval(myVar);
@@ -2176,7 +2172,7 @@
         }
 
 
-  
+
 
     });
 
@@ -2283,98 +2279,94 @@
     }
 
 
+    function getFilter(begin, end, input) {
 
-function getFilter(begin, end, input) {
-    
 
-    var val = [];
-    var i;
-  
-    for (i = 0; i < input.length; i++) {
-        //alert("inside for loop");
-      
-        var startDate = new Date(input[i].year);
+        var val = [];
+        var i;
 
-        console.log(startDate);
+        for (i = 0; i < input.length; i++) {
+            //alert("inside for loop");
 
-        console.log(begin);
-     
-        if (startDate <= new Date(end) && startDate>=new Date(begin)) // input[i] overlaps with [begin, end]
-        {
-          // alert("ifcondition");
-            console.log(moment(startDate).format('YYYY-MM-DD'));
+            var startDate = new Date(input[i].year);
 
-            console.log(input[i].value);
+            console.log(startDate);
 
-            var year = moment(startDate, "DD.MM.YYYY");
-            year.add(1, 'days');
-           // alert(year);
+            console.log(begin);
 
-            val.push({ year: moment(year).format('YYYY-MM-DD'), value: input[i].value });
+            if (startDate <= new Date(end) && startDate >= new Date(begin)) // input[i] overlaps with [begin, end]
+            {
+                // alert("ifcondition");
+                console.log(moment(startDate).format('YYYY-MM-DD'));
+
+                console.log(input[i].value);
+
+                var year = moment(startDate, "DD.MM.YYYY");
+                year.add(1, 'days');
+                // alert(year);
+
+                val.push({ year: moment(year).format('YYYY-MM-DD'), value: input[i].value });
+            }
         }
+        return val;
     }
-    return val;
-}
 
 
-function getFilteryear(begin, end, input) {
+    function getFilteryear(begin, end, input) {
 
 
-    var val = [];
-    var i;
+        var val = [];
+        var i;
 
-    for (i = 0; i < input.length; i++) {
-        //alert("inside for loop");
+        for (i = 0; i < input.length; i++) {
+            //alert("inside for loop");
 
-        var startDate =input[i].year.split("-");
+            var startDate = input[i].year.split("-");
 
-        console.log(startDate);
+            console.log(startDate);
 
-        console.log(begin);
+            console.log(begin);
 
-        var beginDate = begin.split("-");
+            var beginDate = begin.split("-");
 
-        var endDate=end.split("-");
+            var endDate = end.split("-");
 
-        if (startDate[0] == beginDate[0] || beginDate[0] == endDate[0])
-        {
+            if (startDate[0] == beginDate[0] || beginDate[0] == endDate[0]) {
                 var year = moment(startDate, "DD.MM.YYYY");
                 year.add(1, 'days');
                 // alert(year);
 
                 val.push({ year: startDate[0], value: input[i].value });
-        } else if (startDate[0] >= beginDate[0] && startDate[0] <= endDate[0])
+            } else if (startDate[0] >= beginDate[0] && startDate[0] <= endDate[0]) {
+                var year = moment(startDate, "DD.MM.YYYY");
+                year.add(1, 'days');
+                // alert(year);
 
-        {
-            var year = moment(startDate, "DD.MM.YYYY");
-            year.add(1, 'days');
-            // alert(year);
+                val.push({ year: startDate[0], value: input[i].value });
+            }
 
-            val.push({ year: startDate[0], value: input[i].value });
+
+
+            //if (startDate[0]==  && startDate >= new Date(begin)) // input[i] overlaps with [begin, end]
+            //{
+            //    // alert("ifcondition");
+            //    console.log(moment(startDate).format('YYYY-MM-DD'));
+
+            //    console.log(input[i].value);
+
+            //    var year = moment(startDate, "DD.MM.YYYY");
+            //    year.add(1, 'days');
+            //    // alert(year);
+
+            //    val.push({ year: moment(year).format('YYYY-MM-DD'), value: input[i].value });
+            //}
         }
-
-      
-
-        //if (startDate[0]==  && startDate >= new Date(begin)) // input[i] overlaps with [begin, end]
-        //{
-        //    // alert("ifcondition");
-        //    console.log(moment(startDate).format('YYYY-MM-DD'));
-
-        //    console.log(input[i].value);
-
-        //    var year = moment(startDate, "DD.MM.YYYY");
-        //    year.add(1, 'days');
-        //    // alert(year);
-
-        //    val.push({ year: moment(year).format('YYYY-MM-DD'), value: input[i].value });
-        //}
+        return val;
     }
-    return val;
-}
 
 
 
-var year = 0;
+    var year = 0;
 
 
 
