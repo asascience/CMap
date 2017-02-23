@@ -150,7 +150,7 @@ $(document).ready(function () {
             xVal = dps[p].x;
             dps.push({ x: xVal, y: yVal, });
 
-            console.log(dps);
+         //   console.log(dps);
 
             p++;
             if (dps.length > 10) {

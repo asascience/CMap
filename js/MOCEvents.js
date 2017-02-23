@@ -27,6 +27,8 @@
 	    title: "Management of change - Events",
 	    visible: false,
 	    actions: [
+            "Minimize",
+            "Maximize",
              "Close"
 	    ]
 
@@ -125,21 +127,20 @@
 	    $("#gridMOCEvents").empty();
 
 	   $("#gridMOCEvents").kendoGrid({
-	        dataSource: {
-	            transport: {
-	                read: function (options) {
-	                    options.success(data);
-	                }
-	            },
-	            schema: {
-	                data: "d"
-	            }
-	          
+	       dataSource: {
+	           data: resultObject,
+	           pageSize: 5
+	           
 	        },	             
 	       
 	        filterable: true,
            sortable:true,
            height: 550,
+           pageable: {
+               refresh: true,
+               pageSizes: true,
+               buttonCount: 5
+           },
            detailTemplate: kendo.template($("#templateEventDetails").html()),
            detailInit: detailInitEvents,
            //dataBound: function () {
@@ -152,19 +153,36 @@
                 { field: "EventName", title: "Event Name" },
                 { field: "RegAgency", title: "Regulatory Agency", filterable: { multi: true, search: true, search: true } },              
                 { field: "ComplianceDate", title: "Frequency", filterable: { multi: true, search: true, search: true } },
-	         { command: { text: "Reminder", click: showDetails }, width: "120px" },
+	         { command: { text: "Reminder", click: showReminderWin }, width: "120px" },
              { command: { text: "Schedule", click: showDetails }, width:"120px" }]
                             
 	    }); 
 	
 	}
-	function showDetails(e)
+	function showReminderWin(e)
 	{
-	  //  $("#txtEventID").val(e.data.EventID);
-	    
 	    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-	 //   $('#txtEventID').val = dataItem.EventID;
-	    
+	    LoadEventDetailsSchedule(dataItem.EventID, dataItem.EventName, dataItem.RegAgency, dataItem.Regulation, dataItem.ComplianceDate);
+	    $("#detailsSchedule").prev().find(".k-window-title").text("Event Reminder");
+	    $("#btnReminder").show();
+	    $("#btnSchedule").hide();
+	    $("#trUnits").hide();
+	    detailsScheduleWindow.data("kendoWindow").open();
+	    detailsScheduleWindow.data("kendoWindow").center();
+	}
+	function showDetails(e)
+	{	     
+	    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+	 	//    $("#select-unit").kendoMobileButtonGroup({
+	    //    select: function (e) {
+	    //       // kendoConsole.log("selected index:" + e.index);
+	    //    },
+	    //    index: 0
+	    //});
+	    $("#trUnits").show();
+	    $("#btnReminder").hide();
+	    $("#btnSchedule").show();
+	 	    $("#detailsSchedule").prev().find(".k-window-title").text("Schedule Event");
 	    LoadEventDetailsSchedule(dataItem.EventID,dataItem.EventName,dataItem.RegAgency,dataItem.Regulation,dataItem.ComplianceDate);
 	    detailsScheduleWindow.data("kendoWindow").open();
 	    detailsScheduleWindow.data("kendoWindow").center();
@@ -210,12 +228,48 @@
 	                change: setValue
 	            });
 
-
+	            $("#btnReminder").kendoButton();
 	            $("#btnSchedule").kendoButton();
+	            var dropdownlist = $("#dropdownUnits").data("kendoDropDownList");
+	            dropdownlist.enable(false);
 	        },
 	        error: ServiceFailed// When Service call fails
 	    });
 	}
+	$('#chkSiteWide').change(function () {
+	    var dropdownlist = $("#dropdownUnits").data("kendoDropDownList");
+	    if ($(this).is(':checked')) 	    
+	        dropdownlist.enable(false);
+	    else
+	        dropdownlist.enable(true);
+	});
+	$("#btnReminder").click(function () {
+	    var Url = serviceURLs["SetEventReminder"];
+	    var eventid = $("#divEID").text();
+	    // var units = $("#dropdownUnits").data("kendoDropDownList");	    
+	    var duedate = $("#duedatevalue").val();
+
+	    var Data = '{"EventID": "' + eventid + '","ReminderDate": "' + duedate + '"}';
+	    // alert(Data);
+	    var ContentType = "application/json; charset=utf-8";
+
+	    $.ajax({
+	        type: 'POST',
+	        url: Url,
+	        data: Data,
+	        contentType: ContentType,
+	        dataType: 'json',
+	        processdata: true,
+	        success: function (msg) {
+
+	            // var resultObject1 = eval(msg.ScheduleNewEventResult);
+	            alert(msg.SetEventReminderResult);
+	        },
+	        error: ServiceFailed// When Service call fails
+	    });
+
+
+	});
 	$("#btnSchedule").click(function () {
 	  //  MOCEventsWindow.data("kendoWindow").open();
 
@@ -223,7 +277,9 @@
 	    var eventid = $("#divEID").text();
 	   // var units = $("#dropdownUnits").data("kendoDropDownList");	    
 	    var duedate = $("#duedatevalue").val();
-	    var unit =  $("#dropdownUnits").val();
+	    var unit = $("#dropdownUnits").val();
+	    if ($("#chksitewide").is(':checked'))
+	        unit = "null";
 	    var Data = '{"EventID": "' + eventid + '","DueDate": "' + duedate + '","Unit":"' + unit + '"}';
 	   // alert(Data);
 	    var ContentType = "application/json; charset=utf-8";

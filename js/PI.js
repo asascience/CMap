@@ -131,7 +131,7 @@ var fusioncharts = new FusionCharts({
                         year = json[i].year.toString();
 
                         stored = x;
-                        console.log(i);
+                      //  console.log(i);
                         i++;
                     }else
                     {

@@ -1,17 +1,42 @@
  html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
  table tr td {vertical-align:top;}
+ .tblDetailSchedule{border-collapse:collapse;border-spacing:0;}
+ 
 
+ #tblMOCUnits {
+    width:70%; 
+    margin-left:15%; 
+    margin-right:15%;
+    border-width:1px;
+    border-color:#47A3DA;
+    border-style:solid;
+  }
+ #tblMOCUnits td {
+   padding:5px;
+  }
+ #tblMOCUnits .headings{
+     background-color:#AED6F1;
+ }
+ #tblMOCUnits .noedit{
+  background-color:#e9f6fb;
+     }
+ .km-switch{
+     width:200px;
+ }
  #divFC1 ul li{
      list-style:none;
  }
-
+ .vakata-context { 
+     z-index:999 !important; 
+} 
  .eventid
  {display:none;}
 
 
  #calendar {
      align-content:center;
-                     width: 60%;
+                     width: 200px;
+                     height:250px;
 					 font-size:11px;
                 } 
  .NoMarginPaddingDIV{

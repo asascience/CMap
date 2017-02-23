@@ -72,6 +72,35 @@
         ]
 
     });
+
+    //---------------------------------------------------------------------------------
+    var Url = serviceURLs["GetTodaysEventReminders"];
+    var ContentType = "application/json; charset=utf-8";
+    $.ajax({
+        type: 'POST',
+        url: Url,
+        // data: Data,
+        contentType: ContentType,
+        dataType: 'json',
+        processdata: true,
+        success: function (msg) {
+            GetTodaysEventRemindersSucceeded(msg);
+        },
+        error: ServiceFailed// When Service call fails
+    });
+    //---------------------------------------------------------------------------------
+    var dialogERs = $('#dialogEventReminders');
+    dialogERs.kendoDialog({
+        width: "400px",
+        title: "Event Reminders",
+        closable: true,
+        modal: true,
+        content: "",
+        actions: [
+           
+            { text: 'Ok', primary: true }
+        ]
+    });
     //---------------------------------------------------------------------------------
     $('#btnETInspections').click(function () {
         
@@ -239,17 +268,45 @@
 
     });
     //---------------------------------------------------------------------------------
-    $(function () {
-        $("#divEventDescriptionsToday").accordion({
-            heightStyle: "content",
-            header: "h3", collapsible: true
-        });
-
-        $("#divEventDescriptionsUpcoming").accordion({
-            heightStyle: "content",
-            header: "h3", collapsible: true
+    $(document).ready(function () {
+        $("#panelbarEvents").kendoPanelBar({
+            expandMode: "single"
         });
     });
+    //---------------------------------------------------------------------------------
+    function GetTodaysEventRemindersSucceeded(result) {
+        var resultObject = eval(result.GetTodaysEventRemindersResult);
+        if (resultObject != "") {
+            var kendoWindow = $("#dialogEventReminders").data("kendoDialog");
+            kendoWindow.content("You have reminder for following events. <br><ul><li> " + resultObject[0].event_name);
+            dialogERs.data("kendoDialog").open();
+        }
+          
+      
+    }
+    //---------------------------------------------------------------------------------
+    function GetEventRemindersSucceeded(result) {
+        var resultObject = eval(result.GetEventRemindersResult);
+        $("#divEventReminders").kendoGrid({
+            dataSource: {
+                data: resultObject,
+                pageSize: 5
+            },
+            scrollable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 3
+            },
+            sortable: true,
+
+            columns: [
+                { field: "event_name", title: "Event Name" },
+               { field: "notification_date", title: "Reminder Date", template: "#= kendo.toString(kendo.parseDate(notification_date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" }
+                ]
+
+        });
+    }
     //---------------------------------------------------------------------------------
     function GetEventsSucceeded(result) {
         var date, upcomingEvents = [], todaysEvents = [];
@@ -268,10 +325,31 @@
         else
             $("#divTodayEvents").append(todaysEvents.join(''));
         //Upcoming Events
-        if (upcomingEvents.length == 0)
-            $("#divUpcomingEvents").append("No upcoming events");
-        else
-            $("#divUpcomingEvents").append(upcomingEvents.join(''));
+     //   if (upcomingEvents.length == 0)
+     //       $("#divUpcomingEvents").append("No upcoming events");
+     //   else
+      //      $("#divUpcomingEvents").append(upcomingEvents.join(''));
+
+
+        $("#divUpcomingEvents").kendoGrid({
+            dataSource: {
+                data: resultObject,
+                pageSize:5
+            },          
+            scrollable: true,
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 3
+            },
+            sortable: true,
+          
+            columns: [
+                { field: "Event_name", title: "Event Name" },
+               { field: "Event_Unit", title: "Unit", width: "110px" },
+                { field: "Due_Date", title: "Due Date",width: "120px", template: "#= kendo.toString(kendo.parseDate(Due_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" }]
+
+        });
 
         var today = new Date();
         var content = '# if ($.inArray(+data.date, data.dates) != -1) { #' +
@@ -326,6 +404,21 @@
             },
             error: ServiceFailed// When Service call fails
         });
+
+        Url = serviceURLs["GetEventReminders"];
+        $.ajax({
+            type: 'POST',
+            url: Url,
+            // data: Data,
+            contentType: ContentType,
+            dataType: 'json',
+            processdata: true,
+            success: function (msg) {
+                GetEventRemindersSucceeded(msg);
+            },
+            error: ServiceFailed// When Service call fails
+        });
+
     }
 
 });

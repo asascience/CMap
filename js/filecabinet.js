@@ -401,20 +401,64 @@
                 'data': eval(json.items),
                 'check_callback': true
             },
-            'search': {
-                "case_insensitive": true,
-                "show_only_matches": true
-            },
-            'plugins': ["search"]
+            
+            'plugins': ["contextmenu"],
+            'contextmenu': {
+                'items': function ($node) {
+                    return {
+                        createItem: {
+                            "label": "Create New Branch",
+                            "action": function (obj) { this.create(obj); alert(obj.text()) },
+                            "_class": "class"
+                        },
+                        renameItem: {
+                            "label": "Rename Branch",
+                            "action": function (obj) { this.rename(obj); }
+                        },
+                        deleteItem: {
+                            "label": "Remove Branch",
+                            "action": function (obj) { this.remove(obj); }
+                        }
+                    };
+                }
+            }
         });
 
                 
-        $("#divcategorysubcategory").bind("loaded.jstree", function (event, data) {
-            $('#divcategorysubcategory').jstree("open_node", "46");
-        });
+        //$("#divcategorysubcategory").bind("loaded.jstree", function (event, data) {
+        //    $('#divcategorysubcategory').jstree("open_node", "46");
+        //});
 
         
 
+    }
+    function customMenu(node) {
+        //debugger
+        //Show a different label for renaming files and folders
+        var tree = $('#divcategorysubcategory').jstree(true);
+       
+        
+        var renameLabel;
+        var deleteLabel;
+        var folder = false;
+      
+            renameLabel = "Rename File";
+            deleteLabel = "Delete File";
+      
+        var items = {
+            "rename": {
+                "label": renameLabel, //Different label (defined above) will be shown depending on node type
+                "action": function (obj) { }
+            },
+            "delete": {
+                "label": deleteLabel,
+                "action": function (obj) {
+                    tree.delete_node($(node));
+                }
+            }
+        };
+        alert(items);
+        return items;
     }
     function onsubcategoryChange() {
 
