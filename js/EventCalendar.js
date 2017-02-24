@@ -15,9 +15,9 @@
 
     var winheight = $(window).height();
 
-    $('#divDashBoard').css('width', winW - 360);
+    // $('#divDashBoard').css('width', winW - 360);
 
-    $('#divDashBoard').css('left', winW / 2 - $('#divDashBoard').width() / 2 - 20);
+    // $('#divDashBoard').css('left', winW / 2 - $('#divDashBoard').width() / 2 - 20);
 
 
 

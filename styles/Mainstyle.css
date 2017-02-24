@@ -163,7 +163,7 @@
   border-color: rgba(0,0,0,0.2); /*Very transparent black*/
 	}
 
-	#divDashBoard{
+	/*#divDashBoard{
 
   -moz-border-radius:10px;
   -webkit-border-radius:10px;
@@ -172,7 +172,7 @@
   background: #fff; 
   border: #solid 10px #000; 
  /* background-color: rgba(174,214,241,0.9);*/
- background-color:#47A3DA;
+ /* background-color:#47A3DA;
   border-color: rgba(0,0,0,0.2); 
   position:absolute;
   top:15px;
@@ -181,7 +181,7 @@
  
   padding:15px;
 
-	}
+	}*/
 
    
 
