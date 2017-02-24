@@ -67,7 +67,7 @@
 	        left: winW / 2 - $('#divDashBoard').width() / 2 + 40
 	    },
 	    width: winW - 500,
-	    height: 500,
+	    height: 550,
 	    title: "Add/Edit Units",
 	    visible: false,
 	    actions: [
@@ -80,13 +80,22 @@
 	function LoadUnitsSucceeded(result) {
 	   
 	   var resultObject = eval(result.GetUnitNamesResult);	   
-	    $("#dropdownUnitNames").height(15).kendoDropDownList({
+	    $("#dropdownUnitNames").kendoDropDownList({
             
 	        dataTextField: "unit_name",
 	        dataValueField: "unit_name",
 	        dataSource: resultObject,
 	        index: 0,
 	        change: onUnitChange
+
+	    });
+	    $("#dropdownUnitNames1").kendoDropDownList({
+
+	        dataTextField: "unit_name",
+	        dataValueField: "unit_name",
+	        dataSource: resultObject,
+	        index: 0,
+	        change: onUnitChange1
 
 	    });
 	    var color = $("#dropdownUnitNames").data("kendoDropDownList");
@@ -112,32 +121,59 @@
 	    });
 	   
 	}
-	function UnitDetailsSucceeded(result)
-	{
-	    
-	    var resultObject = eval(result.GetUnitDetailsResult);
-	    alert(resultObject[0].Unit_Length);
-	    $("#divUnitType").html(resultObject[0].Unit_Type);
-	    $("#divUnitDiameter").html(resultObject[0].Unit_Diameter);
-	    $("#divUnitLength").html(resultObject[0].Unit_Length);
-	    $("#divUnitWidth").html(resultObject[0].Unit_Width);
-	    $("#divUnitHeight").html(resultObject[0].Unit_Height);
-	    $("#divUnitCapacity").html(resultObject[0].Unit_Capacity);
-	    $("#divUnitService").html(resultObject[0].Unit_Service);
-	    var date = new Date(parseInt(resultObject[0].Unit_Construction_date.substr(6)));	    
-	    $("#divUnitDOC").html(date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear());
-	    $("#divUnitDOM").html(resultObject[0].Unit_Modification_Date);
-	    $("#divUnitMaterial").html(resultObject[0].Unit_Material);
-	    $("#divUnitDesignBasis").html(resultObject[0].Unit_Design_Basis);
-	    
-	}
+	
 	function onUnitChange()
-	{
+	{	    
+	    $("#dropdownUnitNames1").data('kendoDropDownList').value($("#dropdownUnitNames").val());
+	    LoadUnitDetails();
+	}
+	function onUnitChange1() {
+	    $("#dropdownUnitNames").data('kendoDropDownList').value($("#dropdownUnitNames1").val());	 
 	    LoadUnitDetails();
 
 	}
 
-	
+	$("#btnMOCUnitEdit").kendoButton();
+	$("#btnMOCUnitUpdate").kendoButton();
+	$("#btnMOCUnitCancel").kendoButton();
+	$("#btnMOCUnitAdd").kendoButton();
+	$('#btnMOCUnitCancel').hide();
+	$('#btnMOCUnitUpdate').hide();
+
+	$('#tblMOCUnits td:nth-child(3)').hide();
+	$('#tblMOCUnits td:nth-child(4)').hide();
+
+	$('#btnMOCUnitAdd').click(function () {
+	    $('#tblMOCUnits td:nth-child(4)').show();
+	    $('#tblMOCUnits td:nth-child(2)').hide();
+	});
+
+	$('#btnMOCUnitEdit').click(function () {
+	    $('#tblMOCUnits td:nth-child(3)').show();
+	    $('#tblMOCUnits td:nth-child(2)').hide();
+	    $('#tblMOCUnits td:nth-child(4)').hide();
+	    $('#btnMOCUnitCancel').show();
+	    $('#btnMOCUnitUpdate').show();
+	    $('#btnMOCUnitEdit').hide();
+	    $("#btnMOCUnitAdd").hide();
+	}); 
+	$('#btnMOCUnitCancel').click(function () {
+	    $('#tblMOCUnits td:nth-child(2)').show();
+	    $('#tblMOCUnits td:nth-child(3)').hide();
+	    $('#btnMOCUnitCancel').hide();
+	    $('#btnMOCUnitUpdate').hide();
+	    $('#btnMOCUnitEdit').show();
+	    $("#btnMOCUnitAdd").show();
+	});
+	$('#btnMOCUnitUpdate').click(function () {
+	    UpdateUnits();
+	    $('#tblMOCUnits td:nth-child(2)').show();
+	    $('#tblMOCUnits td:nth-child(3)').hide();
+	    $('#btnMOCUnitCancel').hide();
+	    $('#btnMOCUnitUpdate').hide();
+	    $('#btnMOCUnitEdit').show();
+	    $("#btnMOCUnitAdd").show();
+	});
     //---------------------------------------------------------------------------------
 	$('#btnMOCUnits').click(function () {
 
@@ -210,7 +246,7 @@
         content: function (e) {
             var listView = $("#listView2filter").data("kendoListView");
             var item = listView.dataSource.getByUid(e.target.attr("data-uid"));
-            return "TankID: " + (item.tankid);
+            return "Unit: " + (item.tankid);
 
         }
     })
@@ -287,9 +323,77 @@
 	   
 
 	});
+
+    //
+
+
+	$('#btnunRelate').click(function () {
+
+
+
+	    var values = new Array();
+	    var list2 = $("#listView2filter").data("kendoListView");
+	    var category = $("#categoryr").data("kendoDropDownList").value();
+
+	    var subcategory = $("#subcategoryr").data("kendoDropDownList").value();
+
+
+
+	    var listt = $("#listViewtank").data("kendoListView");
+
+	    var tankid = "";
+
+	   
+	    list2.select().each(function (idx, element) {
+
+	        console.log(element);
+	        var uid = $(element).data("uid");
+	        var dsItem = list2.dataSource.getByUid(uid);
+
+	        console.log(dsItem);
+	        //alert(dsItem.filename);
+
+	        values.push(dsItem.filename);
+
+
+	    });
+
+	    var filename = values.join("$");
+
+	    var Data = '{"category":"' + category + '","subcategory":"' + subcategory + '","fn":"' + filename + '"}';
+	    console.log(Data);
+	    var Type = "POST";
+	    var Url = serviceURLs["UNRelateTank"];
+	    var ContentType = "application/json; charset=utf-8";
+	    var DataType = "json";
+
+	    $.ajax({
+	        type: Type,
+	        url: Url,
+	        data: Data,
+	        contentType: ContentType,
+	        dataType: DataType,
+	        processdata: true,
+	        success: function (msg) {
+	            console.log(msg);
+	            alert(msg.BreakRelateFileResult);
+	             //alert("success");
+	        },
+	        error: ServiceFailed// When Service call fails
+	    });
+
+
+
+
+
+
+	});
+
+
 	function LoadUnitDetails()
 	{
 	    var color = $("#dropdownUnitNames").data("kendoDropDownList");
+	//    var color1 = $("#dropdownUnitNames1").data("kendoDropDownList");
 	    
 	    var unitname = color.value();
 	    
@@ -309,6 +413,40 @@
 	        error: ServiceFailed// When Service call fails
 	    });
 	}
+	function UnitDetailsSucceeded(result) {
+
+	    var resultObject = eval(result.GetUnitDetailsResult);
+
+	    $("#divUnitType").html(resultObject[0].Unit_Type);
+	    $("#editUnitType").val(resultObject[0].Unit_Type);
+	    $("#divUnitDiameter").html(resultObject[0].Unit_Diameter);
+	    $("#editUnitDiameter").val(resultObject[0].Unit_Diameter);
+	    $("#divUnitLength").html(resultObject[0].Unit_Length);
+	    $("#editUnitLength").val(resultObject[0].Unit_Length);
+	    $("#divUnitWidth").html(resultObject[0].Unit_Width);
+	    $("#editUnitWidth").val(resultObject[0].Unit_Width);
+	    $("#divUnitHeight").html(resultObject[0].Unit_Height);
+	    $("#editUnitHeight").val(resultObject[0].Unit_Height);
+	    $("#divUnitCapacity").html(resultObject[0].Unit_Capacity);
+	    $("#editUnitCapacity").val(resultObject[0].Unit_Capacity);
+	    $("#divUnitService").html(resultObject[0].Unit_Service);
+	    $("#editUnitService").val(resultObject[0].Unit_Service);
+	    var date = new Date(parseInt(resultObject[0].Unit_Construction_date.substr(6)));
+	    $("#divUnitDOC").html(date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear());
+	    $("#editUnitDOC").val(date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear());
+	    if (resultObject[0].Unit_Modification_Date != null) {
+	        date = new Date(parseInt(resultObject[0].Unit_Modification_Date.substr(6)));
+	        $("#divUnitDOM").html(date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear());
+	        $("#editUnitDOM").val(date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear());
+	    }
+
+
+	    $("#divUnitMaterial").html(resultObject[0].Unit_Material);
+	    $("#editUnitMaterial").val(resultObject[0].Unit_Material);
+	    $("#divUnitDesignBasis").html(resultObject[0].Unit_Design_Basis);
+	    $("#editUnitDesignBasis").val(resultObject[0].Unit_Design_Basis);
+
+	}
 	function LoadUnits() {
 	        
 	    var Url = serviceURLs["LoadUnits"];
@@ -327,7 +465,38 @@
 	        error: ServiceFailed// When Service call fails
 	    });
 	}
+	function UpdateUnits() {
+	    var unitname = $("#dropdownUnitNames1").val();	  
+	    var type = $("#editUnitType").val();	    
+	    var diameter = $("#editUnitDiameter").val();
+	    var length = ($("#editUnitLength").val()=="")?null:$("#editUnitLength").val();	    
+	    var width = ($("#editUnitWidth").val() == "") ? null : $("#editUnitWidth").val();
+	    var height =  ($("#editUnitHeight").val() == "") ? null : $("#editUnitHeight").val();
+	    var capacity = $("#editUnitCapacity").val();
+	    var service = $("#editUnitService").val();
+	    var DOC = $("#editUnitDOC").val();
+	    var DOM = $("#editUnitDOM").val();
+	    var material = $("#editUnitMaterial").val();
+	    var DB = $("#editUnitDesignBasis").val();
 
+	    var Url = serviceURLs["UpdateUnits"];
+	    var ContentType = "application/json; charset=utf-8";
+	    var Data = '{"UnitName": "' + unitname + '","Type": "' + type + '","diameter":"' + diameter + '","length":"' + length + '","width":"' + width + '","height":"' + height + '","capacity":"' + capacity + '","service":"' + service + '","DOC":"' + DOC + '","DOM":"' + DOM + '","material":"' + material + '","DB":"' + DB + '"}';
+	   // alert(Data);
+	    $.ajax({
+	        type: 'POST',
+	        url: Url,
+	        data: Data,
+	        contentType: ContentType,
+	        dataType: 'json',
+	        processdata: true,
+	        success: function (msg) {	         
+	            alert(msg.UpdateUnitResult);	        
+	        },
+	        error: ServiceFailed// When Service call fails
+	    });
+	    LoadUnitDetails();
+	}
 	function LoadUnitstankslists() {
         
 	    var Url = serviceURLs["LoadUnits"];
@@ -467,7 +636,7 @@
      //alert("change");
 
      var uesrid = "2"; var Type = "POST";
-     var Url = serviceURLs["fileslist"];;
+     var Url = serviceURLs["GetFilesListRelate"];
      var Data = '{"Id": "' + uesrid + '"}';
      var ContentType = "application/json; charset=utf-8";
      var DataType = "json";

@@ -22,22 +22,23 @@
     <script src="https://code.jquery.com/jquery-3.1.1.js"
             integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
             crossorigin="anonymous"></script>
-
-
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/redmond/jquery-ui.css" rel="stylesheet" type="text/css" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="js/PI.js"></script>
 
 
     <script src="js/jQAllRangeSliders-min.js"></script>
     <script src="js/sliderDemo.js"></script>
     <script src="js/dateSliderDemo.js"></script>
     <script src="js/editSliderDemo.js"></script>
-	
-    <!--Testin Hello g-->
-    
-    <!--<script src="js/demo.js"></script>-->
+    <script src="js/jquery.jeditable.js"></script>
+
+
     <script src="js/moment.js"></script>
     <link href="css/iThing.css" rel="stylesheet" />
     <script src="js/jQDateRangeSlider-withRuler-min.js"></script>
@@ -49,9 +50,14 @@
 
 
 
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.1.118/styles/kendo.material.mobile.min.css" />
+
+    <link href="css/jstree-sample.css" rel="stylesheet" />
+
 
     <link href="styles/Mainstyle.css" rel="stylesheet" />
-
 
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -65,40 +71,73 @@
     <link href="styles/dashboardmenu.css" rel="stylesheet" />
     <script src="js/JSLINQ.js"></script>
 
-
+    <script src="js/MOC.js"></script>
 
 
 
 
     <script src="https://js.arcgis.com/3.19/"></script>
     <style>
-        .gridMOCEvents {
-    border-color: #bbb;
-    font-size: 12px;
-    max-width: 850px;
-    margin: 50px;
-    
-    -moz-box-shadow: 0px 1px rgba(0, 0, 0, 0.05);
-    -webkit-box-shadow: 0px 1px rgba(0, 0, 0, 0.05);
-    box-shadow: 0px 1px rgba(0, 0, 0, 0.05);
-}
-.detailsSchedule .k-content, .k-editable-area, .k-panel > li.k-item, .k-panelbar > li.k-item, .k-tiles {
-    background-color: rgba(63, 81, 181, 1);
-}
-
-        .k-header{
-            font-size:12px;
+        .ui-dialog {
+            z-index: 10000000;
         }
-        .k-grid tr td
-        {font-size:11px;}
+
+        .ui-corner-all {
+            z-index: 10000000;
+        }
+
+        .ui-widget {
+            z-index: 10000000;
+        }
+
+        .ui-widget-content {
+            z-index: 10000000;
+        }
+
+        .ui-front {
+            z-index: 10000000;
+        }
+
+        .ui-dialog-buttons {
+            z-index: 10000000;
+        }
+
+        .ui-draggable {
+            z-index: 10000000;
+        }
+
+        .ui-resizable {
+            z-index: 10000000;
+        }
+
+
+        .gridMOCEvents {
+            border-color: #bbb;
+            font-size: 12px;
+            max-width: 850px;
+            margin: 50px;
+            -moz-box-shadow: 0px 1px rgba(0, 0, 0, 0.05);
+            -webkit-box-shadow: 0px 1px rgba(0, 0, 0, 0.05);
+            box-shadow: 0px 1px rgba(0, 0, 0, 0.05);
+        }
+
+        .detailsSchedule .k-content, .k-editable-area, .k-panel > li.k-item, .k-panelbar > li.k-item, .k-tiles {
+            background-color: rgba(63, 81, 181, 1);
+        }
+
+        .k-header {
+            font-size: 12px;
+        }
+
+        .k-grid tr td {
+            font-size: 11px;
+        }
+
         .k-dropdown .k-dropdown-wrap {
             height: 27px;
         }
 
-        .vakata-context {
-            z-index: 10005;
-            left: 300px;
-        }
+
 
         #tabstrip h2 {
             font-weight: lighter;
@@ -118,6 +157,10 @@
         #tabstrip p {
             margin: 0;
             padding: 0;
+        }
+
+        .k-grid-content {
+            overflow-y: hidden;
         }
     </style>
     <script type="text/javascript">
@@ -140,11 +183,11 @@
             # } #
 
             # if(filechecked!="checked"){ #
-            <input class="check" type="checkbox"  />
+            <input class="check" type="checkbox" />
             <span>#: filename #</span>
 
             # } #
-       
+
         </div>
 
 
@@ -154,7 +197,7 @@
 
 
         <div class="listItem">
-            <input class="checktank" type="checkbox"  />
+            <input class="checktank" type="checkbox" />
             <span>&nbsp;</span>
             <span>#: unit_name #</span>
         </div>
@@ -162,12 +205,12 @@
 
     </script>
 
-    
+
 
     <script type="text/x-kendo-tmpl" id="templatenotes">
 
 
-      
+
         <div class="listItem">
             <span>#: filename #  #: notes #</span>
 
@@ -185,6 +228,76 @@
             <span>#: text #</span>
         </div>
 
+
+    </script>
+    <style>
+        .km-widget.km-buttongroup {
+            margin: 0 auto;
+        }
+
+        .play {
+            width: 30px;
+            height: 30px;
+            background-image: url(img/play.png);
+            padding: 0;
+            border: none;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            border: 0px;
+        }
+
+        .pause {
+            width: 30px;
+            height: 30px;
+            background-image: url(img/pause.png);
+            padding: 0;
+            border: none;
+            background-repeat: no-repeat;
+            background-color: transparent;
+            border: 0px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function demo_create() {
+
+            //alert("democreate");
+            //$("#divcategorysubcategory").jstree('create_node', '#', 'New');
+
+            var ref = $('#divcategorysubcategory').jstree(true),
+                           sel = ref.get_selected();
+            if (!sel.length) {
+                return false;
+            }
+            sel = sel[0];
+            sel = ref.create_node(sel, {
+                "type": "file"
+            });
+            if (sel) {
+                ref.edit(sel);
+            }
+            var node = $("#divcategorysubcategory").jstree('get_selected');
+
+            alert(node.text);
+
+        }
+
+        function demo_archive() {
+
+            alert("demo_archive");
+            var node = $("#divcategorysubcategory").jstree('get_selected'),
+                text = 'New Node';
+            $("#divcategorysubcategory").jstree('rename_node', node, text);
+        }
+
+        function demo_delete() {
+            var node = $("#divcategorysubcategory").jstree('get_selected');
+            $("#divcategorysubcategory").jstree('delete_node', node);
+        }
+
+        function closepanel() {
+            document.getElementById("divps1").style.display = "none";
+        }
 
     </script>
 
@@ -429,17 +542,14 @@
                                 <div class="hor-menu  ">
                                     <ul class="nav navbar-nav">
                                         <li aria-haspopup="true" class=" ">
-                                            <a href="javascript:;" id="btnFC1"> File Cabinet
-                                            </a>
+                                            <a href="#" id="btnFC1">File Cabinet</a>
                                         </li>
                                         <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
-                                            <a href="javascript:;" id="btncompliance"> Compliance
-                                                <span class="arrow"></span>
-                                            </a>
+                                            <a href="#" id="btncompliance">Compliance<span class="arrow"></span></a>
                                             <ul class="dropdown-menu pull-left">
                                                 <li aria-haspopup="true" class=" ">
                                                     <a id="btncompliance" href="#" class="cbp-tm-icon-archive">
-                                                        <label><input type="checkbox" id="chkSComp" value="first_checkbox"> Show Compliance</label>
+                                                        <label><input type="checkbox" id="chkSComp" value="first_checkbox">Show Compliance</label>
                                                     </a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
@@ -472,66 +582,59 @@
                                             </ul>
                                         </li>
                                         <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
-                                            <a href="javascript:;">Management of Change<span class="arrow"></span>
-                                            </a>
+                                            <a href="#">Management of Change<span class="arrow"></span></a>
                                             <ul class="dropdown-menu pull-left">
                                                 <li aria-haspopup="true" class=" ">
                                                     <a id="btnMOCUnits" href="#">Unit</a>
                                                 </li>
                                                 <li aria-haspopup="true" class="dropdown-submenu ">
-                                                    <a href="javascript:;" class="nav-link nav-toggle ">
-                                                        Data <span class="arrow"></span>
-                                                    </a>
+                                                    <a href="#" class="nav-link nav-toggle ">Data<span class="arrow"></span></a>
                                                     <ul class="dropdown-menu">
                                                         <li aria-haspopup="true" class=" ">
-                                                            <a href="#" class="nav-link "> PI</a>
+                                                            <a href="#" class="nav-link ">PI</a>
                                                         </li>
                                                         <li aria-haspopup="true" class=" ">
-                                                            <a href="#" class="nav-link "> ASPEN</a>
+                                                            <a href="#" class="nav-link ">ASPEN</a>
                                                         </li>
                                                         <li aria-haspopup="true" class=" ">
-                                                            <a href="#" class="nav-link "> LDOS</a>
+                                                            <a href="#" class="nav-link ">LDOS</a>
                                                         </li>
                                                     </ul>
                                                 </li>
                                                 <li aria-haspopup="true" class="dropdown-submenu ">
-                                                    <a href="javascript:;" class="nav-link nav-toggle ">
-                                                        Inspection <span class="arrow"></span>
-                                                    </a>
+                                                    <a href="#" class="nav-link nav-toggle ">Inspection <span class="arrow"></span></a>
                                                     <ul class="dropdown-menu">
                                                         <li aria-haspopup="true" class=" ">
-                                                            <a href="#" class="nav-link "> Air</a>
+                                                            <a href="#" class="nav-link ">Air</a>
                                                         </li>
                                                         <li aria-haspopup="true" class=" ">
-                                                            <a href="#" class="nav-link "> Waste</a>
+                                                            <a href="#" class="nav-link ">Waste</a>
                                                         </li>
                                                         <li aria-haspopup="true" class=" ">
-                                                            <a href="#" class="nav-link "> Water</a>
+                                                            <a href="#" class="nav-link ">Water</a>
                                                         </li>
                                                         <li aria-haspopup="true" class=" ">
-                                                            <a href="#" class="nav-link "> Other</a>
+                                                            <a href="#" class="nav-link ">Other</a>
                                                         </li>
                                                     </ul>
                                                 </li>
                                                 <li aria-haspopup="true" class="dropdown-submenu ">
-                                                    <a href="javascript:;" class="nav-link nav-toggle ">
-                                                        Requirement <span class="arrow"></span>
-                                                    </a>
+                                                    <a href="#" class="nav-link nav-toggle ">Requirement <span class="arrow"></span></a>
                                                     <ul class="dropdown-menu">
                                                         <li aria-haspopup="true" class=" ">
-                                                            <a href="#" class="nav-link "> Permit</a>
+                                                            <a href="#" class="nav-link ">Permit</a>
                                                         </li>
                                                         <li aria-haspopup="true" class=" ">
-                                                            <a href="#" class="nav-link "> Regulation</a>
+                                                            <a href="#" class="nav-link ">Regulation</a>
                                                         </li>
                                                         <li aria-haspopup="true" class=" ">
-                                                            <a href="#" class="nav-link "> Report</a>
+                                                            <a href="#" class="nav-link ">Report</a>
                                                         </li>
                                                         <li aria-haspopup="true" class=" ">
-                                                            <a href="#" class="nav-link "> Guidance</a>
+                                                            <a href="#" class="nav-link ">Guidance</a>
                                                         </li>
                                                         <li aria-haspopup="true" class=" ">
-                                                            <a href="#" class="nav-link "> Work Process</a>
+                                                            <a href="#" class="nav-link ">Work Process</a>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -554,17 +657,13 @@
                                                     <a href="#">Sampling</a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
-                                                    <a id="btnETInspections" href="#">
-                                                        Inspections<span class="badge badge-warning">2</span>
-                                                    </a>
+                                                    <a id="btnETInspections" href="#">Inspections<span class="badge badge-warning">2</span></a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
                                                     <a href="#">Waste Storage</a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
-                                                    <a href="#">
-                                                        Training<span class="badge badge-danger">1</span>
-                                                    </a>
+                                                    <a href="#">Training<span class="badge badge-danger">1</span></a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
                                                     <a href="#">Reporting</a>
@@ -636,21 +735,30 @@
                         <div id="calendar"></div>
                     </div>
                     <br />
-                    <div id="divEventDescriptionsToday">
-                        <h3>Today's Events</h3>
-                        <div>
-                            <ul id="divTodayEvents"></ul>
-                        </div>
-                    </div>
+                    <ul id="panelbarEvents">
+                        <li class="k-state-active">
+                            Today's Events
+                            <div style="padding:10px;">
+                                <ul id="divTodayEvents"></ul>
+                            </div>
+                        </li>
+                        <li>
+                            Upcoming Events
 
-                    <div id="divEventDescriptionsUpcoming">
-                        <h3>Upcoming Events</h3>
-                        <div>
-                            <ul id="divUpcomingEvents"></ul>
-                        </div>
-                    </div>
+                            <div id="divUpcomingEvents"></div>
+
+
+                        </li>
+                        <li>
+                            Reminders
+                            <div id="divEventReminders"></div>
+
+                        </li>
+
+                    </ul>
 
                 </div>
+                <div id="dialogEventReminders"></div>
                 <!--****************************************************************-->
                 <div id="divMOCEvents">
 
@@ -658,11 +766,54 @@
 
                     <div id="gridMOCEvents"></div>
 
+                    <script type="text/x-kendo-template" id="templateEventDetails">
+                        <div class="tabstrip">
+                            <ul>
+                                <li class="k-state-active">
+                                    Details
+                                </li>
+                                <li>
+                                    History
+                                </li>
+                            </ul>
+                            <div>
+                                <div class="gridEventDetails">
+                                    <table>
+                                        <tr>
+                                            <td style="width:100px;">Description</td>
+                                            <td>#= EventDesc #</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Notes</td>
+                                            <td>#= Notes #</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Event Type</td>
+                                            <td>#= EventType #</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Regulation</td>
+                                            <td>#= Regulation #</td>
+                                        </tr>
+
+                                    </table>
 
 
-                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="eventid">#= EventID #</div>
+                                <div class='gridEventsHistory'>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </script>
+
+                </div>
                 <div id="detailsSchedule">
-                    <table align="center" border="1" cellpadding="9" cellspacing="2">
+                    <table align="center" class="tblDetailSchedule" cellpadding="9" cellspacing="2">
                         <tr>
                             <td style="color:#47A3DA">Event Name</td>
                             <td>
@@ -672,7 +823,7 @@
                         </tr>
                         <tr>
                             <td style="color:#47A3DA">Regulatory Agency</td>
-                        <td><div id="divEAgency"></div></td>
+                            <td><div id="divEAgency"></div></td>
                         </tr>
                         <tr>
                             <td style="color:#47A3DA">Regulation</td>
@@ -682,18 +833,21 @@
                             <td style="color:#47A3DA">Frequency</td>
                             <td><div id="divEFrequency"></div></td>
                         </tr>
-                        <tr>
+                        <tr id="trUnits">
                             <td style="color:#47A3DA">Unit</td>
-                            <td><input id="dropdownUnits" /></td>
+                            <td>
+                                <input type="checkbox" value="Sitewide" id="chkSiteWide" checked />Sitewide
+                            <input id="dropdownUnits" /></td>
                         </tr>
                         <tr>
                             <td style="color:#47A3DA">Due Date</td>
                             <td>
-                                        <input id="duedatevalue" value="02/13/2017" />
+                                <input id="duedatevalue" value="02/23/2017" />
 
-                            <div id="calendarEventsDueDate"></div></td>
+                                <div id="calendarEventsDueDate"></div>
+                            </td>
                         </tr>
-                        <tr><td align="center" colspan="2"><button id="btnSchedule">Schedule</button></td></tr>
+                        <tr><td align="center" colspan="2"><button id="btnSchedule">Schedule</button><button id="btnReminder">Set Reminder</button></td></tr>
                     </table>
                 </div>
                 <!--****************************************************************-->
@@ -746,58 +900,102 @@
                 </div>
                 <!--****************************************************************-->
                 <div id="divMOCUnits">
-                    <table>
+                    <br />
+                    <table id="tblMOCUnits">
+                        <colgroup>
+                            <col class="headings" />
+                            <col class="noedit" />
+                            <col class="noedit" />
+                            <col class="noedit" />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <td colspan=3>
+                                    <button id="btnMOCUnitAdd">Add</button>
+                                    <button id="btnMOCUnitEdit">Edit</button>
+                                    <button id="btnMOCUnitUpdate">Update</button>
+                                    <button id="btnMOCUnitCancel">Cancel</button>
+                                </td>
+                            </tr>
+                        </thead>
                         <tr>
-                            <td>Select Unit</td>
+                            <td>Unit</td>
                             <td>
-                                <input id="dropdownUnitNames" /><br /><br /><br />
+                                <input id="dropdownUnitNames" />
                             </td>
+                            <td>
+                                <input id="dropdownUnitNames1" />
+                            </td>
+                            <td><input type="text" id="AddUnitName"></td>
                         </tr>
 
                         <tr>
                             <td>Type</td>
                             <td><div id="divUnitType"></div></td>
+                            <td><input type="text" id="editUnitType"></td>
+                            <td><input type="text" id="AddUnitType"></td>
                         </tr>
                         <tr>
                             <td>Diameter</td>
                             <td><div id="divUnitDiameter"></div></td>
+                            <td><input type="text" id="editUnitDiameter"></td>
+                            <td><input type="text" id="AddUnitDiameter"></td>
                         </tr>
                         <tr>
                             <td>Length</td>
                             <td><div id="divUnitLength"></div></td>
+                            <td><input type="text" id="editUnitLength"></td>
+                            <td><input type="text" id="AddUnitLength"></td>
                         </tr>
                         <tr>
                             <td>Width</td>
                             <td><div id="divUnitWidth"></div></td>
+                            <td><input type="text" id="editUnitWidth"></td>
+                            <td><input type="text" id="AddUnitWidth"></td>
                         </tr>
                         <tr>
                             <td>Height</td>
                             <td><div id="divUnitHeight"></div></td>
+                            <td><input type="text" id="editUnitHeight"></td>
+                            <td><input type="text" id="AddUnitHeight"></td>
                         </tr>
                         <tr>
                             <td>Capacity</td>
                             <td><div id="divUnitCapacity"></div></td>
+                            <td><input type="text" id="editUnitCapacity"></td>
+                            <td><input type="text" id="AddUnitCapacity"></td>
                         </tr>
                         <tr>
                             <td>Service</td>
                             <td><div id="divUnitService"></div></td>
+                            <td><input type="text" id="editUnitService"></td>
+                            <td><input type="text" id="AddUnitService"></td>
                         </tr>
                         <tr>
                             <td>Date of Construction</td>
                             <td><div id="divUnitDOC"></div></td>
+                            <td><input type="text" id="editUnitDOC"></td>
+                            <td><input type="text" id="AddUnitDOC"></td>
                         </tr>
                         <tr>
                             <td>Date of Modification</td>
                             <td><div id="divUnitDOM"></div></td>
+                            <td><input type="text" id="editUnitDOM"></td>
+                            <td><input type="text" id="AddUnitDOM"></td>
                         </tr>
                         <tr>
                             <td>Material of Construction</td>
                             <td><div id="divUnitMaterial"></div></td>
+                            <td><input type="text" id="editUnitMaterial"></td>
+                            <td><input type="text" id="AddUnitMaterial"></td>
                         </tr>
                         <tr>
                             <td>Design Basis</td>
                             <td><div id="divUnitDesignBasis"></div></td>
+                            <td><input type="text" id="editUnitDesignBasis"></td>
+                            <td><input type="text" id="AddUnitDB"></td>
                         </tr>
+
                     </table>
                 </div>
                 <!--****************************************************************-->
@@ -810,6 +1008,8 @@
                             <li><a href="#Other">Other</a></li>
                             <li><a href="#divFCSearch">Search Files</a></li>
                             <li><a href="#divFCRecent">Recent Files</a></li>
+
+                            <li><a href="#divFCArchive">Archived Files</a></li>
 
                         </ul>
                         <div id="Air">
@@ -974,16 +1174,20 @@
                                     <td colspan=3></td>
                                 </tr>
                             </table><br>
-                            <div id="divFCSearchResults" ></div>
+                            <div id="divFCSearchResults"></div>
                         </div>
                         <div id="divFCRecent">
 
                             <div id="divRecent20Files"></div>
                         </div>
+                        <div id="divFCArchive">
+
+                            <div id="divarchivefiles"></div>
+                        </div>
 
                     </div>
                     <div id="airnotes">
-                    <div id="noteslistview"></div>
+                        <div id="notesgridview"></div>
                     </div>
                 </div>
                 <div id="divFCUpload">
@@ -997,56 +1201,165 @@
                         </ul>
 
                         <div id="fileupload">
-                            <table id="tblUpload">
 
+                            <table style="width:100%">
                                 <tr>
-                                    <td align="right">
-                                        Select Category:
+                                    <td style="width:40%">
+                                        <table id="tblUpload">
+
+                                            <tr>
+                                                <td align="right">
+                                                    Select Category:
+                                                </td>
+
+                                                <td>
+                                                    <input id="category" />
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td align="right">
+                                                    Select Sub Category:
+                                                </td>
+
+                                                <td>
+                                                    <input id="subcategory" />
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div id="divcategorysubcategory" class="demo" style="margin-top:1em; min-height:200px;"></div>
+
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </td>
+
+                                            </tr>
+
+
+
+
+                                        </table>
+
                                     </td>
+                                    <td style="width:60%">
 
-                                    <td>
-                                        <input id="category" />
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td align="right">
-                                        Select Sub Category:
-                                    </td>
-
-                                    <td>
-                                        <input id="subcategory" />
-
-                                    </td>
-                                </tr>
-
-                                <tr>
-
-                                    <td align="center" colspan="2"> Select File: <input type=file id="uploadFiles"><br /><br /></td>
+                                        <div id="customupload">
 
 
-                                </tr>
+                                            <ul>
+                                                <li style="list-style:none;"><a href="#createfolder">Create Folder</a></li>
 
-                                <tr>
-                                    <td align="center" colspan="2"><textarea style="width:200px;height:100px" id="notestext"></textarea><br /><br /></td>
-
-                                </tr>
-                                <tr>
-                                    <td align="center" colspan="2"><input type=button value="Upload" class="button" id="btnRead"></td>
-                                </tr>
+                                                <li style="list-style:none;"><a href="#defaultupload">Upload</a></li>
 
 
+                                                <li style="list-style:none;"><a href="#archive">Archive</a></li>
 
-                                <tr>
-                                    <td colspan="2">
-                                        <div id="divcategorysubcategory">
+                                                <li style="list-style:none;"><a href="#remove">Remove</a></li>
+
+                                            </ul>
+                                            <div id="createfolder">
+                                                <table>
+                                                    <tr>
+
+                                                        <td align="right">Folder Name:</td>
+                                                        <td align="right"> <input id="txtfoldername" type="text" /><br /><br /></td>
+
+
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td align="center" colspan="2"><input type=button value="Upload" class="button" id="btnCreate"></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+
+                                            <div id="defaultupload">
+
+                                                <table>
+
+                                                    <tr>
+
+                                                        <td align="left" style="width:30px;"> File:</td>
+                                                        <td align="left"> <input type=file id="uploadFiles"><br /><br /></td>
+
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="left">Notes:</td>
+                                                        <td align="left"><textarea style="width:200px;height:100px" id="notestext"></textarea><br /><br /></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="right"></td>
+                                                        <td align="left"><input type=button value="Upload" class="button" id="btnRead"></td>
+                                                    </tr>
+
+
+                                                </table>
+
+                                            </div>
+
+                                            <div id="archive">
+                                                <table>
+
+                                                    <tr style="display:none">
+
+                                                        <td align="left" style="width:30px;">File:</td>
+                                                        <td align="left"> <input disabled="disabled" type="text" id="archivefile"><br /><br /></td>
+
+
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td align="right"></td>
+                                                        <td align="left"><input type=button value="Archive" class="button" id="btnArchive"></td>
+                                                    </tr>
+
+
+                                                </table>
+                                            </div>
+
+                                            <div id="remove">
+                                                <table>
+
+                                                    <tr style="display:none">
+
+                                                        <td align="left" style="width:30px;">File:</td>
+                                                        <td align="left"> <input disabled="disabled" type="text" id="archivefile"><br /><br /></td>
+
+
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td align="right"></td>
+                                                        <td align="left"><input type=button value="Delete" class="button" id="btnRemove"></td>
+                                                    </tr>
+
+
+                                                </table>
+                                            </div>
+
+
 
                                         </div>
+
                                     </td>
-
                                 </tr>
-
                             </table>
+
+
+
+
                         </div>
 
                         <div id="filerelate">
@@ -1087,7 +1400,8 @@
 
 
                                 <tr>
-                                    <td align="center" colspan="2"><input type=button value="Relate" class="button" id="btnRelate"></td>
+                                    <td align="center" colspan="1"><input type=button value="UnRelate" class="button" id="btnunRelate"></td>
+                                    <td align="center" colspan="1"><input type=button value="Relate" class="button" id="btnRelate"></td>
                                 </tr>
 
 
@@ -1106,24 +1420,47 @@
                     </div>
                 </div>
 
-                <div id="divps1" >
+                <div id="divps1" title="PI System">
                     <table>
+                        <tr>
+                            <td colspan="2">
+                                <div class="demo-section k-content">
+                                    <ul id="select-period">
+                                        <li>
+                                            Daily
+                                        </li>
+                                        <li>
+                                            Monthly
+                                        </li>
+                                        <li>
+                                            Yearly
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </td>
+
+                        </tr>
+
 
                         <tr>
-                            <td style="vertical-align:top">
-
+                            <td style="vertical-align:top" align="right">
                                 <br />
                                 <br />
                                 <div id="ps1">
                                 </div>
+
                             </td>
 
-                            <td style ="vertical-align:top">
+                            <td style="vertical-align:top">
                                 <div id="speedometer"></div>
-                                </td>
-        </tr>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                        </tr>
                     </table>
-
+                    <span id="labeltext"></span>
                     <div id="dateRulers"></div>
                 </div>
                 <div id="mapDiv" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
@@ -1137,9 +1474,18 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="archivedialog" title="Confirmation Required">
+                    Are you sure want to Archive?
+                </div>
+
+                <div id="dialog" title="Confirmation Required">
+                    Are you sure want to Delete?
+                </div>
             </div>
         </div>
     </div>
+
     <!--[if lt IE 9]>
     <script src="/js/respond.min.js"></script>
     <script src="/js/excanvas.min.js"></script>

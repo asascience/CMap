@@ -77,7 +77,8 @@
           infoTemplate.setContent("<iframe frameborder=0 width=260 height=240 src='mapmenu/cmapmenu.html?tank=${Tank_Id}'></iframe>");
 
          // var counties = new FeatureLayer("http://services.arcgis.com/KJtLkYnwGzQ5MdJW/arcgis/rest/services/SPCC/FeatureServer/0", {
-		 var counties = new FeatureLayer("http://services.arcgis.com/KJtLkYnwGzQ5MdJW/arcgis/rest/services/Tanks/FeatureServer/0",{            
+       //  var counties = new FeatureLayer("http://services.arcgis.com/KJtLkYnwGzQ5MdJW/arcgis/rest/services/Tanks/FeatureServer/0",{            
+          var counties = new FeatureLayer("http://services.arcgis.com/KJtLkYnwGzQ5MdJW/arcgis/rest/services/CMapDemo/FeatureServer/0", {
             infoTemplate: infoTemplate,
             outFields: [
               "*"
