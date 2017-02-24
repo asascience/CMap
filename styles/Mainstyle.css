@@ -154,9 +154,9 @@
     }
 	#IFWeather
 	{
-		-moz-border-radius:10px;
+		/*-moz-border-radius:10px;
   -webkit-border-radius:10px;
-  border-radius:10px;
+  border-radius:10px;*/
   background: #fff; /* fallback for browsers that don't understand rgba */
   border: #solid 10px #000; /* fallback for browsers that don't understand rgba */
   background-color: rgba(174,214,241,0.9);/* slighly transparent white */
@@ -276,4 +276,8 @@
 
 .green {
   color: green;
+}
+
+#divDashBoard div ul li:last-child ul.dropdown-menu {
+    max-width: none;
 }

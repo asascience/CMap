@@ -1,10 +1,12 @@
 /*************************************************************************************************/
 /* Global - Base																				 */
 /*************************************************************************************************/
-body{background-color:#47A3DA;}
+/*body{background-color:#47A3DA;}*/
+body{background-color:#55616f;}
 #weatherwidget{
 /*background-color:#AED6F1;*/
-background-color:#47A3DA;
+/*background-color:#47A3DA;*/
+background-color:#55616f;
 padding:10px;
 color:yellow;
 }
