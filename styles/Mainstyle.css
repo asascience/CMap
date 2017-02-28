@@ -281,3 +281,11 @@
 #divDashBoard div ul li:last-child ul.dropdown-menu {
     max-width: none;
 }
+
+.page-wrapper-top .page-header .page-header-top .page-logo {
+    width: 420px;
+}
+
+    .page-wrapper-top .page-header .page-header-top .page-logo img {
+        padding-top: 2px;
+    }
