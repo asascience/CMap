@@ -289,3 +289,7 @@
     .page-wrapper-top .page-header .page-header-top .page-logo img {
         padding-top: 2px;
     }
+
+#divETCalendar, #detailsSchedule, #divETInspections, #divMOCUnits, #divFC, #divFCUpload, #divps1 {
+    display: none;
+}
