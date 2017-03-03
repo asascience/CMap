@@ -67,7 +67,6 @@
 	        left: winW / 3 + 55
 	    },
 	    width: 400,
-	    height: 550,
 	    title: "Add/Edit Units",
 	    visible: false,
 	    actions: [

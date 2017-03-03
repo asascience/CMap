@@ -29,11 +29,11 @@
 
     ETInspectWindow.kendoWindow({
         position: {
-            top: 100, // or "100px"
-            left: winW / 2 - $('#divDashBoard').width() / 2 + 40
+            top: 150, // or "100px"
+            left: winW / 3 - 100
         },
         width: winW - 500,
-        height: 700,
+        maxHeight: winheight - $('.page-wrapper-top').height() - 100,
         title: "Event Tickler - Inspections",
         visible: false,
         actions: [
@@ -60,11 +60,11 @@
     //---------------------------------------------------------------------------------
     ETCalendarWindow.kendoWindow({
         position: {
-            top: 100, // or "100px"
-            left: winW / 2 - $('#divDashBoard').width() / 2 + 40
+            top: 150, // or "100px"
+            left: winW / 3
         },
-        width: winW - 500,
-        height: 700,
+        width: 550,
+        maxHeight: winheight - $('.page-wrapper-top').height() - 100,
         title: "Event Tickler - Calendar",
         visible: false,
         actions: [

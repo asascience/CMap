@@ -295,6 +295,10 @@
     display: none;
 }
 
+#divMOCUnits {
+    padding-top: 0;
+}
+
 body .ui-widget {
     font-family: "Open Sans",sans-serif;
 }

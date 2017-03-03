@@ -23,6 +23,7 @@
     var serviceURLs = window.serviceURLs;
 
  var winW = $(window).width();
+ var winH = $(window).height();
  var FCWindow = $("#divFC");
  var FCUploadWindow = $("#divFCUpload");
 
@@ -42,7 +43,7 @@
 			left: winW / 2 - $('#divFC').width() - 20
 		  },
         width: 773,
-	    height:600,
+        maxHeight: winH - $('.page-wrapper-top').height() - 100,
         title: "File Cabinet",
         visible: false,
         actions: [                           
@@ -54,11 +55,11 @@
 		   //---------------------------------------------------------------------------------
    FCUploadWindow.kendoWindow({
 	    position: {
-			top: 100, // or "100px"
-			left: winW / 2 - $('#divDashBoard').width() / 2 +20
+			top: 150, // or "100px"
+			left: winW / 3 - 200
 		  },
 	    width: winW - 400,
-	    height:600,
+        maxHeight: winH - $('.page-wrapper-top').height() - 100,
         title: "File Cabinet - Upload",
         visible: false,
         actions: [                           
