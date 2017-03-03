@@ -1597,20 +1597,21 @@
     //---------------------------------------------------------------------------------
     var myVar = "";
 
+    PI1.kendoWindow({
+        position: {
+            top: 150, // or "100px"
+            left: winW / 2 - $('#divFC').width() - 20
+        },
+        width: 800,
+        maxHeight: winheight - $('.page-wrapper-top').height() - 100,
+        title: "PI System",
+        visible: false,
+        actions: ["Close"],
+        resizable: false
+    });
+
     $("#btnpis").click(function () {
-
-
-
-        PI1.dialog({
-            open: function (event, ui) {
-                PI1.closest("div[role='dialog']").css({ top: 100, height: 600, left: winW / 2 - $('#divDashBoard').width() / 2 + 20, width: $('#divDashBoard').width() - 100 });
-
-            }
-        });
-
-
-
-
+        PI1.data("kendoWindow").open();
     });
 
 
