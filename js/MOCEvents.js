@@ -19,7 +19,7 @@
     //---------------------------------------------------------------------------------
 	MOCEventsWindow.kendoWindow({
 	    position: {
-	        top: 100, // or "100px"
+	        top: 150, // or "100px"
 	        left: winW / 2 - $('#divDashBoard').width() / 2 
 	    },
     width: $('#divDashBoard').width(),

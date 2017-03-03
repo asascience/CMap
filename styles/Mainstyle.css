@@ -12,9 +12,10 @@
     background-color:#AED6F1;
  }
  #tblMOCUnits {
-    width:70%; 
+    /*width:70%;
     margin-left:15%; 
-    margin-right:15%;
+    margin-right:15%;*/
+    margin: 0 auto;
     border-width:1px;
     border-color:#47A3DA;
     border-style:solid;
