@@ -26,28 +26,29 @@
  var FCWindow = $("#divFC");
  var FCUploadWindow = $("#divFCUpload");
 
- $('#airnotes').width(winW - 600);
+    // $('#airnotes').width(winW - 600);
 
     //$('#divFC1').width(winW - 480);
 
-    $('#divFC1').css('width', winW - 440);
+    // $('#divFC1').css('width', winW - 440);
 
-    $("#notesgridview").width(winW - 440);
+    // $("#notesgridview").width(winW - 440);
 
     $("#divFCUpload").width(winW -400);
    //---------------------------------------------------------------------------------
    FCWindow.kendoWindow({
 	    position: {
-			top: 100, // or "100px"
-			left: winW / 2 - $('#divDashBoard').width() / 2 +20
+			top: 150, // or "100px"
+			left: winW / 2 - $('#divFC').width() - 20
 		  },
-        width:winW-400,
+        width: 773,
 	    height:600,
         title: "File Cabinet",
         visible: false,
         actions: [                           
              "Close"
-         ]
+         ],
+        resizable: false
                        
           });
 		   //---------------------------------------------------------------------------------

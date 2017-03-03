@@ -138,7 +138,7 @@
               .ui-tabs-vertical .ui-tabs-panel {
                   padding: 1em;
                   float: right;
-                  width: 40em;
+                  /*width: 40em;*/
               }
 			    .toolbarBG { background-color: #AED6F1;height:40px;padding:0px;margin:0px;margin-left:5px; }
 				/*---------------------------------tabs-------------------------------------------*/
@@ -339,4 +339,8 @@ ul.ui-tabs-nav {
 table {
     border-spacing: 2px !important;
     border-collapse: separate !important;
+}
+
+#airnotes {
+    margin: 15px auto;
 }

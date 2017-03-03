@@ -46,7 +46,7 @@ $(document).ready(function () {
 
     
 
-    $('#divFC1').css('width', winW);
+    // $('#divFC1').css('width', winW);
 
     $('#chartContainer').css('width', winW - 600);
 
