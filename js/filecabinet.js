@@ -23,41 +23,43 @@
     var serviceURLs = window.serviceURLs;
 
  var winW = $(window).width();
+ var winH = $(window).height();
  var FCWindow = $("#divFC");
  var FCUploadWindow = $("#divFCUpload");
 
- $('#airnotes').width(winW - 600);
+    // $('#airnotes').width(winW - 600);
 
     //$('#divFC1').width(winW - 480);
 
-    $('#divFC1').css('width', winW - 440);
+    // $('#divFC1').css('width', winW - 440);
 
-    $("#notesgridview").width(winW - 440);
+    // $("#notesgridview").width(winW - 440);
 
     $("#divFCUpload").width(winW -400);
    //---------------------------------------------------------------------------------
    FCWindow.kendoWindow({
 	    position: {
-			top: 100, // or "100px"
-			left: winW / 2 - $('#divDashBoard').width() / 2 +20
+			top: 150, // or "100px"
+			left: winW / 2 - $('#divFC').width() - 20
 		  },
-        width:winW-400,
-	    height:600,
+        width: 773,
+        maxHeight: winH - $('.page-wrapper-top').height() - 100,
         title: "File Cabinet",
         visible: false,
         actions: [                           
              "Close"
-         ]
+         ],
+        resizable: false
                        
           });
 		   //---------------------------------------------------------------------------------
    FCUploadWindow.kendoWindow({
 	    position: {
-			top: 100, // or "100px"
-			left: winW / 2 - $('#divDashBoard').width() / 2 +20
+			top: 150, // or "100px"
+			left: winW / 3 - 200
 		  },
 	    width: winW - 400,
-	    height:600,
+        maxHeight: winH - $('.page-wrapper-top').height() - 100,
         title: "File Cabinet - Upload",
         visible: false,
         actions: [                           

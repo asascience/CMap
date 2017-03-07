@@ -1,4 +1,4 @@
- html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
+ html, body { height: 100%; width: 100%; margin: 0; padding: 0; font-family: "Open Sans",sans-serif;}
  table tr td {vertical-align:top;}
  #tblDetailSchedule
  {
@@ -38,9 +38,10 @@
     background-color:#AED6F1;
  }
  #tblMOCUnits {
-    width:70%; 
+    /*width:70%;
     margin-left:15%; 
-    margin-right:15%;
+    margin-right:15%;*/
+    margin: 0 auto;
     border-width:1px;
     border-color:#47A3DA;
     border-style:solid;
@@ -164,7 +165,7 @@
               .ui-tabs-vertical .ui-tabs-panel {
                   padding: 1em;
                   float: right;
-                  width: 40em;
+                  /*width: 40em;*/
               }
 			    .toolbarBG { background-color: #AED6F1;height:40px;padding:0px;margin:0px;margin-left:5px; }
 				/*---------------------------------tabs-------------------------------------------*/
@@ -306,4 +307,71 @@
 
 #divDashBoard div ul li:last-child ul.dropdown-menu {
     max-width: none;
+}
+
+.page-wrapper-top .page-header .page-header-top .page-logo {
+    width: 420px;
+}
+
+    .page-wrapper-top .page-header .page-header-top .page-logo img {
+        padding-top: 2px;
+    }
+
+#divETCalendar, #detailsSchedule, #divETInspections, #divMOCUnits, #divFC, #divFCUpload, #divps1 {
+    display: none;
+}
+
+#divMOCUnits {
+    padding-top: 0;
+}
+
+body .ui-widget {
+    font-family: "Open Sans",sans-serif;
+}
+
+.k-widget .k-window-titlebar {
+    background-color: #444d58;
+    color           : #BCC2CB;
+}
+
+button.k-button,
+button.k-button.k-primary {
+    color           : #FFF;
+    background-color: #3598dc;
+    border-color    : #3598dc;
+}
+
+button.k-button:hover,
+button.k-button.k-primary:hover {
+    background-color: #217ebd;
+    border-color    : #1f78b5;
+    transition      : all .3s;
+}
+
+a.k-button-bare.k-dialog-action.k-dialog-close {
+    padding-top: 2px;
+}
+
+.ui-dialog-titlebar.ui-widget-header,
+ul.ui-tabs-nav {
+    background-image: none;
+    background-color: #444d58;
+}
+
+.k-widget .k-grid-header {
+    background-color: #444d58;
+}
+
+.ui-state-active a
+{
+    color:#c49f47 !important;
+}
+
+table {
+    border-spacing: 2px !important;
+    border-collapse: separate !important;
+}
+
+#airnotes {
+    margin: 15px auto;
 }

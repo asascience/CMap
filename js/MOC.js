@@ -58,22 +58,21 @@
 
 	
 
-	$('#divMOCUnits').css('width', winW - 600);
+	// $('#divMOCUnits').css('width', winW - 600);
 	var MOCunitsWindow = $("#divMOCUnits");
     //---------------------------------------------------------------------------------
 	MOCunitsWindow.kendoWindow({
 	    position: {
-	        top: 100, // or "100px"
-	        left: winW / 2 - $('#divDashBoard').width() / 2 + 40
+	        top: 150, // or "100px"
+	        left: winW / 3 + 55
 	    },
-	    width: winW - 500,
-	    height: 550,
+	    width: 400,
 	    title: "Add/Edit Units",
 	    visible: false,
 	    actions: [
              "Close"
-	    ]
-
+	    ],
+		resizable: false
 	});
     
     //---------------------------------------------------------------------------------
