@@ -634,7 +634,6 @@
 
  function onsubcategoryChange() {
      //alert("change");
-
      var uesrid = "2"; var Type = "POST";
      var Url = serviceURLs["GetFilesListRelate"];
      var Data = '{"Id": "' + uesrid + '"}';
@@ -650,7 +649,7 @@
          processdata: true,
          success: function (msg) {
              LoadFiles(msg);
-             //alert("success");
+             // alert("success");
          },
          error: ServiceFailed// When Service call fails
      });

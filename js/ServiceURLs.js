@@ -19,7 +19,7 @@ var serviceURLslocal = {
     UNRelateTank: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/BreakRelateFile",
     Keywordsearch: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Keywordsearch",
     Getnotes: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Getnotes",
-    Getnotes: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Getnotes",
+  
     Removenode: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Removenotes",
     GetEventsByID: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetEventsByID",
     Archivenode: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/Archivenotes",
@@ -27,7 +27,15 @@ var serviceURLslocal = {
     UpdateUnits: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/UpdateUnit",
     SetEventReminder: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/SetEventReminder",
     GetEventReminders: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetEventReminders",
-    GetTodaysEventReminders: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetTodaysEventReminders"
+    GetTodaysEventReminders: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetTodaysEventReminders",
+    GetRecentDialyVolume: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentDialyVolume",
+    GetRecentDialyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentDialyVolumeThroughPut",
+    GetRecentMonthlyVolume: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentMonthlyVolume",
+    GetRecentMonthlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentMonthlyVolumeThroughPut",
+    GetRecentYearlyVolume: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentYearlyVolume",
+    GetRecentYearlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentYearlyVolumeThroughPut"
+
+    
 
 };
 
@@ -60,7 +68,13 @@ var serviceURLsProd = {
     UpdateUnits: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/UpdateUnit",
     SetEventReminder: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/SetEventReminder",
     GetEventReminders: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetEventReminders",
-    GetTodaysEventReminders: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetTodaysEventReminders"
+    GetTodaysEventReminders: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetTodaysEventReminders",
+    GetRecentDialyVolume: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecentDialyVolume",
+    GetRecentDialyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecentDialyVolumeThroughPut",
+    GetRecentMonthlyVolume: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecentMonthlyVolume",
+    GetRecentMonthlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecentMonthlyVolumeThroughPut",
+    GetRecentYearlyVolume: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecentYearlyVolume",
+    GetRecentYearlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecentYearlyVolumeThroughPut"
   
 
 };

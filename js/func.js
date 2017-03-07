@@ -2,7 +2,6 @@ $(document).ready(function () {
 
 
 
-   
 
 
 
@@ -221,9 +220,15 @@ $(document).ready(function () {
 
     //---------------------------------------------------------------------------------
 
+    $("#btntct").click(function () {
 
-
-
+        //alert("btntctclick");
+        var loginname = "tctadmin";
+        var url = "http://localhost/tct/TankData.aspx?name=" + loginname;
+        //alert(url);
+        //window.location.href = url;
+        window.open(url, "_newtab");
+    });
 
 
 
