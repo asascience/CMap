@@ -1439,8 +1439,8 @@
         events: {
             "rendered": function (evtObj, argObj) {
 
-                console.log(evtObj);
-                console.log(fusionchartsspeedometer);
+             //   console.log(evtObj);
+             //   console.log(fusionchartsspeedometer);
                 var gaugeRef = evtObj.sender,
                     fuelVolume = 0;
 
@@ -1464,7 +1464,7 @@
                             var btn = document.getElementById('toggleBtn');
 
 
-                            console.log(btn.value);
+                        //    console.log(btn.value);
 
                             if (btn.value == "Stop Update") {
 
@@ -1478,7 +1478,7 @@
 
                                 document.getElementById('volumevalue').innerHTML = x;
                                 stored = x;
-                                console.log("basic" + i);
+                             //   console.log("basic" + i);
                                 i++;
                             } else {
                                 // year = json1[i].year.toString();
@@ -1760,7 +1760,7 @@
         gaugeRef.restartUpdate();
         speedoref.restartUpdate();
 
-        console.log(myVar);
+     //   console.log(myVar);
 
 
         myVar = setInterval(function () {
@@ -1810,7 +1810,7 @@
                     }
 
                     stored = x;
-                    console.log("load" + i);
+                  //  console.log("load" + i);
                     i++;
                 } else {
 
@@ -1849,16 +1849,16 @@
 
             var startDate = new Date(input[i].year);
 
-            console.log(startDate);
+          //  console.log(startDate);
 
-            console.log(begin);
+        //    console.log(begin);
 
             if (startDate <= new Date(end) && startDate >= new Date(begin)) // input[i] overlaps with [begin, end]
             {
                 // alert("ifcondition");
-                console.log(moment(startDate).format('YYYY-MM-DD'));
+             //   console.log(moment(startDate).format('YYYY-MM-DD'));
 
-                console.log(input[i].value);
+             //   console.log(input[i].value);
 
                 var year = moment(startDate, "DD.MM.YYYY");
                 year.add(1, 'days');
@@ -1882,9 +1882,9 @@
 
             var startDate = input[i].year.split("-");
 
-            console.log(startDate);
+        //    console.log(startDate);
 
-            console.log(begin);
+       //     console.log(begin);
 
             var beginDate = begin.split("-");
 

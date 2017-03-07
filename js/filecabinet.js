@@ -501,7 +501,7 @@
 
             //alert("success");
 
-            console.log(msg.GetnotesResult);
+         //   console.log(msg.GetnotesResult);
 
             var json = (msg.GetnotesResult);
 
@@ -511,7 +511,7 @@
 
             });
 
-            console.log(dataSource);
+        //    console.log(dataSource);
            
           
 
@@ -736,7 +736,7 @@
             processdata: true,
             success: function (msg) {
 
-                console.log(msg.GetnotesResult);
+           //     console.log(msg.GetnotesResult);
 
                 var json = (msg.GetnotesResult);
 
@@ -746,7 +746,7 @@
 
                 });
 
-                console.log(dataSource);
+          //      console.log(dataSource);
                 var listView = $("#noteslistview").data("kendoListView");
                 listView.destroy();
                 $("#noteslistview").kendoListView({
@@ -806,7 +806,7 @@
                     data: eval(msg.KeywordsearchResult)
 
                 });
-                console.log(msg.KeywordsearchResult);
+           //     console.log(msg.KeywordsearchResult);
 
               
 
@@ -921,7 +921,7 @@ var loadAllFilesResults;
 	  var json = JSLINQ(loadAllFilesResults)
            .Where(function (item) { return item.cateogory == category && item.subcategory == subcategory; });
 	
-	  console.log(json.items);
+	//  console.log(json.items);
         $(divtreename).on('changed.jstree', function (e, data) {
            
           

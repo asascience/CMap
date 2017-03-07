@@ -806,43 +806,55 @@
 
                 </div>
                 <div id="detailsSchedule">
-                    <table align="center" class="tblDetailSchedule" cellpadding="9" cellspacing="2">
-                        <tr>
-                            <td style="color:#47A3DA">Event Name</td>
-                            <td>
+                    <form id="detailsScheduleForm">
+                        <ul id="tblDetailSchedule">
+                            <li>
+                                <label>Event Name</label>
                                 <div id="divEID" style="display:none;"></div>
                                 <div id="divEName"></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="color:#47A3DA">Regulatory Agency</td>
-                            <td><div id="divEAgency"></div></td>
-                        </tr>
-                        <tr>
-                            <td style="color:#47A3DA">Regulation</td>
-                            <td><div id="divERegulation"></div></td>
-                        </tr>
-                        <tr>
-                            <td style="color:#47A3DA">Frequency</td>
-                            <td><div id="divEFrequency"></div></td>
-                        </tr>
-                        <tr id="trUnits">
-                            <td style="color:#47A3DA">Unit</td>
-                            <td>
-                                <input type="checkbox" value="Sitewide" id="chkSiteWide" checked />Sitewide
-                            <input id="dropdownUnits" /></td>
-                        </tr>
-                        <tr>
-                            <td style="color:#47A3DA">Due Date</td>
-                            <td>
-                                <input id="duedatevalue" value="02/23/2017" />
-
-                                <div id="calendarEventsDueDate"></div>
-                            </td>
-                        </tr>
-                        <tr><td align="center" colspan="2"><button id="btnSchedule">Schedule</button><button id="btnReminder">Set Reminder</button></td></tr>
-                    </table>
-                </div>
+                            </li>
+                         <!--   <li>
+                                <label>Regulatory Agency</label>
+                                <div id="divEAgency"></div>
+                            </li>
+                            <li>
+                               <label>Regulation</label> 
+                                <div id="divERegulation"></div>
+                            </li>-->
+                            <li>
+                                <label>Frequency</label>
+                                <div id="divEFrequency"></div>
+                            </li>
+                            <li>
+                                <label>Sitewide/ Select Units</label>
+                               <!--<input type="checkbox" value="Sitewide" id="chkSiteWide" checked /> Sitewide--> 
+                               
+                                                              
+                                <input type="radio" name="radiositewide" id="radiositewide1" class="k-radio" checked>
+                                        <label class="k-radio-label" for="radiositewide1">Sitewide</label>
+                                  
+                                        <input type="radio" name="radiositewide" id="radiositewide2" class="k-radio">
+                                        <label class="k-radio-label" for="radiositewide2">Select Units</label>
+                                <select id="dropdownUnitsNew" multiple="multiple"  data-placeholder="Select units..."></select>
+                                   
+</li>
+                            <li>
+                                <label for="reminderdatevalue">Reminder Date</label>
+                                <input id="reminderdatevalue" name="reminderdatevalue" required style="width:150px;" placeholder="mm/dd/yyyy" data-msg="Reminder Date is required." />
+                                <span class="k-invalid-msg" data-for="reminderdatevalue"></span>
+                            </li>
+                            <li>
+                                <label for="duedatevalue">Due Date</label>
+                                <input id="duedatevalue" name="duedatevalue" required style="width:150px;" placeholder="mm/dd/yyyy" data-msg="Due Date is required." />
+                                <span class="k-invalid-msg" data-for="duedatevalue"></span>
+                            </li>
+                            <li>
+                                <button id="btnSchedule" type="submit">Schedule</button>
+                            </li>
+                        </ul>
+                           
+                        </form>
+</div>
                 <!--****************************************************************-->
                 <div id="divETInspections">
                     <div id="datagridinspections"></div>
@@ -914,7 +926,7 @@
                         <tr>
                             <td>Unit</td>
                             <td>
-                                <input id="dropdownUnitNames" />
+                                <input id="dropdownUnitNames" /><button id="btnLocateUnit">Locate</button>
                             </td>
                             <td>
                                 <input id="dropdownUnitNames1" />
@@ -931,32 +943,32 @@
                         <tr>
                             <td>Diameter</td>
                             <td><div id="divUnitDiameter"></div></td>
-                            <td><input type="text" id="editUnitDiameter"></td>
-                            <td><input type="text" id="AddUnitDiameter"></td>
+                            <td><input type="text" id="editUnitDiameter"> ft</td>
+                            <td><input type="text" id="AddUnitDiameter"> ft</td>
                         </tr>
                         <tr>
                             <td>Length</td>
                             <td><div id="divUnitLength"></div></td>
-                            <td><input type="text" id="editUnitLength"></td>
-                            <td><input type="text" id="AddUnitLength"></td>
+                            <td><input type="text" id="editUnitLength"> ft</td>
+                            <td><input type="text" id="AddUnitLength"> ft</td>
                         </tr>
                         <tr>
                             <td>Width</td>
                             <td><div id="divUnitWidth"></div></td>
-                            <td><input type="text" id="editUnitWidth"></td>
-                            <td><input type="text" id="AddUnitWidth"></td>
+                            <td><input type="text" id="editUnitWidth"> ft</td>
+                            <td><input type="text" id="AddUnitWidth"> ft</td>
                         </tr>
                         <tr>
                             <td>Height</td>
                             <td><div id="divUnitHeight"></div></td>
-                            <td><input type="text" id="editUnitHeight"></td>
-                            <td><input type="text" id="AddUnitHeight"></td>
+                            <td><input type="text" id="editUnitHeight"> ft</td>
+                            <td><input type="text" id="AddUnitHeight"> ft</td>
                         </tr>
                         <tr>
                             <td>Capacity</td>
                             <td><div id="divUnitCapacity"></div></td>
-                            <td><input type="text" id="editUnitCapacity"></td>
-                            <td><input type="text" id="AddUnitCapacity"></td>
+                            <td><input type="text" id="editUnitCapacity"> BBLs</td>
+                            <td><input type="text" id="AddUnitCapacity"> BBLs</td>
                         </tr>
                         <tr>
                             <td>Service</td>

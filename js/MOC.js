@@ -421,6 +421,7 @@
 	    $("#editUnitType").val(resultObject[0].Unit_Type);
 	    $("#divUnitDiameter").html(resultObject[0].Unit_Diameter);
 	    $("#editUnitDiameter").val(resultObject[0].Unit_Diameter);
+	   // alert(resultObject[0].Unit_Length);
 	    $("#divUnitLength").html(resultObject[0].Unit_Length);
 	    $("#editUnitLength").val(resultObject[0].Unit_Length);
 	    $("#divUnitWidth").html(resultObject[0].Unit_Width);
