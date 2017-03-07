@@ -5,6 +5,13 @@
      margin-left:5px;
      margin-right:5px;
  }
+ #btnLocateUnit{
+
+     background: url(../images/locate.png) no-repeat;
+     width:40px;
+     height:40px;
+
+ }
 
  #tblDetailSchedule li {
    list-style: none;

@@ -23,29 +23,22 @@
 .tblDesignMenu .tg-heading{cursor:pointer;background-color:#154360;color:white; font-family:Arial, sans-serif;font-size:14px;padding:5px 5px;border-color:black;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
 #trH2SO4{display:none;}
 </style>
+    <script src="../js/ServiceURLs.js"></script>
 <script src="../js/cmapmenu.js"></script>	
-<script>
-$(document).ready(function(){
 
-var qs=getParameterByName("tank");
-ChangeDesignTable(qs);
-changeMAERTable(qs);
-
-  });
-  </script>
 </head>
 <body>
 <!-------------------------------------------Main Table----------------------------------->
 	<table id="tblMainMenu" class="tg" width="100%">
   <tr>
-<td><table class="tgsub" onclick="javascript:showDesignMenu(1)"><tr>
+<td><table id="tblDesignMain" class="tgsub" ><tr>
     <td >DESIGN</td><td align="right"><img src="right.gif"></td>
 </tr></table>
 </td>
   </tr>
   <tr>
 <td>
-<table class="tgsub" onclick="javascript:showAirMenu(1)"><tr>
+<table id="tblAirMain" class="tgsub" ><tr>
     <td >AIR</td><td align="right"><img src="right.gif"></td>
 </tr></table>
 </td>
@@ -63,7 +56,7 @@ changeMAERTable(qs);
 </table>
 <!-------------------------------------------Design Table----------------------------------->
 <table class="tblDesignMenu" id="tblDesignMenu" width="100%" style="display:none">
-<tr><td class="tg-heading" onclick="javascript:showDesignMenu(0)" colspan=2><img src="leftarrow.gif">DESIGN</td></tr>
+<tr><td id="tdBackToDesign" class="tg-heading"  colspan=2><img src="leftarrow.gif">DESIGN</td></tr>
  
   <tr>
   <td><b>Material</b></td>
@@ -96,24 +89,24 @@ changeMAERTable(qs);
 </table>
 <!-------------------------------------------Air Table----------------------------------->
 <table class="tg" id="tblAirMenu" width="100%" style="display:none">
-<tr><td class="tg-heading" onclick="javascript:showAirMenu(0)"><img src="leftarrow.gif">AIR</td></tr>
+<tr><td id="tdBacktoAir" class="tg-heading" ><img src="leftarrow.gif">AIR</td></tr>
   <tr>
   <td>
-  <table class="tgsub" onclick="javascript:showAirProgramsMenu(1)"><tr>
+  <table id="tblAirPrograms" class="tgsub" ><tr>
     <td >REGULATIONS</td><td align="right"><img src="right.gif"></td>
 </tr></table>
 </td>    
   </tr>
   <tr>
     <td>
-	 <table class="tgsub" onclick="javascript:showAirPermitsMenu(1)"><tr>
+	 <table id="tblAirPermits" class="tgsub" ><tr>
     <td >PERMITS</td><td align="right"><img src="right.gif"></td>
 </tr></table>
 </td>
   </tr>
   <tr>
   <td>
-  <table class="tgsub" onclick="javascript:showAirEmissionsMenu(1)"><tr>
+  <table id="tblAirEmissions" class="tgsub" ><tr>
     <td >EMISSIONS</td><td align="right"><img src="right.gif"></td>
 </tr></table>
 </td>
@@ -134,7 +127,7 @@ changeMAERTable(qs);
 </table>
 <!-------------------------------------------Air->REGULATIONS Table----------------------------------->
 <table class="tg" id="tblAirRegulationsMenu" width="100%" style="display:none">
-<tr><td class="tg-heading" onclick="javascript:showAirMenu(1)"><img src="leftarrow.gif">AIR->REGULATIONS</td></tr>
+<tr><td id="tdBackToAirMenu" class="tg-heading" ><img src="leftarrow.gif">AIR->REGULATIONS</td></tr>
   <tr>
     <td class="tg-yw4l" ><a class="atxt" href="documents/compliance map rule pdfs/40 CFR 60 Subpart Kb.pdf" target="_blank">40 CFR 60 SUBPART Kb</a> </td>
   </tr>
@@ -156,7 +149,7 @@ changeMAERTable(qs);
 </table>
 <!-------------------------------------------Air->Emissions Table----------------------------------->
 <table class="tg" id="tblAirEmissionsMenu" width="100%" style="display:none">
-<tr><td class="tg-heading" onclick="javascript:showAirMenu(1)"><img src="leftarrow.gif">AIR->EMISSIONS</td></tr>
+<tr><td id="tdBackToAirMenu1" class="tg-heading" ><img src="leftarrow.gif">AIR->EMISSIONS</td></tr>
   <tr>
     <td class="tg-yw4l" id="tdMTable" > MAER TABLE<br/>
 	<table id="tblMTable1" style="padding:5px;margin:5px;" >
@@ -177,7 +170,7 @@ changeMAERTable(qs);
 </table>
 
 <table class="tg" id="tblAirPermitsMenu" width="100%" style="display:none">
-<tr><td class="tg-heading" onclick="javascript:showAirMenu(1)"><img src="leftarrow.gif">AIR->PERMITS</td></tr>
+<tr><td id="tdBackToAirMenu2" class="tg-heading" ><img src="leftarrow.gif">AIR->PERMITS</td></tr>
   <tr>
     <td class="tg-yw4l" > <a class="atxt" href="documents/Permit 8404.pdf" target="_blank">8404.pdf</a></td>
   </tr>
