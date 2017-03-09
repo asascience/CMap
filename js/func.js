@@ -224,7 +224,7 @@ $(document).ready(function () {
 
         //alert("btntctclick");
         var loginname = "tctadmin";
-        var url = "http://localhost/tct/TankData.aspx?name=" + loginname;
+        var url = "http://tct.reservoirkb.com/TankData.aspx?name=" + loginname;
         //alert(url);
         //window.location.href = url;
         window.open(url, "_newtab");
