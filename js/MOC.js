@@ -78,7 +78,19 @@
     //---------------------------------------------------------------------------------
 	function LoadUnitsSucceeded(result) {
 	   
-	   var resultObject = eval(result.GetUnitNamesResult);	   
+	    var resultObject = eval(result.GetUnitNamesResult);
+
+
+	    //$("#countries").kendoAutoComplete({
+	    //    dataSource: resultObject,
+	    //    dataTextField: "unit_name",
+	    //    filter: "startswith",
+	    //    placeholder: "Select country...",
+	    //    separator: ", "
+	    //});
+
+
+
 	    $("#dropdownUnitNames").kendoDropDownList({
             
 	        dataTextField: "unit_name",

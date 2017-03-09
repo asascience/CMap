@@ -1209,6 +1209,10 @@ var loadAllFilesResults;
 
         });
 
+        $(divtreename).jstree("open_node", "ul > li:first");
+        
+       // $(divtreename).jstree("open_node", "ul > li:first");​
+
 
 
 

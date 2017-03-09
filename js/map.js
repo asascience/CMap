@@ -44,7 +44,8 @@
             zoom: 17,
 			showLabels : true,
 			logo:false,
-			showAttribution:false
+			showAttribution: false,
+			smartNavigation: false
           });
 		   var scalebar = new Scalebar({
           map: map,
@@ -180,21 +181,32 @@ var dialog = new TooltipDialog({
 			$("#btnLocateUnit").kendoButton({
 			    spriteCssClass: "k-icon netherlandsFlag"
 			});
-			$("#btnLocateUnit").click(function () {
-			  //  alert("Locate");
-			    var queryTask = new QueryTask(UnitsLayer);
 
-			    //initialize query
-			    var query = new Query();
+			
+
+			$("#btnLocateUnit").click(function () {
 			    var unit = $("#dropdownUnitNames").data("kendoDropDownList");
 			    var unitname = unit.value();
-
-			    query.returnGeometry = true;
-			    query.outFields = ["Tank_ID", "Unit_Type", "Material"];
-			    query.where = "Tank_ID = '"+unitname+"'" ;
-			    UnitsLayer.queryFeatures(query, showResults);
+			    FindUnit(unitname);
 			
 			});
+
+			$("#btnLocateUnitHome").click(function () {			
+			    var unitname = $("#txtUnitNameSearchHome").val();			   
+			    FindUnit(unitname);
+			});
+
+			function FindUnit(unitname)
+			{
+			   // var queryTask = new QueryTask(UnitsLayer);
+
+			   
+			    var query = new Query(); 
+			    query.returnGeometry = true;
+			    query.outFields = ["Tank_ID", "Unit_Type", "Material"];
+			    query.where = "Tank_ID = '" + unitname + "'";
+			    UnitsLayer.queryFeatures(query, showResults);
+			}
 		  
 
 			function showResults(featureSet) {
@@ -213,6 +225,12 @@ var dialog = new TooltipDialog({
 			        //Get the current feature from the featureSet.
 			        //Feature is a graphic
 			        var graphic = resultFeatures[i];
+
+
+			        var stateExtent = resultFeatures[i].geometry.getExtent().expand(5.0);
+			        map.setExtent(stateExtent);
+
+
 			        graphic.setSymbol(symbol);
 
 			        //Set the infoTemplate.

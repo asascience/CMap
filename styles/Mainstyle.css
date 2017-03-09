@@ -5,13 +5,35 @@
      margin-left:5px;
      margin-right:5px;
  }
- #btnLocateUnit{
+ #btnLocateUnit,#btnLocateUnitHome{
 
      background: url(../images/locate.png) no-repeat;
-     width:40px;
-     height:40px;
+     width:30px;
+     height:30px;
+      padding: 10px;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
 
  }
+ .form-control1{
+     background-color:gray;
+     color:#DCDCDC;
+ width:150px;height:30px;
+  padding: 10px;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+  font-style:italic;
+
+ }
+ .form-control1:focus{
+     color:white;
+ }
+ .input-group1{
+     float:left;
+     width:160px;
+height:30px;padding:5px 10px;font-size:12px;line-height:1.5;border-radius:3px
+ }
+ 
 
  #tblDetailSchedule li {
    list-style: none;

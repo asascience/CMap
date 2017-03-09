@@ -493,16 +493,26 @@
                         <div class="page-header-menu">
                             <div class="container-fluid" id="divDashBoard">
                                 <!-- BEGIN HEADER SEARCH BOX -->
-                                <!--<form class="search-form" action="page_general_search.html" method="GET">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search" name="query">
-                                        <span class="input-group-btn">
-                                            <a href="javascript:;" class="btn submit">
-                                                <i class="icon-magnifier"></i>
-                                            </a>
-                                        </span>
+                                <!--<form class="search-form" action="page_general_search.html" method="GET">-->
+                                <div class="search-form">
+                                    <div class="input-group" style="width:200px;">
+                                        <table><tr>
+                                            <td></td>
+                                            <td><input type="text" class="form-control1" placeholder="enter unit name" id="txtUnitNameSearchHome">
+                                            <!--<input id="countries" />--></td>
+                                            <td><button id="btnLocateUnitHome"></button></td>
+                                            </tr></table>
+                                       
+                                        
+                                       
+                                        <!--<span class="input-group-btn">
+                <a href="javascript:;" class="btn submit">
+                    <i class="icon-magnifier"></i>
+                </a>
+            </span>-->
                                     </div>
-                                </form>-->
+                                </div>
+                                <!--</form>-->
                                 <!-- END HEADER SEARCH BOX -->
                                 <!-- BEGIN MEGA MENU -->
                                 <div class="hor-menu  ">
@@ -653,6 +663,7 @@
                                                 </li>
                                             </ul>
                                         </li>
+                                        
                                     </ul>
                                 </div>
                                 <!-- END MEGA MENU -->
@@ -900,7 +911,16 @@
                         <tr>
                             <td>Unit</td>
                             <td>
-                                <input id="dropdownUnitNames" /><button id="btnLocateUnit"></button>
+                              <table>
+                                <tr>
+                                  <td>
+                                    <input id="dropdownUnitNames" />
+                                    </td>
+                                    <td>
+                                        <button id="btnLocateUnit"></button>
+                                    </td>
+                                  </tr>
+                                </table> 
                             </td>
                             <td>
                                 <input id="dropdownUnitNames1" />

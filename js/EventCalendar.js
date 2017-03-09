@@ -95,6 +95,7 @@
         title: "Event Reminders",
         closable: true,
         modal: true,
+        visible:false,
         content: "",
         actions: [
            
@@ -277,8 +278,18 @@
     function GetTodaysEventRemindersSucceeded(result) {
         var resultObject = eval(result.GetTodaysEventRemindersResult);
         if (resultObject != "") {
+          //  alert(resultObject.length);
             var kendoWindow = $("#dialogEventReminders").data("kendoDialog");
-            kendoWindow.content("You have reminder for following events. <br><ul><li> " + resultObject[0].event_name);
+
+            var remindercontent = "";
+            if (resultObject.length > 1)
+                remindercontent = "You have "+resultObject.length+" reminders for following events.<br><br><ul>";
+            else
+                remindercontent = "You have a reminder for following event.<br><br><ul>";
+
+            for (i = 0; i < resultObject.length; i++)
+            remindercontent = remindercontent + "<li>" + resultObject[i].event_name;
+            kendoWindow.content(remindercontent);
             dialogERs.data("kendoDialog").open();
         }
           
