@@ -188,7 +188,11 @@ var dialog = new TooltipDialog({
 			    var unit = $("#dropdownUnitNames").data("kendoDropDownList");
 			    var unitname = unit.value();
 			    FindUnit(unitname);
-			
+			    $("#divMOCUnits");
+			    $("#divMOCUnits").closest(".k-window").css({
+			        top: 150,
+			        left: 20
+			    });
 			});
 
 			$("#btnLocateUnitHome").click(function () {			

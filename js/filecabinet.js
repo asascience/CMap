@@ -1203,17 +1203,23 @@ var loadAllFilesResults;
            
         }).jstree({
             'core': {
-                'data': (json.items)
+                'data': (json.items),
+                "open_parents": true,
+                "load_open": true
             }
 
 
         });
 
-        $(divtreename).jstree("open_node", "ul > li:first");
+       // $(divtreename).jstree("open_node", "ul > li:first");
         
        // $(divtreename).jstree("open_node", "ul > li:first");​
 
-
+        //$(divtreename).bind("open_node.jstree", function (e, data) {
+        //    $(data.rslt.obj).find('li').each(function (i) {
+        //        data.inst.open_node($(this));
+        //    });
+        //});
 
 
     }
