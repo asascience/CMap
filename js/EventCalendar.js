@@ -102,11 +102,31 @@
             { text: 'Ok', primary: true }
         ]
     });
+    $('#btnETTraining').click(function () {
+
+        ETInspectWindow.data("kendoWindow").open();
+        var EventType = "Training";
+        loadinspectiontraining(EventType);
+
+
+        var dialog = $("#divETInspections").data("kendoWindow");
+        dialog.title("Event Tickler - Training");
+    });
     //---------------------------------------------------------------------------------
     $('#btnETInspections').click(function () {
         
         ETInspectWindow.data("kendoWindow").open();
-        var EventType = "Inspection"; var Type = "POST";
+        var EventType = "Inspection";
+        loadinspectiontraining(EventType);
+
+        var dialog = $("#divETInspections").data("kendoWindow");
+        dialog.title("Event Tickler - Inspections");
+
+    });
+
+    function loadinspectiontraining(EventType)
+    {
+        var Type = "POST";
         var Url = serviceURLs["GetEventsByType"];;
         var Data = '{"Type": "' + EventType + '"}';
         var ContentType = "application/json; charset=utf-8";
@@ -126,7 +146,7 @@
             error: ServiceFailed// When Service call fails
         });
 
-    });
+    }
 
     function GetinspectionsListSucceeded(result) {
 
@@ -166,7 +186,8 @@
     { field: "Created_Date", title: "Created Date",filterable: { multi: true, search: true, search: true }, template: "#= kendo.toString(kendo.parseDate(Created_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
     { field: "Status", title: "Status",template:rowTemplateString, filterable: { multi: true, search: true, search: true } },
 
-     { field: "Due_Date", title: "Due Date",filterable: { multi: true, search: true, search: true },  template: "#= kendo.toString(kendo.parseDate(Due_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" }, ]
+     { field: "Due_Date", title: "Due Date",filterable: { multi: true, search: true, search: true },  template: "#= kendo.toString(kendo.parseDate(Due_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" }, 
+        { command: { text: "Completed", click: showDetails }, width: "120px" }]
             //{ field: "completed_date", title: "Completed Date", width: "90px"}]
 
         });
@@ -176,7 +197,44 @@
 
     }
 
+    function showDetails(e) {
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
 
+
+        //LoadEventDetailsSchedule(dataItem.EventID, dataItem.EventName, dataItem.RegAgency, dataItem.Regulation, dataItem.ComplianceDate);
+
+        alert(dataItem.Calendar_ID);
+
+        UpdateEventDetails(dataItem.Calendar_ID);
+
+
+    }
+
+    function UpdateEventDetails(Calendar_ID) {
+        alert(Calendar_ID);
+        var uesrid = "2"; var Type = "POST";
+        var Url = serviceURLs["UpdatEventID"];
+        // alert(e.data.Calendar_ID);
+        var Data = '{"Id": "' + Calendar_ID + '"}';
+        var ContentType = "application/json; charset=utf-8";
+        var DataType = "json";
+
+
+        $.ajax({
+            type: Type,
+            url: Url,
+            data: Data,
+            contentType: ContentType,
+            dataType: DataType,
+            processdata: true,
+            success: function (msg) {
+                console.log(msg);
+
+            },
+            error: ServiceFailed// When Service call fails
+        });
+
+    }
     function detailInit(e) {
 
         var uesrid = "2"; var Type = "POST";
@@ -331,10 +389,10 @@
         });
         //Today's Events
 
-        if (todaysEvents.length == 0)
-            $("#divTodayEvents").append("No events today");
-        else
-            $("#divTodayEvents").append(todaysEvents.join(''));
+        //if (todaysEvents.length == 0)
+        //    $("#divTodayEvents").append("No events today");
+        //else
+        //    $("#divTodayEvents").append(todaysEvents.join(''));
         //Upcoming Events
      //   if (upcomingEvents.length == 0)
      //       $("#divUpcomingEvents").append("No upcoming events");
@@ -399,7 +457,7 @@
     function LoadEventCalendar() {
         $("#calendar").empty();
         $("#divUpcomingEvents").empty();
-        $("#divTodayEvents").empty();
+     //   $("#divTodayEvents").empty();
         var Url = serviceURLs["EventCalendar"];
         var ContentType = "application/json; charset=utf-8";
 
