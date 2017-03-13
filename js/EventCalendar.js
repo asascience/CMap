@@ -203,7 +203,7 @@
 
         //LoadEventDetailsSchedule(dataItem.EventID, dataItem.EventName, dataItem.RegAgency, dataItem.Regulation, dataItem.ComplianceDate);
 
-        alert(dataItem.Calendar_ID);
+       
 
         UpdateEventDetails(dataItem.Calendar_ID);
 
@@ -211,7 +211,7 @@
     }
 
     function UpdateEventDetails(Calendar_ID) {
-        alert(Calendar_ID);
+       
         var uesrid = "2"; var Type = "POST";
         var Url = serviceURLs["UpdatEventID"];
         // alert(e.data.Calendar_ID);
@@ -228,7 +228,9 @@
             dataType: DataType,
             processdata: true,
             success: function (msg) {
-                console.log(msg);
+                
+                var EventType = "Training";
+                loadinspectiontraining(EventType);
 
             },
             error: ServiceFailed// When Service call fails
