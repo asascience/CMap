@@ -33,7 +33,8 @@ var serviceURLslocal = {
     GetRecentMonthlyVolume: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentMonthlyVolume",
     GetRecentMonthlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentMonthlyVolumeThroughPut",
     GetRecentYearlyVolume: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentYearlyVolume",
-    GetRecentYearlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentYearlyVolumeThroughPut"
+    GetRecentYearlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentYearlyVolumeThroughPut",
+    UpdatEventID: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/UpdateEventID"
 
     
 
@@ -74,7 +75,8 @@ var serviceURLsProd = {
     GetRecentMonthlyVolume: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecentMonthlyVolume",
     GetRecentMonthlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecentMonthlyVolumeThroughPut",
     GetRecentYearlyVolume: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecentYearlyVolume",
-    GetRecentYearlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecentYearlyVolumeThroughPut"
+    GetRecentYearlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecentYearlyVolumeThroughPut",
+    UpdatEventID: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/UpdateEventID"
   
 
 };

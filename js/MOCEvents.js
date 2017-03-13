@@ -97,6 +97,8 @@
 	    var Url = serviceURLs["GetEventsByID"];
 	    var Data = '{"EventID": "' + eventID + '"}';
 	    var ContentType = "application/json; charset=utf-8";
+
+	   
 	    $.ajax({
 	        type: 'POST',
 	        url: Url,
@@ -106,9 +108,7 @@
 	        processdata: true,
 	        success: function (msg) {
 	            var resultObject = eval(msg.GetEventsByIDResult);
-	          //  alert(resultObject);
-	           
-	          //  alert($("#gridEventsHistory"));
+	         
 	            $("#gridEventsHistory").empty();
 
 	            detailRow.find(".gridEventsHistory").kendoGrid({
@@ -118,7 +118,8 @@
 	                columns: [ 
                         { field: "Due_Date", title: "Due Date", template: "#= kendo.toString(kendo.parseDate(Due_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
                         { field: "Created_Date", title: "Created Date", template: "#= kendo.toString(kendo.parseDate(Created_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" }, 
-                        { field: "Event_Unit", title: "Unit" }]                   
+                        { field: "Event_Unit", title: "Unit" },
+	                { field: "Status", title: "Status" }]
 
 	            });
 	        },
