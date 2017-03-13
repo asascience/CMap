@@ -108,18 +108,21 @@
 	        processdata: true,
 	        success: function (msg) {
 	            var resultObject = eval(msg.GetEventsByIDResult);
-	         
+	            console.log(resultObject);
 	            $("#gridEventsHistory").empty();
 
 	            detailRow.find(".gridEventsHistory").kendoGrid({
 	                dataSource: {
 	                    data: resultObject
 	                },	              
-	                columns: [ 
+	                columns: [
+                         { field: "Event_Unit", title: "Unit" },
+                         { field: "Created_Date", title: "Created Date", template: "#= kendo.toString(kendo.parseDate(Created_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
                         { field: "Due_Date", title: "Due Date", template: "#= kendo.toString(kendo.parseDate(Due_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
-                        { field: "Created_Date", title: "Created Date", template: "#= kendo.toString(kendo.parseDate(Created_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" }, 
-                        { field: "Event_Unit", title: "Unit" },
-	                { field: "Status", title: "Status" }]
+                        { field: "Completed_Date", title: "Completed Date", template: "#= kendo.toString(kendo.parseDate(Completed_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
+
+                        { field: "Status", title: "Status" }]
+	                
 
 	            });
 	        },
