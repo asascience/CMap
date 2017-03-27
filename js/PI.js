@@ -149,8 +149,9 @@
                             "caption": "",
                             "subcaption": "",
                             "lowerLimit": "0",
-                            
-
+                            "upperLimit": "1000000",
+                            "lowerLimitDisplay": "Empty",
+                            "upperLimitDisplay": "Full",
 
                             "lowerLimitDisplay": "Empty",
                             
@@ -338,7 +339,8 @@
                             "caption": "",
                             "subcaption": "",
                             "lowerLimit": "0",
-                            
+                           
+                            "upperLimit": "1000000",
                             "editMode": "1",
                             "showValue": "1",
                             "valueBelowPivot": "1",
@@ -489,24 +491,11 @@
 
     function changedataperiodtype(period,type)
     {
-        //alert(period);
-        //alert(type);
+       
        
         if(period==0&&type==0)
         {
-            //$("#dateRulers").dateRangeSlider("destroy");
-            //$("#dateRulers").dateRangeSlider({
-
-            //    bounds: { min: new Date(2014, 0, 1), max: new Date(2015, 11, 30) },
-            //    defaultValues: { min: new Date(2014, 0, 1), max: new Date(2014, 5, 1) },
-            //    formatter: function (val) {
-            //        var days = val.getDate(),
-            //          month = val.getMonth() + 1,
-            //          year = val.getFullYear();
-            //        return year + "/" + month + "/" + days;
-            //    }
-
-            //});
+           
             var Type = "POST";
             var Url = serviceURLs["GetRecentDialyVolume"];
             var ContentType = "application/json; charset=utf-8";
@@ -608,8 +597,7 @@
 
                     var endDatearr = endDate.split('/');
 
-                    //alert(startDatearr);
-                    //alert(endDatearr);
+                 
 
                     $("#dateRulers").dateRangeSlider("destroy");
 
@@ -961,9 +949,7 @@
 
         function loadata(startDate, endDate, type) {
 
-            //alert(startDate);
-
-            //alert(endDate);
+           
             slider = true;
 
             var json1 = [];
