@@ -228,7 +228,11 @@ function CompleteEventWindow(e) {
 
         //LoadEventDetailsSchedule(dataItem.EventID, dataItem.EventName, dataItem.RegAgency, dataItem.Regulation, dataItem.ComplianceDate);
 
+<<<<<<< HEAD
      //   alert(dataItem.Calendar_ID);
+=======
+       
+>>>>>>> f09efb5a59fb59d9db96097cd6c476b8451e783f
 
         UpdateEventDetails(dataItem.Calendar_ID);
 
@@ -236,7 +240,11 @@ function CompleteEventWindow(e) {
     }
 
     function UpdateEventDetails(Calendar_ID) {
+<<<<<<< HEAD
        // alert(Calendar_ID);
+=======
+       
+>>>>>>> f09efb5a59fb59d9db96097cd6c476b8451e783f
         var uesrid = "2"; var Type = "POST";
         var Url = serviceURLs["UpdatEventID"];
         // alert(e.data.Calendar_ID);
@@ -253,9 +261,14 @@ function CompleteEventWindow(e) {
             dataType: DataType,
             processdata: true,
             success: function (msg) {
+<<<<<<< HEAD
                 var dialog = $("#divETInspections").data("kendoWindow");
 
                 var EventType = "Inspection";
+=======
+                
+                var EventType = "Training";
+>>>>>>> f09efb5a59fb59d9db96097cd6c476b8451e783f
                 loadinspectiontraining(EventType);
 
             },
