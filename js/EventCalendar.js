@@ -102,6 +102,7 @@
             { text: 'Ok', primary: true }
         ]
     });
+    LoadECEventsCount();
     $('#btnETTraining').click(function () {
 
         ETInspectWindow.data("kendoWindow").open();
@@ -111,6 +112,7 @@
 
         var dialog = $("#divETInspections").data("kendoWindow");
         dialog.title("Event Tickler - Training");
+      //  alert(dialog.title);
     });
     //---------------------------------------------------------------------------------
     $('#btnETInspections').click(function () {
@@ -123,7 +125,30 @@
         dialog.title("Event Tickler - Inspections");
 
     });
+    function LoadECEventsCount()
+        {
+        var Type = "POST";
+        var Url = serviceURLs["GetEventsCount"];               
+        var ContentType = "application/json; charset=utf-8";
+        var DataType = "json";
 
+        $.ajax({
+            type: Type,
+            url: Url,          
+            contentType: ContentType,
+            dataType: DataType,
+            processdata: true,
+            success: function (msg) {
+
+                var resultObject = eval(msg.GetEventsCountResult);
+               // alert(resultObject[0].Inspections);
+                $("#ECInspectionsCnt").text(resultObject[0].Inspections);
+                $("#ECTrainingsCnt").text(resultObject[0].Trainings);
+            },
+            error: ServiceFailed// When Service call fails
+        });
+
+        }
     function loadinspectiontraining(EventType)
     {
         var Type = "POST";
@@ -166,17 +191,11 @@
            // rowTemplate: rowTemplateString,
             filterable: true,
             sortable: true,
-            dataBound: function () {
-                this.expandRow(this.tbody.find("tr.k-master-row"));
-            },
+            //dataBound: function () {
+            //    this.expandRow(this.tbody.find("tr.k-master-row"));
+            //},
             detailInit: detailInit,
-            dataBound: function () {
-                // this.expandRow(this.tbody.find("tr.k-master-row").first());
-
-                $('td').each(function () { if ($(this).text() == 'Pedning') { $(this).addClass('orange') } });
-                $('td').each(function () { if ($(this).text() == 'Completed') { $(this).addClass('green') } });
-                $('td').each(function () { if ($(this).text() == 'In-Progress') { $(this).addClass('orange') } });
-            },
+           
 
             columns: [{ field: "Calendar_ID", hidden: true },
                 
@@ -184,10 +203,10 @@
     { field: "Event_Unit", title: "Unit", filterable: { multi: true, search: true, search: true } },
 
     { field: "Created_Date", title: "Created Date",filterable: { multi: true, search: true, search: true }, template: "#= kendo.toString(kendo.parseDate(Created_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
-    { field: "Status", title: "Status",template:rowTemplateString, filterable: { multi: true, search: true, search: true } },
-
-     { field: "Due_Date", title: "Due Date",filterable: { multi: true, search: true, search: true },  template: "#= kendo.toString(kendo.parseDate(Due_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" }, 
-        { command: { text: "Completed", click: showDetails }, width: "120px" }]
+    //{ field: "Status", title: "Status",template:rowTemplateString, filterable: { multi: true, search: true, search: true } },   
+     { field: "Due_Date", title: "Due Date", filterable: { multi: true, search: true, search: true }, template: "#= kendo.toString(kendo.parseDate(Due_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
+      { field: "Status", title: "Status", template: ApplyColorsonStatus, filterable: { multi: true, search: true, search: true } },
+        { command: { text: "Complete Event", click: CompleteEventWindow }, width: "120px" }]
             //{ field: "completed_date", title: "Completed Date", width: "90px"}]
 
         });
@@ -196,14 +215,20 @@
 
 
     }
-
-    function showDetails(e) {
+function ApplyColorsonStatus(dataItem)
+{
+    var status= dataItem.Status;
+    //  if (dataItem.Status == "Completed")
+    status = "<span class='status" + dataItem.Status + "'>" + dataItem.Status + "</span>";
+    return status;
+}
+function CompleteEventWindow(e) {
         var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
 
 
         //LoadEventDetailsSchedule(dataItem.EventID, dataItem.EventName, dataItem.RegAgency, dataItem.Regulation, dataItem.ComplianceDate);
 
-        alert(dataItem.Calendar_ID);
+     //   alert(dataItem.Calendar_ID);
 
         UpdateEventDetails(dataItem.Calendar_ID);
 
@@ -211,7 +236,7 @@
     }
 
     function UpdateEventDetails(Calendar_ID) {
-        alert(Calendar_ID);
+       // alert(Calendar_ID);
         var uesrid = "2"; var Type = "POST";
         var Url = serviceURLs["UpdatEventID"];
         // alert(e.data.Calendar_ID);
@@ -228,7 +253,10 @@
             dataType: DataType,
             processdata: true,
             success: function (msg) {
-                console.log(msg);
+                var dialog = $("#divETInspections").data("kendoWindow");
+
+                var EventType = "Inspection";
+                loadinspectiontraining(EventType);
 
             },
             error: ServiceFailed// When Service call fails
@@ -243,8 +271,9 @@
         var Data = '{"Id": "' + e.data.Calendar_ID + '"}';
         var ContentType = "application/json; charset=utf-8";
         var DataType = "json";
-
-        $("#txttankid").html(e.data.Event_name);
+       // alert(e.data.Calendar_ID);
+      $("#txttankid").html(e.data.Event_name);
+        $("#txtEventCalID").text(e.data.Calendar_ID);
 
         $.ajax({
             type: Type,
@@ -296,15 +325,15 @@
 
         var updatedby = $('#txtUpdatedby').val();
 
-        var tankid = $('#txttankid').val();
+        //    var tankid = $('#txtEventCalID').val();
 
+        var EventCalendarID = $('#txtEventCalID').text();
 
-
-
+       // alert(EventCalendarID);
         var Url = serviceURLs["uploadinspectionhistory"];
-        // var Data = '{"type": "' + resultObject + '","fn":"' + fn + '"}';
-        var Data = '{"TankID": "' + tankid + '","comment": "' + comments + '","updatedby":"' + updatedby + '"}';
-        //alert(Data);
+        
+        var Data = '{"EventCalendarID": "' + EventCalendarID + '","comment": "' + comments + '","updatedby":"' + updatedby + '"}';
+        alert(Data);
         var ContentType = "application/json; charset=utf-8";
 
         $.ajax({
@@ -315,10 +344,11 @@
             dataType: 'json',
             processdata: true,
             success: function (msg) {
-                // //GetFilesListSucceeded(msg);
-                alert("success");
-                // console.log(msg);
-                //// alert(msg);
+               
+                alert("Error Coming");
+              //  var resultObject = eval(msg.uploadinspectionhistoryResult);
+                
+                alert(msg.uploadinspectionhistoryResult);
 
             },
             error: ServiceFailed// When Service call fails

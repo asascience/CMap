@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link href="img/favicon.ico" rel="shortcut icon">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
-    <title>Complaince MAP</title>
+    <title>Compliance MAP</title>
 
     <link rel="stylesheet" href="https://js.arcgis.com/3.19/dijit/themes/soria/soria.css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.19/dojox/layout/resources/ExpandoPane.css">
@@ -498,8 +498,11 @@
                                     <div class="input-group" style="width:200px;">
                                         <table><tr>
                                             <td></td>
-                                            <td><input type="text" class="form-control1" placeholder="enter unit name" id="txtUnitNameSearchHome">
-                                            <!--<input id="countries" />--></td>
+                                            <!--<td><input type="text" class="form-control1" placeholder="enter unit name" id="txtUnitNameSearchHome">-->
+                                                   <td>
+                                                       <input placeholder="enter unit name..." id="txtUnitNameSearchHome">
+                                                       <!--<input id="countries" />-->
+                                                   </td>
                                             <td><button id="btnLocateUnitHome"></button></td>
                                             </tr></table>
                                        
@@ -634,13 +637,13 @@
                                                     <a href="#">Sampling</a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
-                                                    <a id="btnETInspections" href="#">Inspections<span class="badge badge-warning">2</span></a>
+                                                    <a id="btnETInspections" href="#">Inspections<span id="ECInspectionsCnt" class="badge badge-warning">2</span></a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
                                                     <a href="#">Waste Storage</a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
-                                                    <a id="btnETTraining">Training<span class="badge badge-danger">1</span></a>
+                                                    <a id="btnETTraining">Training<span id="ECTrainingsCnt" class="badge badge-danger">1</span></a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
                                                     <a href="#">Reporting</a>
@@ -793,6 +796,14 @@
                                 <div id="divEID" style="display:none;"></div>
                                 <div id="divEName"></div>
                             </li>
+                            <li>
+                                <label>Event Medium</label>                              
+                                <div id="divEMedium"></div>
+                            </li>
+                            <li>
+                                <label>Event Type</label>
+                                <div id="divEType"></div>
+                            </li>
                          <!--   <li>
                                 <label>Regulatory Agency</label>
                                 <div id="divEAgency"></div>
@@ -806,16 +817,23 @@
                                 <div id="divEFrequency"></div>
                             </li>
                             <li>
-                                <label>Sitewide/ Select Units</label>
+                                <!--<label>Sitewide/ Select Units</label>-->
                                <!--<input type="checkbox" value="Sitewide" id="chkSiteWide" checked /> Sitewide--> 
                                
-                                                              
-                                <input type="radio" name="radiositewide" id="radiositewide1" class="k-radio" checked>
-                                        <label class="k-radio-label" for="radiositewide1">Sitewide</label>
-                                  
-                                        <input type="radio" name="radiositewide" id="radiositewide2" class="k-radio">
+                                  <table><tr>
+                                      <td>
+                                      <input type="radio" name="radiositewide" id="radiositewide1" class="k-radio" checked>
+                                        <label class="k-radio-label" for="radiositewide1">Sitewide</label></td>
+                                      <td width="10px"></td>
+                                      <td>
+                                      <input type="radio" name="radiositewide" id="radiositewide2" class="k-radio">
                                         <label class="k-radio-label" for="radiositewide2">Select Units</label>
-                                <select id="dropdownUnitsNew" multiple="multiple"  data-placeholder="Select units..."></select>
+                                      </td>
+                                      </tr></table>                            
+                              
+                                  
+                                      
+                                <select id="dropdownUnitsNew" name="dropdownUnitsNew" multiple="multiple" data-placeholder="Select units..."></select>
                                    
 </li>
                             <li>
@@ -842,13 +860,14 @@
                     <div id="details">
 
                         <table>
-
+                            <tr><td><div id="txtEventCalID" /></td></tr>
                             <tr>
                                 <td>
                                     <p>Event Name:</p>
                                 </td>
                                 <td>
                                     <p><div id="txttankid" /></p>
+                                    
                                 </td>
                             </tr>
                             <tr>
@@ -1423,45 +1442,22 @@
                     <table align="center">
 
                         <tr>
-                            <td style="vertical-align:bottom;" align="right">
-                                TankID:
+                            <td  >
+                               Select Tank: <input id="pisystemtankid" />
                             </td>
 
-                            <td style="vertical-align:top" align="left">
-                                <input id="pisystemtankid" />
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="2">
-                                <br />
-                                <br />
-                            </td>
-                        </tr>
-
-                        <tr>
-                           
-
-                            <td colspan="2">
+                            <td  align="left">
                                 <div class="demo-section k-content">
                                     <ul id="select-type">
                                         <li>
-                                           Volume
+                                            Volume
                                         </li>
                                         <li>
                                             Throughput
                                         </li>
-                                       
+
                                     </ul>
                                 </div>
-                                <br />
-                            </td>
-                               
-                               
-                            
-                        </tr>
-                        <tr>
-                            <td colspan="2">
                                 <div class="demo-section k-content">
                                     <ul id="select-period">
                                         <li>
@@ -1475,10 +1471,19 @@
                                         </li>
                                     </ul>
                                 </div>
-
                             </td>
+                         
+</tr>
 
+                        <tr>
+                            <td colspan="2">
+                                <br />
+                               
+                            </td>
                         </tr>
+
+                      
+                       
 
 
                         <tr>

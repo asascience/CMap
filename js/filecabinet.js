@@ -423,7 +423,7 @@
                 }
             }
         });
-        document.getElementById("46").setAttribute("class", "jstree-node  jstree-last jstree-open");
+      //  document.getElementById("46").setAttribute("class", "jstree-node  jstree-last jstree-open");
 
         //$("#divcategorysubcategory").jstree("open_all","#46");
 
@@ -1211,7 +1211,10 @@ var loadAllFilesResults;
 
         });
 
-       // $(divtreename).jstree("open_node", "ul > li:first");
+        $(divtreename).jstree("select_node", "ul > li:first");//, false, true);
+   //     $(divtreename).jstree("select_node", "ul > li:first");
+   //     var Selectednode = $(divtreename).jstree("get_selected");
+    //    $(divtreename).jstree("open_node", Selectednode, false, true);​
         
        // $(divtreename).jstree("open_node", "ul > li:first");​
 

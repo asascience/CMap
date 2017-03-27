@@ -119,9 +119,10 @@
                          { field: "Event_Unit", title: "Unit" },
                          { field: "Created_Date", title: "Created Date", template: "#= kendo.toString(kendo.parseDate(Created_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
                         { field: "Due_Date", title: "Due Date", template: "#= kendo.toString(kendo.parseDate(Due_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
-                        { field: "Completed_Date", title: "Completed Date", template: "#= kendo.toString(kendo.parseDate(Completed_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
+                       // { field: "Completed_Date", title: "Completed Date", template: "#= kendo.toString(kendo.parseDate(Completed_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
+                        { field: "Completed_Date", title: "Completed Date", template: checkDateIsNull },
 
-                        { field: "Status", title: "Status" }]
+                        { field: "Status", title: "Status" ,template:ApplyColorsonStatus}]
 	                
 
 	            });
@@ -129,6 +130,17 @@
 	        error: ServiceFailed// When Service call fails
 	    });
 	 
+	}
+	function ApplyColorsonStatus(dataItem)
+	{
+	    var status= dataItem.Status;
+	  //  if (dataItem.Status == "Completed")
+	        status = "<span class='status" + dataItem.Status + "'>" + dataItem.Status + "</span>";
+	    return status;
+	}
+	function checkDateIsNull(dataItem) {	 
+	    var compDate = dataItem.Completed_Date ? kendo.toString(kendo.parseDate(dataItem.Completed_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') : "--";
+	    return compDate;
 	}
 	function LoadAllEventsSucceeded(result) {
 	 
@@ -149,7 +161,7 @@
 
 	            filterable: true,
 	            sortable: true,
-	            height: 550,
+	            height: 625,
 	            pageable: {
 	                refresh: true,
 	                pageSizes: true,
@@ -164,6 +176,7 @@
 	            columns: [
                     { field: "EventID", title: "Event ID", hidden: true },
                    { field: "EventMedium", title: "Medium", width: "100px", filterable: { multi: true, search: true, search: true } },
+                   { field: "EventType", title: "Type", width: "100px", filterable: { multi: true, search: true, search: true } },
                     { field: "EventName", title: "Event Name" },
                     { field: "RegAgency", title: "Regulatory Agency", filterable: { multi: true, search: true, search: true } },
                     { field: "ComplianceDate", title: "Frequency", filterable: { multi: true, search: true, search: true } },
@@ -190,12 +203,12 @@
 	    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
 	   
 	 	    $("#detailsSchedule").prev().find(".k-window-title").text("Schedule Event");
-	    LoadEventDetailsSchedule(dataItem.EventID,dataItem.EventName,dataItem.RegAgency,dataItem.Regulation,dataItem.ComplianceDate);
+	 	    LoadEventDetailsSchedule(dataItem.EventID, dataItem.EventMedium,dataItem.EventType, dataItem.EventName, dataItem.RegAgency, dataItem.Regulation, dataItem.ComplianceDate);
 	    detailsScheduleWindow.data("kendoWindow").open();
 	    detailsScheduleWindow.data("kendoWindow").center();
 	}
 
-	function    LoadEventDetailsSchedule(EventID,EventName,RegAgency,Regulation,Frequency)
+	function LoadEventDetailsSchedule(EventID,EventMedium, EventType,EventName, RegAgency, Regulation, Frequency)
 	{
 	    //alert("Load Events");
 	    $("#divEID").html(EventID);
@@ -203,6 +216,8 @@
 	    $("#divEAgency").html(RegAgency);
 	    $("#divERegulation").html(Regulation);
 	    $("#divEFrequency").html(Frequency);
+	    $("#divEMedium").html(EventMedium);
+	    $("#divEType").html(EventType);
 	    var Url = serviceURLs["LoadUnits"];
 	    var ContentType = "application/json; charset=utf-8";
 
@@ -274,7 +289,8 @@
 	}
 	$('#radiositewide1').change(function () {
 	    var dropdownlist = $("#dropdownUnitsNew").data("kendoMultiSelect");
-	    if ($(this).is(':checked')) {	      
+	    if ($(this).is(':checked')) {
+	        alert("disable");
 	        dropdownlist.enable(false);
 	    } 
 	});
@@ -282,6 +298,7 @@
 	$('#radiositewide2').change(function () {
 	    var dropdownlist = $("#dropdownUnitsNew").data("kendoMultiSelect");
 	    if ($(this).is(':checked')) {
+	        alert("enable");
 	        dropdownlist.enable(true);
 	    }
 	});

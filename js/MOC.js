@@ -80,14 +80,14 @@
 	   
 	    var resultObject = eval(result.GetUnitNamesResult);
 
-
-	    //$("#countries").kendoAutoComplete({
-	    //    dataSource: resultObject,
-	    //    dataTextField: "unit_name",
-	    //    filter: "startswith",
-	    //    placeholder: "Select country...",
-	    //    separator: ", "
-	    //});
+	    //alert("start");
+	    $("#txtUnitNameSearchHome").kendoAutoComplete({
+	        dataSource: resultObject,
+	        dataTextField: "unit_name",
+	        filter: "contains"
+	       
+	        
+	    });
 
 
 
@@ -186,11 +186,12 @@
 	    $("#btnMOCUnitAdd").show();
 	});
     //---------------------------------------------------------------------------------
+	LoadUnits();
 	$('#btnMOCUnits').click(function () {
 
 	  
 	    MOCunitsWindow.data("kendoWindow").open();	    
-	    LoadUnits();
+	   
 	    // var unitname = $("#dropdownUnitNames").val();
 	   
 	});
