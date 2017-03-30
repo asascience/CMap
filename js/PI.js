@@ -333,7 +333,7 @@
                             });
 
                             $('input[name="daterange"]').on('cancel.daterangepicker', function (ev, picker) {
-                                $(this).val('');
+                                //$(this).val('');
                             });
                         }
                     }
