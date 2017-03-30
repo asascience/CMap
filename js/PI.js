@@ -105,16 +105,30 @@
                   month = val.getMonth() + 1,
                   year = val.getFullYear();
                 return year + "/" + month + "/" + days;
-            }
+            },
+            valueLabels: "show"
 
         });
+
 
 
         var Type = "POST";
         var Url = serviceURLs["GetRecentDialyVolume"];
         var ContentType = "application/json; charset=utf-8";
         var DataType = "json";
-        var Data = '{"tankid": "' + tankid + '"}';
+        var tankid = $("#pisystemtankid").data("kendoDropDownList").value();
+        var value = $('input[name="daterange"]').val();
+
+        var picker = value.split('-');
+
+        var startDate = picker[0];
+
+        var endDate = picker[1];
+
+
+
+
+        var Data = '{"tankid": "' + tankid + '","startDate":"' + moment(startDate).format('YYYY-MM-DD') + '","endDate":"' + moment(endDate).format('YYYY-MM-DD') + '"}';
         $.ajax({
             type: Type,
             url: Url,
@@ -149,9 +163,9 @@
                             "caption": "",
                             "subcaption": "",
                             "lowerLimit": "0",
-                            "upperLimit": "1000000",
+                            //"upperLimit": "1000000",
                             "lowerLimitDisplay": "Empty",
-                            "upperLimitDisplay": "Full",
+                            //"upperLimitDisplay": "Full",
 
                             "lowerLimitDisplay": "Empty",
                             
@@ -340,7 +354,7 @@
                             "subcaption": "",
                             "lowerLimit": "0",
                            
-                            "upperLimit": "1000000",
+                            //"upperLimit": "1000000",
                             "editMode": "1",
                             "showValue": "1",
                             "valueBelowPivot": "1",
@@ -357,11 +371,11 @@
                                 "code": "#008000"
                             }, {
                                 "minValue": "500000",
-                                "maxValue": "800000",
+                                "maxValue": "1500000",
                                 "code": "#FFFF00"
                             }, {
-                                "minValue": " 800000",
-                                "maxValue": "1000000",
+                                "minValue": " 1500000",
+                                "maxValue": "2000000",
                                 "code": "#FF0000"
                             }]
                         },
@@ -392,9 +406,7 @@
     $('#daterange').on('apply.daterangepicker', function (ev, picker) {
         var startDate = picker.startDate;
         var endDate = picker.endDate;  
-        //alert(startDate);
-
-        //alert(endDate);
+      
     });
 
     //---------------------------------------------------------------------------------
@@ -441,9 +453,13 @@
             {
                 if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 0)) {
                     changedataperiodtype(2, 0);
+                    $('input[name="daterange"]').data('daterangepicker').setStartDate('01/01/2014');
+                    $('input[name="daterange"]').data('daterangepicker').setEndDate('12/31/2014');
                 }
                 if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 1)) {
                     changedataperiodtype(2, 1);
+                    $('input[name="daterange"]').data('daterangepicker').setStartDate('01/01/2014');
+                    $('input[name="daterange"]').data('daterangepicker').setEndDate('12/31/2014');
                 }
             }
 
@@ -468,6 +484,8 @@
                 }
                 if (($("#select-period").data("kendoMobileButtonGroup").current().index() == 2)) {
                     changedataperiodtype(2, 0);
+                    $('input[name="daterange"]').data('daterangepicker').setStartDate('01/01/2014');
+                    $('input[name="daterange"]').data('daterangepicker').setEndDate('12/31/2014');
 
                 }
             }
@@ -482,7 +500,8 @@
                 }
                 if (($("#select-period").data("kendoMobileButtonGroup").current().index() == 2)) {
                     changedataperiodtype(2, 1);
-
+                    $('input[name="daterange"]').data('daterangepicker').setStartDate('01/01/2014');
+                    $('input[name="daterange"]').data('daterangepicker').setEndDate('12/31/2014');
                 }
             }
         },
@@ -496,12 +515,30 @@
         if(period==0&&type==0)
         {
            
+        
+
+            //
+
+
             var Type = "POST";
             var Url = serviceURLs["GetRecentDialyVolume"];
             var ContentType = "application/json; charset=utf-8";
             var DataType = "json";
             var tankid = $("#pisystemtankid").data("kendoDropDownList").value();
-            var Data = '{"tankid": "' + tankid + '"}';
+            var value = $('input[name="daterange"]').val();
+
+            var picker = value.split('-');
+
+            var startDate = picker[0];
+
+            var endDate = picker[1];
+
+
+
+
+            var Data = '{"tankid": "' + tankid + '","startDate":"' + moment(startDate).format('YYYY-MM-DD') + '","endDate":"' + moment(endDate).format('YYYY-MM-DD') + '"}';
+            //
+
             $.ajax({
                 type: Type,
                 url: Url,
@@ -568,7 +605,20 @@
             var ContentType = "application/json; charset=utf-8";
             var DataType = "json";
             var tankid = $("#pisystemtankid").data("kendoDropDownList").value();
-            var Data = '{"tankid": "' + tankid + '"}';
+            var value = $('input[name="daterange"]').val();
+
+            var picker = value.split('-');
+
+            var startDate = picker[0];
+
+            var endDate = picker[1];
+
+
+
+
+            var Data = '{"tankid": "' + tankid + '","startDate":"' + moment(startDate).format('YYYY-MM-DD') + '","endDate":"' + moment(endDate).format('YYYY-MM-DD') + '"}';
+
+            //alert(Data);
             $.ajax({
                 type: Type,
                 url: Url,
@@ -634,7 +684,20 @@
             var ContentType = "application/json; charset=utf-8";
             var DataType = "json";
             var tankid = $("#pisystemtankid").data("kendoDropDownList").value();
-            var Data = '{"tankid": "' + tankid + '"}';
+            var value = $('input[name="daterange"]').val();
+            
+            var picker = value.split('-');
+
+            var startDate = picker[0];
+
+            var endDate = picker[1];
+
+           
+
+           
+            var Data = '{"tankid": "' + tankid + '","startDate":"' + moment(startDate).format('YYYY-MM-DD') + '","endDate":"' + moment(endDate).format('YYYY-MM-DD') + '"}';
+
+           // alert(Data);
             $.ajax({
                 type: Type,
                 url: Url,
@@ -643,14 +706,14 @@
                 data: Data,
                 processdata: true,
                 success: function (msg) {
-
+                    
                     jsonm = eval(msg.GetRecentMonthlyVolumeResult);
 
                     console.log(jsonm);
 
 
                     var value = $('input[name="daterange"]').val();
-                    //alert(value);
+                   // alert(value);
 
                     var picker = value.split('-');
 
@@ -663,7 +726,7 @@
                     var startDatearr = startDate.split('/');
 
                     var endDatearr = endDate.split('/');
-                    //alert(startDatearr);
+                   // alert(startDatearr);
 
                     //alert(endDatearr);
                     $("#dateRulers").dateRangeSlider("destroy");
@@ -684,10 +747,18 @@
 
                     var maxdate = new Date(endDatearr[2], endDatearr[0] - 1, endDatearr[1]);
 
+
+                    //alert(mindate);
+
+                    //alert(maxdate);
+
                     clearInterval(myVar);
                     loadata((mindate.toString()), (maxdate.toString()), "m");
 
-                }
+                    //getupdatedmonthly(jsonm);
+
+                },
+                error: ServiceFailed// When Service call fails
             });
 
             document.getElementById("volumethroughput").innerHTML = "Volume(Gallons)";
@@ -699,7 +770,20 @@
             var ContentType = "application/json; charset=utf-8";
             var DataType = "json";
             var tankid = $("#pisystemtankid").data("kendoDropDownList").value();
-            var Data = '{"tankid": "' + tankid + '"}';
+            var value = $('input[name="daterange"]').val();
+
+            var picker = value.split('-');
+
+            var startDate = picker[0];
+
+            var endDate = picker[1];
+
+           
+
+
+            var Data = '{"tankid": "' + tankid + '","startDate":"' + moment(startDate).format('YYYY-MM-DD') + '","endDate":"' + moment(endDate).format('YYYY-MM-DD') + '"}';
+
+            
             $.ajax({
                 type: Type,
                 url: Url,
@@ -763,15 +847,27 @@
         
 
         if (period == 2 && type == 0) {
-            $('input[name="daterange"]').data('daterangepicker').setStartDate('01/01/2014');
-            $('input[name="daterange"]').data('daterangepicker').setEndDate('12/31/2014');
+        
 
-        var Type = "POST";
-        var Url = serviceURLs["GetRecentYearlyVolume"];
-        var ContentType = "application/json; charset=utf-8";
-        var DataType = "json";
-        var tankid = $("#pisystemtankid").data("kendoDropDownList").value();
-        var Data = '{"tankid": "' + tankid + '"}';
+            //
+            var Type = "POST";
+            var Url = serviceURLs["GetRecentYearlyVolume"];
+            var ContentType = "application/json; charset=utf-8";
+            var DataType = "json";
+            var tankid = $("#pisystemtankid").data("kendoDropDownList").value();
+            var value = $('input[name="daterange"]').val();
+
+            var picker = value.split('-');
+
+            var startDate = picker[0];
+
+            var endDate = picker[1];
+
+            var Data = '{"tankid": "' + tankid + '","startDate":"' + moment(startDate).format('YYYY-MM-DD') + '","endDate":"' + moment(endDate).format('YYYY-MM-DD') + '"}';
+            //
+
+
+      
         $.ajax({
             type: Type,
             url: Url,
@@ -833,15 +929,25 @@
 
     if (period == 2 && type == 1) {
 
-        $('input[name="daterange"]').data('daterangepicker').setStartDate('01/01/2014');
-        $('input[name="daterange"]').data('daterangepicker').setEndDate('12/31/2014');
 
+        //
         var Type = "POST";
         var Url = serviceURLs["GetRecentYearlyVolumeThroughPut"];
         var ContentType = "application/json; charset=utf-8";
         var DataType = "json";
         var tankid = $("#pisystemtankid").data("kendoDropDownList").value();
-        var Data = '{"tankid": "' + tankid + '"}';
+        var value = $('input[name="daterange"]').val();
+
+        var picker = value.split('-');
+
+        var startDate = picker[0];
+
+        var endDate = picker[1];
+
+        var Data = '{"tankid": "' + tankid + '","startDate":"' + moment(startDate).format('YYYY-MM-DD') + '","endDate":"' + moment(endDate).format('YYYY-MM-DD') + '"}';
+        //
+
+      
         $.ajax({
             type: Type,
             url: Url,
@@ -919,23 +1025,40 @@
 
             var maxdate = (data.values.max.toString());
 
+          
+            mindate = moment(mindate).format('MM/DD/YYYY');
+            maxdate = moment(maxdate).format('MM/DD/YYYY');
 
-           
+          
+
+            $('input[name="daterange"]').data('daterangepicker').setStartDate(mindate);
+            $('input[name="daterange"]').data('daterangepicker').setEndDate(maxdate);
 
             if (($("#select-period").data("kendoMobileButtonGroup").current().index() == 0)) {
-                clearInterval(myVar);
-                loadata((mindate), (maxdate), "d");
+                if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 0)) {
+                    changedataperiodtype(0, 0);
+                }
+                if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 1)) {
+                    changedataperiodtype(0, 1);
+                }
             }
 
 
             if (($("#select-period").data("kendoMobileButtonGroup").current().index() == 1)) {
-                clearInterval(myVar);
-
-                loadata((mindate), (maxdate), "m");
+                if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 0)) {
+                    changedataperiodtype(1, 0);
+                }
+                if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 1)) {
+                    changedataperiodtype(1, 1);
+                }
             }
             if (($("#select-period").data("kendoMobileButtonGroup").current().index() == 2)) {
-                clearInterval(myVar);
-                loadata((mindate), (maxdate), "y");
+                if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 0)) {
+                    changedataperiodtype(2, 0);
+                }
+                if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 1)) {
+                    changedataperiodtype(2, 1);
+                }
             }
 
 
@@ -959,7 +1082,7 @@
             }
             if (type == "m") {
 
-
+               
 
                 json1 = getFilter(moment(startDate).format('YYYY-MM-DD'), moment(endDate).format('YYYY-MM-DD'), jsonm);
             }
@@ -982,7 +1105,7 @@
             speedoref.restartUpdate();
 
 
-            console.log(speedoref);
+            //console.log(speedoref);
 
             myVar = setInterval(function () {
 
@@ -998,8 +1121,10 @@
 
                     if (btn.value == "Stop Update") {
 
-
-                        speedoref.feedData("value=" + x);
+                       
+                            speedoref.feedData("value=" + x);
+                       
+                       
 
                         gaugeRef.feedData("&value=" + x);
 
@@ -1020,9 +1145,17 @@
                         if (type == "y") {
 
                             year = year.split("-");
-                            document.getElementById('datevalue').innerHTML = year[0];
-
-                            document.getElementById('volumevalue').innerHTML = x;
+                            document.getElementById('datevalue').innerHTML = year[0] + "-" + year[1];
+                            //alert(x);
+                            if (x.toString() == "NaN")
+                            {
+                                document.getElementById('volumevalue').innerHTML = "Data Not available";
+                                speedoref.feedData("value=0");
+                            }else
+                            {
+                                document.getElementById('volumevalue').innerHTML = x;
+                            }
+                        
                         }
 
                         if (type == "d") {
@@ -1059,7 +1192,7 @@
 
 
         }
-
+       
 
         function getFilter(begin, end, input) {
 
@@ -1082,18 +1215,16 @@
 
 
 
-                startDate = new Date(startDate);
-
-                if (startDate <= new Date(end) && startDate >= new Date(begin)) // input[i] overlaps with [begin, end]
-                {
-
+                    startDate = new Date(startDate);
 
                     var year = moment(startDate, "DD.MM.YYYY");
-                    year.add(1, 'days');
+                 year.add(2, 'days');
+
+                  
 
 
                     val.push({ year: moment(year).format('YYYY-MM-DD'), value: input[i].value });
-                }
+                
             }
             return val;
         }
@@ -1120,27 +1251,18 @@
 
                 startDate = startDate.split("-");
 
-                console.log(startDate);
 
-                console.log(begin);
+                startDate = new Date(startDate);
 
-                var beginDate = begin.split("-");
+                var year = moment(startDate, "DD.MM.YYYY");
+                year.add(2, 'days');
 
-                var endDate = end.split("-");
+               
+              
+                    val.push({ year: moment(year).format('YYYY-MM-DD'), value: input[i].value });
+                
 
-                if (startDate[0] == beginDate[0] || beginDate[0] == endDate[0]) {
-                    var year = moment(startDate, "DD.MM.YYYY");
-                    year.add(1, 'days');
-                    // alert(year);
-
-                    val.push({ year: startDate[0], value: input[i].value });
-                } else if (startDate[0] >= beginDate[0] && startDate[0] <= endDate[0]) {
-                    var year = moment(startDate, "DD.MM.YYYY");
-                    year.add(1, 'days');
-                    // alert(year);
-
-                    val.push({ year: startDate[0], value: input[i].value });
-                }
+              
 
 
 
