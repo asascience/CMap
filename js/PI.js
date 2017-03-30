@@ -163,9 +163,9 @@
                             "caption": "",
                             "subcaption": "",
                             "lowerLimit": "0",
-                            //"upperLimit": "1000000",
+                            "upperLimit": "2000000",
                             "lowerLimitDisplay": "Empty",
-                            //"upperLimitDisplay": "Full",
+                            "upperLimitDisplay": "Full",
 
                             "lowerLimitDisplay": "Empty",
                             
