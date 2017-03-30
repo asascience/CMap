@@ -24,13 +24,29 @@
     $('#chartContainer').css('width', winW - 600);
     var ETCalendarWindow = $("#divETCalendar");//---------------------------------------------------------------------------------
     var ETInspectWindow = $("#divETInspections");
+    var ETCompleteEventWindow = $("#divCompleteEvent");
     var detailsWindow = $("#details");
     //---------------------------------------------------------------------------------
+    ETCompleteEventWindow.kendoWindow({
+        position: {
+            top: 150, // or "100px"
+            left:500
+        },
+        width: 400,
+        modal: true,
+        maxHeight: winheight - $('.page-wrapper-top').height() - 100,
+        title: "Event Tickler - Complete Event",
+        visible: false,
+        actions: [
+            "Close"
+        ]
 
+    });
+    //---------------------------------------------------------------------------------
     ETInspectWindow.kendoWindow({
         position: {
             top: 150, // or "100px"
-            left: winW / 3 - 100
+            left: 250
         },
         width: winW - 500,
         maxHeight: winheight - $('.page-wrapper-top').height() - 100,
@@ -183,7 +199,18 @@
         // alert(resultObject);
         $("#datagridinspections").empty();
         $("#datagridinspections").kendoGrid({
+            columns: [{ field: "Calendar_ID", hidden: true },
 
+            { field: "Event_name", title: "Name" },
+            { field: "Event_Unit", title: "Unit", filterable: { multi: true, search: true } },
+
+            { field: "Created_Date", title: "Created Date", filterable: { multi: true, search: true }, template: "#= kendo.toString(kendo.parseDate(Created_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
+            //{ field: "Status", title: "Status",template:rowTemplateString, filterable: { multi: true, search: true, search: true } },   
+            { field: "Due_Date", title: "Due Date", filterable: { multi: true, search: true }, template: "#= kendo.toString(kendo.parseDate(Due_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
+            { field: "Status", title: "Status", template: ApplyColorsonStatus, filterable: { multi: true, search: true } },
+            
+            { command: { text: "Complete Event", click: CompleteEventWindow }, width: "120px" }],
+        
             dataSource: {
                 data: resultObject
 
@@ -191,23 +218,14 @@
            // rowTemplate: rowTemplateString,
             filterable: true,
             sortable: true,
+         
             //dataBound: function () {
             //    this.expandRow(this.tbody.find("tr.k-master-row"));
             //},
-            detailInit: detailInit,
+            detailInit: detailInit      
+
            
-
-            columns: [{ field: "Calendar_ID", hidden: true },
-                
-    { field: "Event_name", title: "Name" },
-    { field: "Event_Unit", title: "Unit", filterable: { multi: true, search: true, search: true } },
-
-    { field: "Created_Date", title: "Created Date",filterable: { multi: true, search: true, search: true }, template: "#= kendo.toString(kendo.parseDate(Created_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
-    //{ field: "Status", title: "Status",template:rowTemplateString, filterable: { multi: true, search: true, search: true } },   
-     { field: "Due_Date", title: "Due Date", filterable: { multi: true, search: true, search: true }, template: "#= kendo.toString(kendo.parseDate(Due_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
-      { field: "Status", title: "Status", template: ApplyColorsonStatus, filterable: { multi: true, search: true, search: true } },
-        { command: { text: "Complete Event", click: CompleteEventWindow }, width: "120px" }]
-            //{ field: "completed_date", title: "Completed Date", width: "90px"}]
+           
 
         });
 
@@ -223,32 +241,35 @@ function ApplyColorsonStatus(dataItem)
     return status;
 }
 function CompleteEventWindow(e) {
-        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-
-
+    var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+   // if (dataItem.Status == "Outstanding")
+      
+    $("#dateEventCompleted").kendoDatePicker({});
+    var todayDate = kendo.toString(kendo.parseDate(new Date()), 'MM/dd/yyyy');
+    $("#dateEventCompleted").data("kendoDatePicker").value(todayDate);
+    $("#btnCompleteEvent").kendoButton();
         //LoadEventDetailsSchedule(dataItem.EventID, dataItem.EventName, dataItem.RegAgency, dataItem.Regulation, dataItem.ComplianceDate);
+    $("#completedEventID").text(dataItem.Calendar_ID);
 
-<<<<<<< HEAD
-     //   alert(dataItem.Calendar_ID);
-=======
-       
->>>>>>> f09efb5a59fb59d9db96097cd6c476b8451e783f
-
-        UpdateEventDetails(dataItem.Calendar_ID);
+    ETCompleteEventWindow.data("kendoWindow").open();
+    ETCompleteEventWindow.data("kendoWindow").center();
+      //  UpdateEventDetails(dataItem.Calendar_ID);
 
 
     }
+$("#btnCompleteEvent").click(function () {   
+  
+    UpdateEventDetails( $("#completedEventID").text());
 
-    function UpdateEventDetails(Calendar_ID) {
-<<<<<<< HEAD
-       // alert(Calendar_ID);
-=======
-       
->>>>>>> f09efb5a59fb59d9db96097cd6c476b8451e783f
+});
+
+function UpdateEventDetails(Calendar_ID) {
+   // alert(Calendar_ID);
+
         var uesrid = "2"; var Type = "POST";
         var Url = serviceURLs["UpdatEventID"];
-        // alert(e.data.Calendar_ID);
-        var Data = '{"Id": "' + Calendar_ID + '"}';
+        var compdate =  $("#dateEventCompleted").val();
+        var Data = '{"Id": "' + Calendar_ID + '","CompletedDate": "' + compdate + '"}';
         var ContentType = "application/json; charset=utf-8";
         var DataType = "json";
 
@@ -261,15 +282,16 @@ function CompleteEventWindow(e) {
             dataType: DataType,
             processdata: true,
             success: function (msg) {
-<<<<<<< HEAD
+               
+
                 var dialog = $("#divETInspections").data("kendoWindow");
 
                 var EventType = "Inspection";
-=======
-                
-                var EventType = "Training";
->>>>>>> f09efb5a59fb59d9db96097cd6c476b8451e783f
+
+
                 loadinspectiontraining(EventType);
+                LoadECEventsCount();
+                ETCompleteEventWindow.data("kendoWindow").close();
 
             },
             error: ServiceFailed// When Service call fails
