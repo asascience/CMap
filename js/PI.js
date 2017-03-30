@@ -312,23 +312,48 @@
 
                                 var maxdate = new Date(endDatearr[2], endDatearr[0] - 1, endDatearr[1]);
 
+                                //if (($("#select-period").data("kendoMobileButtonGroup").current().index() == 0)) {
+                                //    clearInterval(myVar);
+                                //    loadata((mindate.toString()), (maxdate.toString()), "d");
+                                //}
+
+
+                                //if (($("#select-period").data("kendoMobileButtonGroup").current().index() == 1)) {
+                                //    clearInterval(myVar);
+
+                                //    loadata((mindate.toString()), (maxdate.toString()), "m");
+                                //}
+                                //if (($("#select-period").data("kendoMobileButtonGroup").current().index() == 2)) {
+                                //    clearInterval(myVar);
+                                //    loadata((mindate.toString()), (maxdate.toString()), "y");
+                                //}
+
                                 if (($("#select-period").data("kendoMobileButtonGroup").current().index() == 0)) {
-                                    clearInterval(myVar);
-                                    loadata((mindate.toString()), (maxdate.toString()), "d");
+                                    if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 0)) {
+                                        changedataperiodtype(0, 0);
+                                    }
+                                    if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 1)) {
+                                        changedataperiodtype(0, 1);
+                                    }
                                 }
 
 
                                 if (($("#select-period").data("kendoMobileButtonGroup").current().index() == 1)) {
-                                    clearInterval(myVar);
-
-                                    loadata((mindate.toString()), (maxdate.toString()), "m");
+                                    if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 0)) {
+                                        changedataperiodtype(1, 0);
+                                    }
+                                    if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 1)) {
+                                        changedataperiodtype(1, 1);
+                                    }
                                 }
                                 if (($("#select-period").data("kendoMobileButtonGroup").current().index() == 2)) {
-                                    clearInterval(myVar);
-                                    loadata((mindate.toString()), (maxdate.toString()), "y");
+                                    if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 0)) {
+                                        changedataperiodtype(2, 0);
+                                    }
+                                    if (($("#select-type").data("kendoMobileButtonGroup").current().index() == 1)) {
+                                        changedataperiodtype(2, 1);
+                                    }
                                 }
-
-
 
                             });
 
