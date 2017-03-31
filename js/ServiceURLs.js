@@ -35,8 +35,8 @@ var serviceURLslocal = {
     GetRecentYearlyVolume: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentYearlyVolume",
     GetRecentYearlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentYearlyVolumeThroughPut",
     UpdatEventID: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/UpdateEventID",
-    GetEventsCount: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetEventsCount"
-    
+    GetEventsCount: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetEventsCount",
+    AddDeviationReport: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/AddDeviationReport"
 
 };
 
@@ -77,7 +77,8 @@ var serviceURLsProd = {
     GetRecentYearlyVolume: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecentYearlyVolume",
     GetRecentYearlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetRecentYearlyVolumeThroughPut",
     UpdatEventID: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/UpdateEventID",
-    GetEventsCount: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetEventsCount"
+    GetEventsCount: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/GetEventsCount",
+    AddDeviationReport: "http://tct.reservoirkb.com/CMapSvc/Service1.svc/AddDeviationReport"
   
 
 };

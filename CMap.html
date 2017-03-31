@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="https://js.arcgis.com/3.19/dojox/layout/resources/ExpandoPane.css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.19/esri/css/esri.css">
 
-    <link rel="stylesheet" href="styles/cmap.css">
+    <!--<link rel="stylesheet" href="styles/cmap.css">-->
+    <link rel="stylesheet" href="styles/mainstyle.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <script type="text/javascript" src="http://static.fusioncharts.com/code/latest/fusioncharts.js"></script>
@@ -649,13 +650,13 @@ z-index: 99999999 !important;
                                                     <a href="#">Sampling</a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
-                                                    <a id="btnETInspections" href="#">Inspections<span id="ECInspectionsCnt" class="badge badge-warning">2</span></a>
+                                                    <a id="btnETInspections" href="#">Inspections<span id="ECInspectionsCnt" class="badge badge-warning"></span></a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
                                                     <a href="#">Waste Storage</a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
-                                                    <a id="btnETTraining">Training<span id="ECTrainingsCnt" class="badge badge-danger">1</span></a>
+                                                    <a id="btnETTraining">Training<span id="ECTrainingsCnt" class="badge badge-danger"></span></a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
                                                     <a href="#">Reporting</a>
@@ -737,11 +738,11 @@ z-index: 99999999 !important;
 
 
                         </li>
-                        <li>
+                        <!--<li>
                             Reminders
                             <div id="divEventReminders"></div>
 
-                        </li>
+                        </li>-->
 
                     </ul>
 
@@ -881,6 +882,39 @@ z-index: 99999999 !important;
                            </td></tr>
                     </table>
                    
+                </div>
+                <div id="divDeviationReport">
+                    <div id="DeviationEventID" style="display:none;"></div>
+                    <table align="center">
+                        <tr>
+                            <td>
+                               Cause of deviation
+                               
+                            </td>
+                            <td><textarea name="DeviationCause" cols="40" rows="5"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td>Start time    </td>
+                            <td>
+                                <input id="DeviationStartTime" style="width: 100%;" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>End time    </td>
+                            <td><input id="DeviationEndTime" style="width: 100%;" /></td>
+                        </tr>
+                        <tr>
+                            <td>Corrective Action    </td>
+                            <td><textarea name="DeviationCorrectiveAction" cols="40" rows="5"></textarea></td>
+                        </tr>
+                        <tr><td>&nbsp;</td></tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <button id="btnAddDeviationReport" type="submit">Add Deviation Report </button>
+                            </td>
+                        </tr>
+                    </table>
+
                 </div>
                 <div id="divETInspections">
                     <div id="datagridinspections"></div>

@@ -25,7 +25,24 @@
     var ETCalendarWindow = $("#divETCalendar");//---------------------------------------------------------------------------------
     var ETInspectWindow = $("#divETInspections");
     var ETCompleteEventWindow = $("#divCompleteEvent");
+    var DeviationReportWindow = $("#divDeviationReport");
     var detailsWindow = $("#details");
+    //---------------------------------------------------------------------------------
+    DeviationReportWindow.kendoWindow({
+        position: {
+            top: 150, // or "100px"
+            left: 500
+        },
+        width: 500,
+        modal: true,
+        maxHeight: winheight - $('.page-wrapper-top').height() - 100,
+        title: "Add Deviation Report",
+        visible: false,
+        actions: [
+            "Close"
+        ]
+
+    });
     //---------------------------------------------------------------------------------
     ETCompleteEventWindow.kendoWindow({
         position: {
@@ -77,9 +94,9 @@
     ETCalendarWindow.kendoWindow({
         position: {
             top: 150, // or "100px"
-            left: winW / 3
+            left: winW / 2 - $('#divDashBoard').width() / 2 
         },
-        width: 550,
+        width: $('#divDashBoard').width(),
         maxHeight: winheight - $('.page-wrapper-top').height() - 100,
         title: "Event Tickler - Calendar",
         visible: false,
@@ -157,9 +174,16 @@
             success: function (msg) {
 
                 var resultObject = eval(msg.GetEventsCountResult);
-               // alert(resultObject[0].Inspections);
-                $("#ECInspectionsCnt").text(resultObject[0].Inspections);
-                $("#ECTrainingsCnt").text(resultObject[0].Trainings);
+              
+                (resultObject[0].Inspections == "0") ? $("#ECInspectionsCnt").remove() : $("#ECInspectionsCnt").text(resultObject[0].Inspections);
+                (resultObject[0].Trainings == "0") ? $("#ECTrainingsCnt").remove() : $("#ECTrainingsCnt").text(resultObject[0].Trainings);
+
+                //(resultObject[0].Inspections == "0") ? $(this).remove() : $("#ECInspectionsCnt").text(resultObject[0].Inspections);
+                //(resultObject[0].Trainings == "0") ? $(this).remove() : $("#ECTrainingsCnt").text(resultObject[0].Trainings);
+
+              
+                //$("#ECInspectionsCnt").text(resultObject[0].Inspections);
+                //$("#ECTrainingsCnt").text(resultObject[0].Trainings);
             },
             error: ServiceFailed// When Service call fails
         });
@@ -242,37 +266,109 @@ function ApplyColorsonStatus(dataItem)
 }
 function CompleteEventWindow(e) {
     var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-   // if (dataItem.Status == "Outstanding")
-      
+    $("#completedEventID").text(dataItem.Calendar_ID);
+    $("#DeviationEventID").text(dataItem.Calendar_ID);
     $("#dateEventCompleted").kendoDatePicker({});
     var todayDate = kendo.toString(kendo.parseDate(new Date()), 'MM/dd/yyyy');
     $("#dateEventCompleted").data("kendoDatePicker").value(todayDate);
     $("#btnCompleteEvent").kendoButton();
-        //LoadEventDetailsSchedule(dataItem.EventID, dataItem.EventName, dataItem.RegAgency, dataItem.Regulation, dataItem.ComplianceDate);
-    $("#completedEventID").text(dataItem.Calendar_ID);
+    $("#btnAddDeviationReport").kendoButton();
+    if (dataItem.Status == "Outstanding")
+    {
+        $("#DeviationStartTime").kendoDateTimePicker({
+            value: new Date()
+        });
+        $("#DeviationEndTime").kendoDateTimePicker({
+            value: new Date()
+        });
+        
+        DeviationReportWindow.data("kendoWindow").open();
+        DeviationReportWindow.data("kendoWindow").center();
+    }
+    else
+    {
 
-    ETCompleteEventWindow.data("kendoWindow").open();
-    ETCompleteEventWindow.data("kendoWindow").center();
-      //  UpdateEventDetails(dataItem.Calendar_ID);
-
-
+        ETCompleteEventWindow.data("kendoWindow").open();
+        ETCompleteEventWindow.data("kendoWindow").center();
+    }
+   
+       
     }
 $("#btnCompleteEvent").click(function () {   
   
     UpdateEventDetails( $("#completedEventID").text());
 
 });
+function GetEventType() {
+    var dialog = $("#divETInspections").data("kendoWindow");
+    var dialogtitle = dialog.title();
+    var EventType = "Inspection";
+    // alert(dialogtitle);
+    if (dialogtitle.indexOf("Inspection") >= 0)
+        EventType = "Inspection";
+    else if (dialogtitle.indexOf("Training") >= 0)
+        EventType = "Training";
+    return EventType;
+    }
+    $("#btnAddDeviationReport").click(function () {
+       
+        var Calendar_ID = $("#DeviationEventID").text();
+        var Type = "POST";
+        var Url = serviceURLs["AddDeviationReport"];
+        var startdate = $("#DeviationStartTime").val();
+        var enddate = $("#DeviationEndTime").val();
+        var cause = $("textarea[name=DeviationCause]").val();
+        var action = $("textarea[name=DeviationCorrectiveAction]").val();
+        var Data = '{"EventID": "' + Calendar_ID + '","startTime": "' + startdate + '","EndTime": "' + enddate + '","CorrectiveAction": "' + action + '","DeviationCause": "' + cause + '"}';
+       // alert(Data);
+        var ContentType = "application/json; charset=utf-8";
+        var DataType = "json";
+
+        var EventType = GetEventType();
+
+        $.ajax({
+            type: Type,
+            url: Url,
+            data: Data,
+            contentType: ContentType,
+            dataType: DataType,
+            processdata: true,
+            success: function (msg) {
+
+
+
+                alert(msg.AddDeviationReportResult);
+                
+
+               // loadinspectiontraining(EventType);
+                //LoadECEventsCount();
+                DeviationReportWindow.data("kendoWindow").close();
+                ETCompleteEventWindow.data("kendoWindow").open();
+
+            },
+            error: ServiceFailed// When Service call fails
+        });
+
+    });
 
 function UpdateEventDetails(Calendar_ID) {
    // alert(Calendar_ID);
 
-        var uesrid = "2"; var Type = "POST";
+        var Type = "POST";
         var Url = serviceURLs["UpdatEventID"];
         var compdate =  $("#dateEventCompleted").val();
         var Data = '{"Id": "' + Calendar_ID + '","CompletedDate": "' + compdate + '"}';
         var ContentType = "application/json; charset=utf-8";
         var DataType = "json";
 
+        var dialog = $("#divETInspections").data("kendoWindow");
+        var dialogtitle = dialog.title();
+        var EventType = "Inspection";
+       // alert(dialogtitle);
+        if (dialogtitle.indexOf("Inspection")>=0)
+            EventType = "Inspection";
+        else if (dialogtitle.indexOf("Training")>=0)
+            EventType = "Training";
 
         $.ajax({
             type: Type,
@@ -284,9 +380,7 @@ function UpdateEventDetails(Calendar_ID) {
             success: function (msg) {
                
 
-                var dialog = $("#divETInspections").data("kendoWindow");
-
-                var EventType = "Inspection";
+                
 
 
                 loadinspectiontraining(EventType);
@@ -452,19 +546,7 @@ function UpdateEventDetails(Calendar_ID) {
             var eventdate = date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
             upcomingEvents.push("<li>" + item.Event_name + " - " + item.Event_Unit + " - " + eventdate);
         });
-        //Today's Events
-
-        //if (todaysEvents.length == 0)
-        //    $("#divTodayEvents").append("No events today");
-        //else
-        //    $("#divTodayEvents").append(todaysEvents.join(''));
-        //Upcoming Events
-     //   if (upcomingEvents.length == 0)
-     //       $("#divUpcomingEvents").append("No upcoming events");
-     //   else
-      //      $("#divUpcomingEvents").append(upcomingEvents.join(''));
-
-
+        
         $("#divUpcomingEvents").kendoGrid({
             dataSource: {
                 data: resultObject,
@@ -480,8 +562,9 @@ function UpdateEventDetails(Calendar_ID) {
           
             columns: [
                 { field: "Event_name", title: "Event Name" },
-               { field: "Event_Unit", title: "Unit", width: "110px" },
-                { field: "Due_Date", title: "Due Date",width: "120px", template: "#= kendo.toString(kendo.parseDate(Due_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" }]
+                { field: "Event_Unit", title: "Unit"},
+                { field: "Notification_Date", title: "Notification Date", template: "#= kendo.toString(kendo.parseDate(Notification_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
+                { field: "Due_Date", title: "Due Date", template: "#= kendo.toString(kendo.parseDate(Due_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" }]
 
         });
 
@@ -539,19 +622,19 @@ function UpdateEventDetails(Calendar_ID) {
             error: ServiceFailed// When Service call fails
         });
 
-        Url = serviceURLs["GetEventReminders"];
-        $.ajax({
-            type: 'POST',
-            url: Url,
-            // data: Data,
-            contentType: ContentType,
-            dataType: 'json',
-            processdata: true,
-            success: function (msg) {
-                GetEventRemindersSucceeded(msg);
-            },
-            error: ServiceFailed// When Service call fails
-        });
+        //Url = serviceURLs["GetEventReminders"];
+        //$.ajax({
+        //    type: 'POST',
+        //    url: Url,
+        //    // data: Data,
+        //    contentType: ContentType,
+        //    dataType: 'json',
+        //    processdata: true,
+        //    success: function (msg) {
+        //        GetEventRemindersSucceeded(msg);
+        //    },
+        //    error: ServiceFailed// When Service call fails
+        //});
 
     }
 
