@@ -162,7 +162,7 @@
                 scrollable: true,
 	            filterable: true,
 	            sortable: true,
-                height: 400,
+                height: 600,
                 pageable:false,
 	            pageable: {
 	                refresh: true,

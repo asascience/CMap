@@ -112,6 +112,8 @@
             $('#tdMDate').html("N/A");
         var statusclass = 'status' + resultObject[0].Status;
       //  alert(statusclass);
+        if (resultObject[0].event_name==null)
+        alert("null");
         $("#divPendingEvents").text(resultObject[0].event_name);
         $("#divPendingEvents").addClass(statusclass);
     }

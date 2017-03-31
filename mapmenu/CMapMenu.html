@@ -22,10 +22,22 @@
 .tblDesignMenu td{cursor:pointer;background-color:#AED6F1; font-family:Arial, sans-serif;font-size:13px;padding:5px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
 .tblDesignMenu .tg-heading{cursor:pointer;background-color:#154360;color:white; font-family:Arial, sans-serif;font-size:14px;padding:5px 5px;border-color:black;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
 #trH2SO4{display:none;}
+    .statusCompleted {
+        color: green;
+    }
+
+    .statusPending {
+        color: #FF8C00;
+    }
+
+    .statusOutstanding {
+        color: red;
+    }
+
 </style>
     <script src="../js/ServiceURLs.js"></script>
 <script src="../js/cmapmenu.js"></script>	
-    <link rel="stylesheet" href="styles/mainstyle.css">
+    
 
 </head>
 <body>
@@ -62,7 +74,7 @@
                             Pending Events
                         </td>
                     </tr>
-                    <tr><td><p id="divPendingEvents"></p></td></tr>
+                    <tr><td><p  id="divPendingEvents"></p></td></tr>
                 </table>
             </td>
         </tr>
