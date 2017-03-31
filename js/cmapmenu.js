@@ -110,8 +110,10 @@
         }
         else
             $('#tdMDate').html("N/A");
-
-
+        var statusclass = 'status' + resultObject[0].Status;
+      //  alert(statusclass);
+        $("#divPendingEvents").text(resultObject[0].event_name);
+        $("#divPendingEvents").addClass(statusclass);
     }
     function getParameterByName(name) {
         //if (!url) {
