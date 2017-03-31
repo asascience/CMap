@@ -450,6 +450,9 @@
         });
 
     });
+
+
+    
        
     
     $("#select-period").kendoMobileButtonGroup({
@@ -1031,6 +1034,45 @@
     }
 
 
+
+    $("#btnexport").click(function () {
+
+        
+        var Type = "POST";
+        var Url = serviceURLs["GetExportThroughPut"];
+        var ContentType = "application/json; charset=utf-8";
+        var DataType = "json";
+        var tankid = $("#pisystemtankid").data("kendoDropDownList").value();
+        var value = $('input[name="daterange"]').val();
+
+        var picker = value.split('-');
+
+        var startDate = picker[0];
+
+        var endDate = picker[1];
+
+       
+
+
+        var Data = '{"tankid": "' + tankid + '","startDate":"' + moment(startDate).format('YYYY-MM-DD') + '","endDate":"' + moment(endDate).format('YYYY-MM-DD') + '"}';
+
+
+        $.ajax({
+            type: Type,
+            url: Url,
+            contentType: ContentType,
+            dataType: DataType,
+            data: Data,
+            processdata: true,
+            success: function (msg) {
+
+                alert(msg.GetExportThroughPutResult);
+               
+            }
+        });
+
+
+    });
 
 
         $("#dateRulers").dateRangeSlider({

@@ -34,6 +34,7 @@ var serviceURLslocal = {
     GetRecentMonthlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentMonthlyVolumeThroughPut",
     GetRecentYearlyVolume: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentYearlyVolume",
     GetRecentYearlyVolumeThroughPut: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetRecentYearlyVolumeThroughPut",
+    GetExportThroughPut: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetExportThroughPut",
     UpdatEventID: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/UpdateEventID",
     GetEventsCount: "http://tct.reservoirkb.com/CMapSvcTest/Service1.svc/GetEventsCount"
     
