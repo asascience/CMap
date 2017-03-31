@@ -444,7 +444,7 @@
 
         PI1.dialog({
             open: function (event, ui) {
-                PI1.closest("div[role='dialog']").css({ top: 100, height: 750, left: winW / 2 - $('#divDashBoard').width() / 2 + 20, width: $('#divDashBoard').width() - 100 });
+                PI1.closest("div[role='dialog']").css({ top: 100, height: 780, left: winW / 2 - $('#divDashBoard').width() / 2 + 20, width: $('#divDashBoard').width() - 100 });
 
             }
         });
