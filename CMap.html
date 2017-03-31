@@ -256,6 +256,23 @@ z-index: 99999999 !important;
                     font-size: .8em;
                 }
 
+                #tblEmissiondata table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+ #tblEmissiondata th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+ #tblEmissiondata tr:nth-child(even){background-color: #f2f2f2}
+
+ #tblEmissiondata th {
+    background-color: #989898;
+    color: white;
+}
+
            
     </style>
     <script type="text/javascript">
@@ -558,7 +575,8 @@ z-index: 99999999 !important;
                                                     <a href="#">Operating Procedures</a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
-                                                    <a href="#">Data and Limits</a>
+                                                   
+                                                    <a href="#" id="btnemp" class="cbp-tm-icon-mobile">EmissionData and PermitLimit</a>
                                                 </li>
                                                 <li aria-haspopup="true" class=" ">
                                                     <a href="#">Permit Conditions</a>
@@ -1494,10 +1512,46 @@ z-index: 99999999 !important;
                 </div>
                 <!--****************************************************************-->
 
-                <div id="divps" title="Annual volume displaced - 12 month rolling average">
+                <div id="divEI1" title="Emission Data and Permit Limit">
+                    
+                        <table  id="tblEmissiondata" width="100%" align="center">
+                    <tr><th  align="center">TankID</th><th  align="center">Monthly Emission Rate</th><th  align="center">Permit Limits</th></tr>
+                            <tr>
+                                <td  align="center"><p>TK1671</p></td>
+                                <td  align="center"><p style="color:orange">2.99202</p></td>
+                                <td align="center" ><p>2.55</p></td>
 
-                    <div id="chartContainer">
-                    </div>
+                            </tr>
+
+                            <tr>
+                                <td  align="center"><p>TK1247</p></td>
+                                <td  align="center"><p style="color:green">8.510953</p></td>
+                               
+                                <td  align="center"><p>8.87</p></td>
+                            </tr>
+
+                            <tr>
+                                <td  align="center"><p>TK2041</p></td>
+
+                                <td  align="center"><p style="color:red">7.64279</p></td>
+                              
+                                
+                                <td  align="center"><p>6.64</p></td>
+                            </tr>
+
+                            <tr>
+                                <td  align="center">
+                                    <p> TK1681</p>
+                                </td>
+                               
+                                <td  align="center"><p style="color: green">160.540</p></td>
+                                
+                                <td  align="center"><p>190.4</p></td>
+
+                            </tr>
+                        </table>
+                   
+                   
                 </div>
 
                 <div id="divps1" title="PI System">
