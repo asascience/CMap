@@ -83,6 +83,8 @@
     var jsonm = [];
     var jsony = [];
     var PI1 = $("#divps1");
+
+    var EI1 = $("#divEI1");
     var winW = $(window).width();
 
     var winheight = $(window).height();
@@ -452,6 +454,19 @@
     });
 
 
+
+    $("#btnemp").click(function () {
+
+
+
+        EI1.dialog({
+            open: function (event, ui) {
+                EI1.closest("div[role='dialog']").css({ top: 100, height: 780, left: winW / 2 - $('#divDashBoard').width() / 2 + 20, width: $('#divDashBoard').width() - 100 });
+
+            }
+        });
+
+    });
     
        
     
