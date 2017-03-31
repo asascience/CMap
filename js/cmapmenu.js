@@ -95,6 +95,7 @@
     function UnitDetailsSucceeded(result) {
 
         var resultObject = eval(result.GetUnitDetailsResult);
+        //alert(resultObject)
      //   alert("Here");
         $('#tdMaterials').html(resultObject[0].Unit_Material);
         $('#tdDB').html(resultObject[0].Unit_Design_Basis);

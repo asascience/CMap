@@ -114,7 +114,8 @@
 	            detailRow.find(".gridEventsHistory").kendoGrid({
 	                dataSource: {
 	                    data: resultObject
-	                },	              
+                    },
+                    scrollable:true,
 	                columns: [
                          { field: "Event_Unit", title: "Unit" },
                          { field: "Created_Date", title: "Created Date", template: "#= kendo.toString(kendo.parseDate(Created_Date, 'yyyy-MM-dd'), 'MM/dd/yyyy') #" },
@@ -158,10 +159,11 @@
 	                pageSize: 5
 
 	            },
-
+                scrollable: true,
 	            filterable: true,
 	            sortable: true,
-	            height: 625,
+                height: 400,
+                pageable:false,
 	            pageable: {
 	                refresh: true,
 	                pageSizes: true,
@@ -380,7 +382,7 @@
 	            },
 	            error: ServiceFailed// When Service call fails
 	        });
-
+            LoadECEventsCount();
 	        return false;
 	    }
 	    else { alert("Invalid"); }
